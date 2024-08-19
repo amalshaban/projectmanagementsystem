@@ -2,6 +2,6 @@ import React from 'react'
 
 export default function VerifyAccount() {
   return (
-    <div>VerifyAccount</div>
+    <h1 className='text-white'>VerifyAccount</h1>
   )
 }
