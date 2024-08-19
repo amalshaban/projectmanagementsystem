@@ -2,6 +2,6 @@ import React from 'react'
 
 export default function ForgetPass() {
   return (
-    <div>ForgetPass</div>
+    <h1 className='text-white'>ForgetPass</h1>
   )
 }

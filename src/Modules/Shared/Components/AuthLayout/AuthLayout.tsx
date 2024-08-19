@@ -1,8 +1,12 @@
 import { Outlet } from "react-router-dom";
-
-
+import logo from '../../../../assets/images/PMS3.png'
 export default function AuthLayout() {
   return (
-    <Outlet />
+    <div className="auth-container d-flex justify-content-center align-items-center">
+      <div className=" ">
+        <img className="" src={logo}></img>
+        <Outlet />
+      </div>
+    </div>
   )
 }
