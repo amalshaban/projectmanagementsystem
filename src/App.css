@@ -1,6 +1,56 @@
-.auth-container{
+/* ---------------------- common style ---------------------- */
+
+.main-colr {
+    color: rgba(239, 155, 40, 1);
+}
+
+.main-bg {
+    background-color: rgba(239, 155, 40, 1);
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* ---------------------- auth-layout ----------------------*/
+.auth-container {
     background-image: url('./assets/images/bg3.png');
-    background-position:0ex;
-    height: 100vh;
+    background-position: center center;
+    background-size: cover;
+
+    label {
+        font-size: .8rem;
+    }
+
+    input {
+        background-color: transparent;
+        border: none;
+        border-bottom: rgba(255, 255, 255, 1) 1px solid;
+        border-radius: 0px;
+    }
+
+    input::placeholder {
+        color: #fff;
+    }
+
+    input:focus {
+        background-color: transparent;
+    }
+
+    .form-control {
+        color: #fff !important;
+    }
+
+    .auth-item {
+        background-color: rgba(49, 89, 81, 0.9);
+    }
 
 }
