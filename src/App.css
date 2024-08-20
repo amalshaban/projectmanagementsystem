@@ -22,12 +22,12 @@
 
 /* ---------------------- auth-layout ----------------------*/
 .auth-container {
-    background-image: url('./assets/images/bg3.png');
+    background-image: url("./assets/images/bg3.png");
     background-position: center center;
     background-size: cover;
 
     label {
-        font-size: .8rem;
+        font-size: 0.8rem;
     }
 
     input {
@@ -53,4 +53,13 @@
         background-color: rgba(49, 89, 81, 0.9);
     }
 
+    .title .frist-ch::after {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 16px;
+        height: 4px;
+        background-color: #f39c12;
+    }
 }

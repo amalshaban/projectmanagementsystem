@@ -37,9 +37,12 @@ export default function ChangePass() {
   return (
     <>
       <div className="auth-title my-4">
-        <p className="text-white">welcome to PMS</p>
-        <h3 className="main-colr">Change Password</h3>
+        <p className="text-white">Welcome to PMS</p>
+        <h3 className="main-colr title">
+          <span className="frist-ch position-relative">C</span>hange Password
+        </h3>
       </div>
+
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="my-4">
           <label className="main-colr my-1">Old Password</label>
