@@ -90,8 +90,8 @@ export default function LogIn() {
     {errors.password && <p className='alert alert-danger p-2'>{errors?.password?.message}</p>}
    
    <div className="d-flex justify-content-between mb-3">
-    <Link to={'/dashboard/register'} className='text-white mt-2 text-decoration-none' >Register Now ?</Link>
-    <Link to={'dashboard/forget-pass'} className='text-white mt-2 text-decoration-none' >Forgot Password ?</Link> 
+    <Link  to={'/register'} className='text-white mt-2 text-decoration-none' >Register Now ?</Link>
+    <Link to={'/forget-pass'} className='text-white mt-2 text-decoration-none' >Forgot Password ?</Link> 
    </div>
    
    
