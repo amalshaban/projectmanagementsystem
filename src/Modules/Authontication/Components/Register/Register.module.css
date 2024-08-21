@@ -1,0 +1,314 @@
+.HeroContaner {
+    background-color: var(--textColor--Authlay);
+    width: 1019px;
+    margin: auto;
+    padding: 2.8rem;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    /* gap: 5px; */
+    position: relative;
+}
+
+.logoheadSec{
+    width: 100px;
+    height: 100px;
+    position: relative;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url("../../../../assets/images/8550fbcbe60cd242d12760784feff287.jpg");
+    background-repeat: no-repeat;
+    background-position: 100% 100%;
+    background-size: cover;
+    border-radius: 50%;
+    cursor: pointer;
+    img{
+        width: 50%;
+        height: 50%;
+        object-fit: cover;
+        opacity: .6;
+        transition: .4s all ease-in-out;
+    }
+    img:hover{
+        opacity: .9;
+    }
+}
+
+.daragdrop {
+    width: 50%;
+    position: relative !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    display: none;
+}
+
+/* Style header Title >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
+.Heroheader {
+    .Title {
+        position: relative;
+        top: 5px;
+        font-size: 13px;
+        line-height: 46px;
+        font-weight: 600;
+        color: var(--textColor--Wight);
+    }
+
+    h1 {
+        position: relative;
+        bottom: 15px;
+        font-size: 32px;
+        font-weight: 700;
+        line-height: 46px;
+        color: var(--textColor--yellow);
+        text-transform: capitalize;
+
+        span {
+            color: var(--textColor--yellow);
+            position: relative;
+        }
+
+        span::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 4px;
+            background-color: var(--textColor--yellow);
+            bottom: 0;
+            left: 0;
+        }
+    }
+}
+
+/* sec contaner section style */
+.HeroRegister {
+    width: 100%;
+    height: 280px;
+    display: flex;
+    gap: 20px;
+    position: relative;
+    bottom: 40px;
+}
+
+/* section inpu-tleft >>>>>>>>>>>>>>>.>>>>>>>>>>>.>>>>>>>>>>>>> */
+.MainLeft {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+   
+    label {
+        position: relative;
+        width: 100%;
+        /* background-color: blueviolet; */
+        color: var(--textColor--yellow);
+    }
+
+    .iconshow {
+        color: var(--textColor--Wight) !important;
+        position: absolute;
+        right: 0;
+        bottom: -20px;
+        cursor: pointer;
+        font-size: 18px;
+    }
+
+    .icondontshow {
+        color: var(--textColor--Wight) !important;
+        position: absolute;
+        right: 0;
+        bottom: -20px;
+        cursor: pointer;
+        cursor: pointer;
+        font-size: 18px;
+
+    }
+
+    input {
+        width: 100%;
+        /* padding-top: 0.5rem; */
+        border: none;
+        outline: none;
+        background: transparent;
+        border-bottom: 1px solid var(--textColor--Wight);
+        color: var(--textColor--Wight);
+    }
+    input:focus ~label{
+        color: var(--textColor--Wight) !important;
+    }
+
+    .mainUserName {
+        display: flex;
+        flex-direction: column;
+        .userinput{
+            width: 100%;
+            height: 90%;
+        }
+        .Errors{
+            width: 100%;
+            height: 5%;
+            font-size: 13px;
+            color: var(--bg-dinger);
+        }
+    }
+
+    .mainCountry {
+        display: flex;
+        flex-direction: column;
+        .userinput{
+            width: 100%;
+            height: 90%;
+        }
+        .Errors{
+            width: 100%;
+            height: 5%;
+            font-size: 13px;
+            color: var(--bg-dinger);
+        }
+    }
+
+    .mainpassword {
+        display: flex;
+        flex-direction: column;
+        .userinput{
+            width: 100%;
+            height: 90%;
+        }
+        .Errors{
+            width: 100%;
+            height: 5%;
+            font-size: 13px;
+            color: var(--bg-dinger);
+        }
+    }
+}
+
+/* section input-right >>>>>>>>>>>>>>>.>>>>>>>>>>>.>>>>>>>>>>>>> */
+.MainRight {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* gap: 20px; */
+
+    label {
+        position: relative;
+        width: 100%;
+        color: var(--textColor--yellow);
+    }
+
+    .iconshow {
+        color: var(--textColor--Wight) !important;
+        position: absolute;
+        right: 0;
+        bottom: -20px;
+        cursor: pointer;
+        font-size: 18px;
+    }
+
+    .icondontshow {
+        color: var(--textColor--Wight) !important;
+        position: absolute;
+        right: 0;
+        bottom: -20px;
+        cursor: pointer;
+        cursor: pointer;
+        font-size: 18px;
+
+    }
+
+    input {
+        width: 100%;
+        border: none;
+        outline: none;
+        background: transparent;
+        border-bottom: 1px solid var(--textColor--Wight);
+        color: var(--textColor--Wight);
+    }
+
+
+
+    .mainemail {
+        display: flex;
+        flex-direction: column;
+        .userinput{
+            width: 100%;
+            height: 90%;
+        }
+        .Errors{
+            width: 100%;
+            height: 5%;
+            font-size: 13px;
+            color: var(--bg-dinger);
+        }
+    }
+
+    .mainphone {
+        display: flex;
+        flex-direction: column;
+        .userinput{
+            width: 100%;
+            height: 90%;
+        }
+        .Errors{
+            width: 100%;
+            height: 5%;
+            font-size: 13px;
+            color: var(--bg-dinger);
+        }
+    }
+
+    .mainConfirmpassword {
+        display: flex;
+        flex-direction: column;
+        .userinput{
+            width: 100%;
+            height: 90%;
+        }
+        .Errors{
+            width: 100%;
+            height: 5%;
+            font-size: 13px;
+            color: var(--bg-dinger);
+        }
+    }
+}
+
+
+/* Style Button >>>>>>>>>>>>>>>>.>>>>>>>>>>>>>>>>>>*/
+.buttonSubmit {
+    background-color: var(--textColor--yellow) !important;
+    border: none !important;
+    width: 480px;
+    height: 50px;
+    border-radius: 90px !important;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 30px;
+    font-size: 22px !important;
+    font-weight: 500 !important;
+    line-height: 46px;
+
+}
+
+.buttonSubmit::before {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background-color: var(--textColor--Authlay);
+    transition: .6s all ease-in-out;
+    z-index: -1;
+}
+
+.buttonSubmit:hover::before {
+    width: 100%;
+    color: var(--textColor--Wight);
+}

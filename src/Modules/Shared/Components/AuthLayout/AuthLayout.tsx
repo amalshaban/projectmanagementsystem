@@ -4,7 +4,7 @@ export default function AuthLayout() {
   return (
     <div className="auth-container d-flex justify-content-center align-items-center">
       <div className=" ">
-        <img className="" src={logo}></img>
+        <img className="LogoAuth" src={logo}></img>
         <Outlet />
       </div>
     </div>

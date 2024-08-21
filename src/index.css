@@ -1,0 +1,14 @@
+:root{
+    --bg-Praimry:rgba(0, 146, 71, 1);
+    --bg-Scondry:rgba(255, 255, 255, 1);
+    --bg-Sidebar:rgba(31, 38, 62, 1);
+    --bg-Section:rgba(240, 255, 239, 1);
+    --bg-dinger:rgba(204, 0, 0, 1);
+    --textColor--yellow:rgba(239, 155, 40, 1);
+    --textColor--Authlay:rgba(49, 74, 89, 0.9);
+    --textColor--Wight:rgba(255, 255, 255, 1);
+    --textColor-G-opacty:rgba(0, 146, 71, .1);
+    --color-whiat:rgba(248, 249, 251, 1);
+    --color-text-whiat:rgba(223, 224, 224, 1);
+
+}

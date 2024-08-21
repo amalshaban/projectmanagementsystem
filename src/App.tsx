@@ -19,6 +19,8 @@ import TasksData from './Modules/Tasks/Components/TasksData/TasksData'
 import UsersList from './Modules/Users/Components/UsersList/UsersList'
 import NavBar from './Modules/Shared/Components/NavBar/NavBar'
 import SideBar from './Modules/Shared/Components/SideBar/SideBar'
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer} from 'react-toastify';
 
 function App() {
   
@@ -57,7 +59,11 @@ function App() {
 
 
   return (
-  <RouterProvider router={routes}></RouterProvider>
+    <>
+        <ToastContainer/>
+        <RouterProvider router={routes}></RouterProvider>
+    </>
+
   )
 }
 
