@@ -1,6 +1,24 @@
 .auth-container{
-    background-image: url('./assets/images/bg3.png');
-    background-position:0ex;
-    height: 100vh;
+    background-image: url('./assets//login-bg.svg');
+    background-repeat: no-repeat;
+    background-size:  cover;
+    background-color: rgba(14, 56, 47, 1);
+    height: 100vh;  
+    background-position: center center;
+}
 
+
+.login-container{
+    text-align: left;
+    background: rgba(49, 89, 81, 0.9);
+    padding: 3rem;
+    border-radius: 1rem;
+}
+.login-header{
+    color: rgba(239, 155, 40, 1);
+
+}
+.login-header::first-letter{
+   position: relative;
+    text-decoration: underline;
 }
