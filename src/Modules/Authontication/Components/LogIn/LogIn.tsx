@@ -14,14 +14,21 @@ export default function LogIn() {
     handleSubmit,
     formState:{errors, isSubmitting},
   } = useForm();
+
+
+  const toggleVisibility = (setterFunction: any) => {
+    setterFunction((prevState: any) => !prevState);
+  };
+
   let onSubmit = async (data:any)=>{
     try {
       let response = await axios.post('https://upskilling-egypt.com:3003/api/v1/Users/Login', data);
       
     //   localStorage.setItem('token', response.data.token);
     //   saveLoginData();
-    // toast.success();
+    // toast.success('congratulations, login success !');
     //   navigate('/dashboard');
+    console.log(response)
     
       } 
      catch (error:any) {
@@ -31,12 +38,16 @@ export default function LogIn() {
     }
   }
   return (
-    <div className='login-container'>
-        <span className='text-white'>welcome to PMS</span>
-        <h1 className='login-header'>Login</h1>
+    <>
+    <div className="auth-title my-4">
+    <p className="text-white">Welcome to PMS</p>
+    <h3 className="main-colr title">
+      <span className="frist-ch position-relative">L</span>ogin
+    </h3>
+  </div>
         <form  onSubmit={handleSubmit(onSubmit)}>
     <div className=" mb-3">
-      <label className="my-1 text-warning">Email</label>
+      <label className="main-colr my-1">Email</label>
       <input type="text" className="input-group form-control" placeholder="Enter your email"
        aria-label="email" aria-describedby="basic-addon1"
        {...register("email",EMAILVALIDATION)}
@@ -46,29 +57,53 @@ export default function LogIn() {
     {errors.email && <p className='alert alert-danger p-2'>{errors?.email?.message}</p>}
     <div className="">
        
-      <label className="my-1 text-warning">Password</label>
-      <input type={`${isPasswordVisible?"text" : "password"  }`} className="input-group form-control" placeholder="Enter your password"
-       aria-label="password" aria-describedby="basic-addon1"
+      <label className="main-colr my-1">Password</label>
+      <div className='input-group'>
+      <input type={`${isPasswordVisible?"text" : "password"  }`}
+       className=" form-control" 
+       placeholder="Enter your password"
+       aria-label="password"
+       aria-describedby="basic-addon1"
        {...register("password", PASSWORDVALIDATION)}/>
        <button
-       onMouseDown={(e)=>{e.preventDefault()}}
-       onMouseUp={(e)=>{e.preventDefault()}}
-       onClick={()=>setIsPasswordVisible((prev) => !prev)}
-        type='button'
-       className="input-group-text" id="basic-addon1">
-          <i className={`fa-solid ${isPasswordVisible?"fa-eye" : "fa-eye-slash"  }`}></i></button>
+              onMouseDown={(e) => e.preventDefault()}
+              onMouseUp={(e) => e.preventDefault()}
+              type="button"
+              onClick={() => toggleVisibility(setIsPasswordVisible)}
+              className="input-group-text bg-transparent border-0"
+            >
+              <span className="sr-only">
+                {isPasswordVisible ? "hide password" : "show password"}
+              </span>
+              <i
+                className={
+                  isPasswordVisible
+                    ? "fa-solid text-white fa-eye"
+                    : "fa-solid text-white fa-eye-slash"
+                }
+              ></i>
+            </button>
+      
+      </div>
       
     </div>
     {errors.password && <p className='alert alert-danger p-2'>{errors?.password?.message}</p>}
    
    <div className="d-flex justify-content-between mb-3">
-    {/* <Link to={} className='reg' >Register Now?</Link>
-    <Link to={} className='forgot' >Forgot Password?</Link> */}
+    <Link to={'/dashboard/register'} className='text-white mt-2 text-decoration-none' >Register Now ?</Link>
+    <Link to={'dashboard/forget-pass'} className='text-white mt-2 text-decoration-none' >Forgot Password ?</Link> 
    </div>
    
-    <button disabled={isSubmitting} className='btn btn-success w-100'>LogIn</button>
+   
+   <div className="main-bg rounded-pill">
+    <button type='submit' 
+    disabled={isSubmitting}
+     className='btn text-white border-0  w-100 rounded-pill'>
+      LogIn
+      </button>
+      </div>
   </form>
-    </div>
+  </>
     
   )
 }
