@@ -1,12 +1,10 @@
 /* ---------------------- common style ---------------------- */
 
-.main-colr {
-    color: rgba(239, 155, 40, 1);
+:root {
+    --main-color: rgba(239, 155, 40, 1);
+    --main-bg-color: rgba(239, 155, 40, 1);
 }
 
-.main-bg {
-    background-color: rgba(239, 155, 40, 1);
-}
 
 .sr-only {
     position: absolute;
@@ -26,11 +24,11 @@
     background-position: center center;
     background-size: cover;
 
-    label {
+    .container-Input label {
         font-size: 0.8rem;
     }
 
-    input {
+    .change-pass-input {
         background-color: transparent;
         border: none;
         border-bottom: rgba(255, 255, 255, 1) 1px solid;
