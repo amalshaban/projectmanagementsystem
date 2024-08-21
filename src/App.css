@@ -5,6 +5,13 @@
     --main-bg-color: rgba(239, 155, 40, 1);
 }
 
+.main-color{
+    color: var(--main-color);
+}
+
+.main-bg-color{
+    background-color: var(--main-bg-color);
+}
 
 .sr-only {
     position: absolute;
@@ -24,7 +31,7 @@
     background-position: center center;
     background-size: cover;
 
-    .container-Input label {
+    .container-changePass label {
         font-size: 0.8rem;
     }
 
@@ -35,16 +42,17 @@
         border-radius: 0px;
     }
 
-    input::placeholder {
+    .change-pass-input::placeholder {
         color: #fff;
     }
 
-    input:focus {
+    .change-pass-input:focus {
         background-color: transparent;
     }
 
-    .form-control {
+    .change-pass-input {
         color: #fff !important;
+        box-shadow: none !important;
     }
 
     .auth-item {

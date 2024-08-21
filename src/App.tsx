@@ -29,10 +29,10 @@ function App() {
       children: [
         { index: true, element: <LogIn /> },
         { path: "login", element: <LogIn /> },
-        { path: "forget-password ", element: <ForgetPass /> },
-        { path: "reset-password ", element: <ResetPass /> },
+        { path: "forget-password", element: <ForgetPass /> },
+        { path: "reset-password", element: <ResetPass /> },
         { path: "register", element: <Register /> },
-        { path: "change-password ", element: <ChangePass /> },
+        { path: "change-password", element: <ChangePass /> },
         { path: "verify-account", element: <VerifyAccount /> },
       ],
     },

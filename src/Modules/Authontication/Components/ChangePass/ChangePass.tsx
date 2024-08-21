@@ -43,8 +43,8 @@ export default function ChangePass() {
         </h3>
       </div>
 
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="my-4 container-Input">
+      <form className="container-changePass" onSubmit={handleSubmit(onSubmit)}>
+        <div className="my-4">
           <label className="main-color my-1 ">Old Password</label>
           <div className="input-group">
             <input
@@ -80,7 +80,7 @@ export default function ChangePass() {
           )}
         </div>
 
-        <div className="my-4 container-Input">
+        <div className="my-4">
           <label className="main-color my-1">New Password</label>
           <div className="input-group">
             <input
@@ -116,7 +116,7 @@ export default function ChangePass() {
           )}
         </div>
 
-        <div className="my-4 container-Input">
+        <div className="my-4">
           <label className="main-color my-1">Confirm New Password</label>
           <div className="input-group">
             <input
@@ -155,7 +155,7 @@ export default function ChangePass() {
           )}
         </div>
 
-        <div className="main-bg-color rounded-pill">
+        <div className="main-bg-color rounded-pill py-1 py-md-2">
           <button
             type="submit"
             className="btn text-white border-0  w-100 rounded-pill"
