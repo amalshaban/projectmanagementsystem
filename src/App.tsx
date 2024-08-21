@@ -16,8 +16,6 @@ import ProjectData from "./Modules/Projects/Components/ProjectData/ProjectData";
 import TasksList from "./Modules/Tasks/Components/TasksList/TasksList";
 import TasksData from "./Modules/Tasks/Components/TasksData/TasksData";
 import UsersList from "./Modules/Users/Components/UsersList/UsersList";
-import NavBar from "./Modules/Shared/Components/NavBar/NavBar";
-import SideBar from "./Modules/Shared/Components/SideBar/SideBar";
 import { ToastContainer } from "react-toastify";
 
 function App() {
@@ -29,7 +27,7 @@ function App() {
       children: [
         { index: true, element: <LogIn /> },
         { path: "login", element: <LogIn /> },
-        { path: "forget-pass", element: <ForgetPass /> },
+        { path: "main", element: <ForgetPass /> },
         { path: "reset-pass", element: <ResetPass /> },
         { path: "register", element: <Register /> },
         { path: "change-pass", element: <ChangePass /> },
@@ -54,8 +52,8 @@ function App() {
 
   return (
     <>
-      <ToastContainer />
       <RouterProvider router={routes}></RouterProvider>
+      <ToastContainer />
     </>
   );
 }

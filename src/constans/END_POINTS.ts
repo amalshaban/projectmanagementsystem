@@ -1,4 +1,4 @@
-const BASE_URLS = "upskilling-egypt.com:3003/api/v1";
+const BASE_URLS = "http://upskilling-egypt.com:3003/api/v1";
 
 
 //USERS urls
