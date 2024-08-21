@@ -11,14 +11,14 @@ import VerifyAccount from "./Modules/Authontication/Components/VerifyAccount/Ver
 import ChangePass from "./Modules/Authontication/Components/ChangePass/ChangePass";
 import MasterLayout from "./Modules/Shared/Components/MasterLayout/MasterLayout";
 import Dashboard from "./Modules/Dashboard/Dashboard";
-import ProjectList from "./Modules/Projects/Components/ProjectList/ProjectList";
-import ProjectData from "./Modules/Projects/Components/ProjectData/ProjectData";
 import TasksList from "./Modules/Tasks/Components/TasksList/TasksList";
 import TasksData from "./Modules/Tasks/Components/TasksData/TasksData";
 import UsersList from "./Modules/Users/Components/UsersList/UsersList";
 import NavBar from "./Modules/Shared/Components/NavBar/NavBar";
 import SideBar from "./Modules/Shared/Components/SideBar/SideBar";
 import { ToastContainer } from "react-toastify";
+import ProjectsList from "./Modules/Projects/Components/ProjectList/ProjectList";
+import ProjectsData from "./Modules/Projects/Components/ProjectData/ProjectData";
 
 function App() {
   const routes = createBrowserRouter([
@@ -29,10 +29,10 @@ function App() {
       children: [
         { index: true, element: <LogIn /> },
         { path: "login", element: <LogIn /> },
-        { path: "forget-pass", element: <ForgetPass /> },
-        { path: "reset-pass", element: <ResetPass /> },
+        { path: "forget-password ", element: <ForgetPass /> },
+        { path: "reset-password ", element: <ResetPass /> },
         { path: "register", element: <Register /> },
-        { path: "change-pass", element: <ChangePass /> },
+        { path: "change-password ", element: <ChangePass /> },
         { path: "verify-account", element: <VerifyAccount /> },
       ],
     },
@@ -43,8 +43,8 @@ function App() {
       children: [
         { index: true, element: <Dashboard /> },
         { path: "home", element: <Dashboard /> },
-        { path: "project-list", element: <ProjectList /> },
-        { path: "project-data", element: <ProjectData /> },
+        { path: "projects-list", element: <ProjectsList /> },
+        { path: "projects-data", element: <ProjectsData /> },
         { path: "tasks-list", element: <TasksList /> },
         { path: "tasks-data", element: <TasksData /> },
         { path: "users-list", element: <UsersList /> },

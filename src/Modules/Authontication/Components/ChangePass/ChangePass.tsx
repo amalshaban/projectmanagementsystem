@@ -18,8 +18,8 @@ export default function ChangePass() {
   } = useForm({ mode: "onBlur" });
 
   const toggleVisibility = (setterFunction: any) => {
-    setterFunction((prevState: any) => !prevState);
-  };
+    return ()=> setterFunction((prevState: any) => !prevState);
+   };
 
   const onSubmit = (data: any) => {
     try {
