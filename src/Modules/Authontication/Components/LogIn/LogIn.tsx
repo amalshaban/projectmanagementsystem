@@ -1,19 +1,24 @@
 
 import { useForm } from 'react-hook-form';
 import { EMAILVALIDATION, PASSWORDVALIDATION } from '../../../../assets/CONSTANTS/VALIDATION';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import AuthContext from '../Context/AuthContext';
 
-
+import 'react-toastify/dist/ReactToastify.css';
 export default function LogIn() {
+
+  const { saveLoginData} = useContext(AuthContext);
+  
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   let{
     register,
     handleSubmit,
     formState:{errors, isSubmitting},
   } = useForm();
+
 
 
   const toggleVisibility = (setterFunction: any) => {
@@ -24,10 +29,11 @@ export default function LogIn() {
     try {
       let response = await axios.post('https://upskilling-egypt.com:3003/api/v1/Users/Login', data);
       
-    //   localStorage.setItem('token', response.data.token);
-    //   saveLoginData();
-    // toast.success('congratulations, login success !');
+    
+     localStorage.setItem('token', response.data.token);
+    toast.success('congratulations, login success !');
     //   navigate('/dashboard');
+    saveLoginData();
     console.log(response)
     
       } 

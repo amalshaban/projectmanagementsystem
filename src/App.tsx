@@ -27,7 +27,7 @@ function App() {
       children: [
         { index: true, element: <LogIn /> },
         { path: "login", element: <LogIn /> },
-        { path: "forget-pass", element: <ForgetPass /> },
+        { path: "main", element: <ForgetPass /> },
         { path: "reset-pass", element: <ResetPass /> },
         { path: "register", element: <Register /> },
         { path: "change-pass", element: <ChangePass /> },
@@ -52,8 +52,8 @@ function App() {
 
   return (
     <>
-      <ToastContainer />
       <RouterProvider router={routes}></RouterProvider>
+      <ToastContainer />
     </>
   );
 }
