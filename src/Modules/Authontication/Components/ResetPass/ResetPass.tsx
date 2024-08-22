@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useState } from 'react';
 import { PasswordValidation } from '../../../../constans/VALIDATIONS';
-import { USERS_URLs } from '../../../../constans/END_POINTS';
+import { AuthorizedToken, USERS_URLs } from '../../../../constans/END_POINTS';
 
 export default function ResetPass() {
 
@@ -29,7 +29,7 @@ export default function ResetPass() {
 
   let onSubmit = async (data:any)=>{
     try {
-      let response = await axios.post(USERS_URLs.Reset, data);
+      let response = await axios.post(USERS_URLs.Reset, AuthorizedToken, data);
       
       toast.success(
         response.data.message || 'your password was reset successfully !'

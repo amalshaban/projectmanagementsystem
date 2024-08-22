@@ -1,13 +1,15 @@
 import { useForm } from 'react-hook-form';
 import { EMAILVALIDATION, PASSWORDVALIDATION } from '../../../../assets/CONSTANTS/VALIDATION';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { USERS_URLs } from '../../../../constans/END_POINTS';
+import { AuthContext } from '../Context/AuthContext'
 
 export default function LogIn() {
+  let { saveLoginData } = useContext(AuthContext);
   let navigate = useNavigate();
   let{
     register,
@@ -20,10 +22,11 @@ export default function LogIn() {
   const toggleVisibility = (setterFunction: any) => {
     setterFunction((prevState: any) => !prevState);
   };
-
   let onSubmit = async (data:any)=>{
     try {
       let response = await axios.post(USERS_URLs.Login, data);
+      localStorage.setItem('token', response.data.token);
+      saveLoginData();
       navigate('/dashboard');
       toast.success(
         response.data.message || 'congratulations, login success !'
@@ -35,9 +38,7 @@ export default function LogIn() {
      toast.error(
       error?.response?.data?.message || "Login unsuccessful. Please try again"
     );
-
      console.log(error);
-      
     }
   }
   return (

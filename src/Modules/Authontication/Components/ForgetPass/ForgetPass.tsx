@@ -4,7 +4,7 @@ import {  useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { USERS_URLs } from '../../../../constans/END_POINTS';
+import { AuthorizedToken, USERS_URLs } from '../../../../constans/END_POINTS';
 
 export default function ForgetPass() {
   let navigate = useNavigate();
@@ -19,7 +19,7 @@ export default function ForgetPass() {
 
   let onSubmit = async (data:any)=>{
     try {
-      let response = await axios.post(USERS_URLs.ForgetPass, data);
+      let response = await axios.post(USERS_URLs.ForgetPass,AuthorizedToken, data);
       navigate('/reset-pass');
       toast.success(
         response.data.message || 'check your email inbox !'

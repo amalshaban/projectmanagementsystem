@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { PasswordValidation } from "../../../../constans/VALIDATIONS";
 import axios from "axios";
-import { USERS_URLs } from "../../../../constans/END_POINTS";
+import { AuthorizedToken, USERS_URLs } from "../../../../constans/END_POINTS";
 import { toast } from "react-toastify";
 
 export default function ChangePass() {
@@ -23,7 +23,7 @@ export default function ChangePass() {
 
   const onSubmit =  async(data: any) => {
     try {
-      const response: any =await axios.put(USERS_URLs.ChangePassword, data);
+      const response: any =await axios.put(USERS_URLs.ChangePassword, AuthorizedToken, data);
       toast.success(
         response.data.message || "Your password has been successfully changed!"
       );

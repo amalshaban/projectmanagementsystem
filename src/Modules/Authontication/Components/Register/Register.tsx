@@ -44,14 +44,13 @@ const onSubmit = async (data:any) => {
     navigate("/verify-account")
     toast.success(response?.data.message)
   }
-  catch (error) { 
+  catch (error:any) {
     toast.error(
-    error?.response?.data?.message || "Register unsuccessful. Please try again"
-  );
-  }
-
-}
-
+     error?.response?.data?.message || "Register unsuccessful. Please try again"
+   );
+    console.log(error);
+   }
+ }
 const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const toggleVisibility = (setterFunction: any) => {
     setterFunction((prevState: any) => !prevState);

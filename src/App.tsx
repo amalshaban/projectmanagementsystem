@@ -19,11 +19,12 @@ import UsersList from "./Modules/Users/Components/UsersList/UsersList";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
+
 function App() {
   const routes = createBrowserRouter([
     {
       path: "",
-      element:<AuthLayout />,
+      element: <AuthLayout />,
       errorElement: <NotFound />,
       children: [
         { index: true, element: <LogIn /> },

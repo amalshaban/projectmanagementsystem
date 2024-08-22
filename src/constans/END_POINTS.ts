@@ -1,5 +1,11 @@
-import ForgetPass from "../Modules/Authontication/Components/ForgetPass/ForgetPass";
 
+export const AuthorizedToken = { 
+  headers:{
+     Authorization: `Bearer ${localStorage.token}` 
+    } };
+
+
+    
 const BASE_URL = "http://upskilling-egypt.com:3003/api/v1";
 
 

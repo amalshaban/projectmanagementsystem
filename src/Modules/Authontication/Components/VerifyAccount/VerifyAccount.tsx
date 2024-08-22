@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { EMAILVALIDATION, FIELDVALIDATION } from '../../../../assets/CONSTANTS/VALIDATION';
-import { USERS_URLs } from '../../../../constans/END_POINTS';
+import { AuthorizedToken, USERS_URLs } from '../../../../constans/END_POINTS';
 
 export default function VerifyAccount() {
   let navigate= useNavigate();
@@ -15,13 +15,19 @@ export default function VerifyAccount() {
   
   let onSubmit = async (data:any)=>{
     try {
-      let response = await axios.put(USERS_URLs.Verify, data);
-      toast.success(response?.data?.message);
+      let response = await axios.put(USERS_URLs.Verify,AuthorizedToken, data);
+      toast.success(
+        response.data.message || "Your account has been successfully verified!"
+      );
+      
       navigate('/dashboard');
     
       } 
       catch (error:any) {
-      toast.error(error?.response?.data?.message);
+      
+      toast.error(
+        error.message || "verification proccess was unsuccessful. Please try again"
+      );
       console.log(error);
       
     }
