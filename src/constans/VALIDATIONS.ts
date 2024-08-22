@@ -17,6 +17,12 @@ export const PasswordValidation = {
   },
 };
 
+
+export const FieldValidation = {
+  required: "this field is required",
+};
+
+
 export const RequiredField = (fieldName) => ({
   required: `${fieldName} is required`,
 });

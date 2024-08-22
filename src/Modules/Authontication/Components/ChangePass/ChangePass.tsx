@@ -21,9 +21,9 @@ export default function ChangePass() {
     setterFunction((prevState: any) => !prevState);
   };
 
-  const onSubmit = (data: any) => {
+  const onSubmit =  async(data: any) => {
     try {
-      const response: any = axios.put(USERS_URLs.ChangePassword, data);
+      const response: any =await axios.put(USERS_URLs.ChangePassword, data);
       toast.success(
         response.data.message || "Your password has been successfully changed!"
       );
@@ -38,18 +38,18 @@ export default function ChangePass() {
     <>
       <div className="auth-title my-4">
         <p className="text-white">Welcome to PMS</p>
-        <h3 className="main-colr title">
+        <h3 className="main-color title">
           <span className="frist-ch position-relative">C</span>hange Password
         </h3>
       </div>
 
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form className="container-form" onSubmit={handleSubmit(onSubmit)}>
         <div className="my-4">
-          <label className="main-colr my-1">Old Password</label>
+          <label className="main-color my-1">Old Password</label>
           <div className="input-group">
             <input
               type={showOldPassword ? "text" : "password"}
-              className="form-control"
+              className="form-control form-input"
               placeholder="Enter your Old Password"
               aria-label="oldPassword"
               {...register("oldPassword", PasswordValidation)}
@@ -81,11 +81,11 @@ export default function ChangePass() {
         </div>
 
         <div className="my-4">
-          <label className="main-colr my-1">New Password</label>
+          <label className="main-color my-1">New Password</label>
           <div className="input-group">
             <input
               type={showPassword ? "text" : "password"}
-              className="form-control "
+              className="form-control form-input "
               placeholder="Enter your New Password"
               aria-label="newPassword"
               {...register("newPassword", PasswordValidation)}
@@ -117,11 +117,11 @@ export default function ChangePass() {
         </div>
 
         <div className="my-4">
-          <label className="main-colr my-1">Confirm New Password</label>
+          <label className="main-color my-">Confirm New Password</label>
           <div className="input-group">
             <input
               type={showConfirmPassword ? "text" : "password"}
-              className="form-control "
+              className="form-control form-input "
               placeholder="Confirm New Password"
               aria-label="confirmNewPassword"
               {...register("confirmNewPassword", {
@@ -155,7 +155,8 @@ export default function ChangePass() {
           )}
         </div>
 
-        <div className="main-bg rounded-pill">
+
+        <div className="main-bg-color rounded-pill py-1 py-md-2">
           <button
             type="submit"
             className="btn text-white border-0  w-100 rounded-pill"

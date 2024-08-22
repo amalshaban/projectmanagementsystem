@@ -1,12 +1,20 @@
 
 /* ---------------------- common style ---------------------- */
-
-.main-colr {
-    color: rgba(239, 155, 40, 1);
+.auth-container{
+    min-height: 100vh;
+    
+}
+:root {
+    --main-color: rgba(239, 155, 40, 1);
+    --main-bg-color: rgba(239, 155, 40, 1);
 }
 
-.main-bg {
-    background-color: rgba(239, 155, 40, 1);
+.main-color{
+    color: var(--main-color);
+}
+
+.main-bg-color{
+    background-color: var(--main-bg-color);
 }
 
 .sr-only {
@@ -27,28 +35,28 @@
     background-position: center center;
     background-size: cover;
 
-
-    label {
+    .container-form label {
         font-size: 0.8rem;
     }
 
-    input {
+    .form-input {
         background-color: transparent;
         border: none;
         border-bottom: rgba(255, 255, 255, 1) 1px solid;
         border-radius: 0px;
     }
 
-    input::placeholder {
+    .form-input::placeholder {
         color: #fff;
     }
 
-    input:focus {
+    .form-input:focus {
         background-color: transparent;
     }
 
-    .form-control {
+    .form-input {
         color: #fff !important;
+        box-shadow: none !important;
     }
 
     .auth-item {
