@@ -17,17 +17,18 @@ import TasksList from "./Modules/Tasks/Components/TasksList/TasksList";
 import TasksData from "./Modules/Tasks/Components/TasksData/TasksData";
 import UsersList from "./Modules/Users/Components/UsersList/UsersList";
 import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const routes = createBrowserRouter([
     {
       path: "",
-      element: <AuthLayout />,
+      element:<AuthLayout />,
       errorElement: <NotFound />,
       children: [
         { index: true, element: <LogIn /> },
         { path: "login", element: <LogIn /> },
-        { path: "main", element: <ForgetPass /> },
+        { path: "forget-pass", element: <ForgetPass /> },
         { path: "reset-pass", element: <ResetPass /> },
         { path: "register", element: <Register /> },
         { path: "change-pass", element: <ChangePass /> },
