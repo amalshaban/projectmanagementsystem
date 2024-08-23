@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, createHashRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
 import ProtectedRoute from "./Modules/Shared/Components/ProtectedRoute/ProtectedRoute";
 import AuthLayout from "./Modules/Shared/Components/AuthLayout/AuthLayout";
@@ -21,7 +21,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 function App() {
-  const routes = createBrowserRouter([
+  const routes = createHashRouter([
     {
       path: "",
       element: <AuthLayout />,
