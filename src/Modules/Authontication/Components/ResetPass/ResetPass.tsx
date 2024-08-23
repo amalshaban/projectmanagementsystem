@@ -10,7 +10,6 @@ import {  USERS_URLs } from '../../../../constans/END_POINTS';
 export default function ResetPass() {
 
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-  
   const toggleVisibility = (setterFunction: any) => {
     setterFunction((prevState: any) => !prevState);
   };
@@ -21,6 +20,7 @@ export default function ResetPass() {
   let{
     register,
     handleSubmit,
+    getValues,
     formState:{errors},
   } = useForm({ mode: "onBlur" });
 
@@ -53,7 +53,7 @@ export default function ResetPass() {
      <div className="auth-title my-4">
     <p className="text-white">Welcome to PMS</p>
     <h3 className="main-color title">
-          <span className="frist-ch position-relative">L</span>ogin
+          <span className="frist-ch position-relative">R</span>eset Password
         </h3>
   </div>
 
@@ -138,7 +138,12 @@ export default function ResetPass() {
        placeholder="Enter your password"
        aria-label="confirmPassword"
        aria-describedby="basic-addon1"
-       {...register("confirmPassword", PasswordValidation)}/>
+       {...register("confirmPassword", {
+        required: "password is required",
+        validate: (value) =>
+           value === getValues("password") || "Password is not matched",
+       })}
+       />
        <button
               onMouseDown={(e) => e.preventDefault()}
               onMouseUp={(e) => e.preventDefault()}
