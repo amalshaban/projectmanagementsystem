@@ -45,11 +45,14 @@ const onSubmit = async (data:any) => {
     console.log(error);
    }
  }
-const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-  const toggleVisibility = (setterFunction: any) => {
-    setterFunction((prevState: any) => !prevState);
-  };
 
+
+ 
+ const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+ const toggleVisibility = (setterFunction: any) => {
+   setterFunction((prevState: any) => !prevState);
+ };
+  
   return (
     <>
       <div className="auth-title my-4">
@@ -83,8 +86,9 @@ const [isPasswordVisible, setIsPasswordVisible] = useState(false);
     )}
 
       </div>
+
       <div className='col-md-6'>
-<div className="">
+      <div className="">
     <label className="main-color my-1">userName</label>
       <div className="input-group ">
       <input type="text" className="form-control form-input"
@@ -101,7 +105,7 @@ const [isPasswordVisible, setIsPasswordVisible] = useState(false);
             </span>
     )}
 
-</div>
+      </div>
 
     </div>
     
@@ -154,13 +158,14 @@ const [isPasswordVisible, setIsPasswordVisible] = useState(false);
     <div className='col-md-6'>
 <div className="">
     <label className="main-color my-1">password </label>
-      <div className="input-group ">
-      <input type="password" className="form-control form-input"
-       placeholder="Enter your password "
-       aria-label="password" aria-describedby="basic-addon1"
-       {...register("password",PasswordValidation)}
-       />
-        <button
+    <div className='input-group'>
+      <input type={`${isPasswordVisible?"text" : "password"  }`}
+       className="form-control form-input" 
+       placeholder="Enter your password"
+       aria-label="password"
+       aria-describedby="basic-addon1"
+       {...register("password", PasswordValidation)}/>
+       <button
               onMouseDown={(e) => e.preventDefault()}
               onMouseUp={(e) => e.preventDefault()}
               type="button"
@@ -178,6 +183,7 @@ const [isPasswordVisible, setIsPasswordVisible] = useState(false);
                 }
               ></i>
             </button>
+      
       </div>
      
     </div>
@@ -193,10 +199,15 @@ const [isPasswordVisible, setIsPasswordVisible] = useState(false);
       <div className="">
     <label className="main-color my-1">Confirm Password </label>
       <div className="input-group ">
-      <input type="password" className="form-control form-input"
+      <input type={`${isPasswordVisible?"text" : "password"  }`}
+       className="form-control form-input"
        placeholder="confirmPassword "
        aria-label="confirmPassword" aria-describedby="basic-addon1"
-       {...register("confirmPassword",PasswordValidation)}
+       {...register("confirmPassword", {
+        required: "password is required",
+        validate: (value) =>
+           value === getValues("password") || "Password is not matched",
+       })}
        />
         <button
               onMouseDown={(e) => e.preventDefault()}
