@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form';
-import { EMAILVALIDATION, PASSWORDVALIDATION } from '../../../../assets/CONSTANTS/VALIDATION';
+
 import { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { USERS_URLs } from '../../../../constans/END_POINTS';
 import { AuthContext } from '../Context/AuthContext'
+import { EmailValidation, PasswordValidation } from '../../../../constans/VALIDATIONS';
 
 export default function LogIn() {
   let { saveLoginData } = useContext(AuthContext);
@@ -22,11 +23,13 @@ export default function LogIn() {
   const toggleVisibility = (setterFunction: any) => {
     setterFunction((prevState: any) => !prevState);
   };
+
   let onSubmit = async (data:any)=>{
     try {
       let response = await axios.post(USERS_URLs.Login, data);
       localStorage.setItem('token', response.data.token);
       saveLoginData();
+      console.log(response)
       navigate('/dashboard');
       toast.success(
         response.data.message || 'congratulations, login success !'
@@ -57,7 +60,7 @@ export default function LogIn() {
       <input type="text" className="form-control form-input"
        placeholder="Enter your email"
        aria-label="email" aria-describedby="basic-addon1"
-       {...register("email",EMAILVALIDATION)}
+       {...register("email",EmailValidation)}
        />
       </div>
      
@@ -77,7 +80,7 @@ export default function LogIn() {
        placeholder="Enter your password"
        aria-label="password"
        aria-describedby="basic-addon1"
-       {...register("password", PASSWORDVALIDATION)}/>
+       {...register("password", PasswordValidation)}/>
        <button
               onMouseDown={(e) => e.preventDefault()}
               onMouseUp={(e) => e.preventDefault()}

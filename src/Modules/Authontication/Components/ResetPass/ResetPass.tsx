@@ -1,12 +1,11 @@
 import { useForm } from 'react-hook-form';
-import { EMAILVALIDATION, FIELDVALIDATION } from '../../../../assets/CONSTANTS/VALIDATION';
 import {  useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useState } from 'react';
-import { PasswordValidation } from '../../../../constans/VALIDATIONS';
-import { AuthorizedToken, USERS_URLs } from '../../../../constans/END_POINTS';
+import {  EmailValidation, FieldValidation, PasswordValidation } from '../../../../constans/VALIDATIONS';
+import {  USERS_URLs } from '../../../../constans/END_POINTS';
 
 export default function ResetPass() {
 
@@ -29,7 +28,7 @@ export default function ResetPass() {
 
   let onSubmit = async (data:any)=>{
     try {
-      let response = await axios.post(USERS_URLs.Reset, AuthorizedToken, data);
+      let response = await axios.post(USERS_URLs.Reset, data);
       
       toast.success(
         response.data.message || 'your password was reset successfully !'
@@ -66,7 +65,7 @@ export default function ResetPass() {
       <input type="text" className="form-control form-input"
        placeholder="Enter your email"
        aria-label="email" aria-describedby="basic-addon1"
-       {...register("email",EMAILVALIDATION)}
+       {...register("email",EmailValidation)}
        />
       </div>
      
@@ -83,7 +82,7 @@ export default function ResetPass() {
       <input type="text" className="form-control form-input"
        placeholder="Enter Verification code"
        aria-label="seed" aria-describedby="basic-addon1"
-       {...register("seed",FIELDVALIDATION)}
+       {...register("seed",FieldValidation)}
        />
       </div>
      
@@ -173,7 +172,7 @@ export default function ResetPass() {
             type="submit"
             className="btn text-white border-0  w-100 rounded-pill"
           >
-            LogIn
+            Save
           </button>
         </div>
 
