@@ -6,7 +6,7 @@ export const AuthorizedToken = {
 
 
     
-const BASE_URL = "http://upskilling-egypt.com:3003/api/v1";
+const BASE_URL = "https://upskilling-egypt.com:3003/api/v1";
 
 
 //USERS urls

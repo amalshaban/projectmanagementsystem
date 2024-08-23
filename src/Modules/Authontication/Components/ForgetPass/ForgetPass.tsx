@@ -1,10 +1,10 @@
 import { useForm } from 'react-hook-form';
-import { EMAILVALIDATION } from '../../../../assets/CONSTANTS/VALIDATION';
 import {  useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { AuthorizedToken, USERS_URLs } from '../../../../constans/END_POINTS';
+import { EmailValidation } from '../../../../constans/VALIDATIONS';
 
 export default function ForgetPass() {
   let navigate = useNavigate();
@@ -19,7 +19,7 @@ export default function ForgetPass() {
 
   let onSubmit = async (data:any)=>{
     try {
-      let response = await axios.post(USERS_URLs.ForgetPass,AuthorizedToken, data);
+      let response = await axios.post(USERS_URLs.ForgetPass, data);
       navigate('/reset-pass');
       toast.success(
         response.data.message || 'check your email inbox !'
@@ -29,7 +29,7 @@ export default function ForgetPass() {
       } 
      catch (error:any) {
      toast.error(
-      error?.response?.data?.message || "Login unsuccessful. Please try again"
+      error?.response?.data?.message || "unsuccessful. Please try again"
     );
 
      console.log(error);
@@ -53,7 +53,7 @@ export default function ForgetPass() {
       <input type="text" className="form-control form-input"
        placeholder="Enter your email"
        aria-label="email" aria-describedby="basic-addon1"
-       {...register("email",EMAILVALIDATION)}
+       {...register("email",EmailValidation)}
        />
       </div>
      
@@ -72,7 +72,7 @@ export default function ForgetPass() {
             type="submit"
             className="btn text-white border-0  w-100 rounded-pill"
           >
-            LogIn
+            Verify
           </button>
         </div>
 

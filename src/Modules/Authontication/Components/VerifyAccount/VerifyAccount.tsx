@@ -2,8 +2,8 @@ import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { EMAILVALIDATION, FIELDVALIDATION } from '../../../../assets/CONSTANTS/VALIDATION';
 import { AuthorizedToken, USERS_URLs } from '../../../../constans/END_POINTS';
+import { EmailValidation, FieldValidation } from '../../../../constans/VALIDATIONS';
 
 export default function VerifyAccount() {
   let navigate= useNavigate();
@@ -15,7 +15,7 @@ export default function VerifyAccount() {
   
   let onSubmit = async (data:any)=>{
     try {
-      let response = await axios.put(USERS_URLs.Verify,AuthorizedToken, data);
+      let response = await axios.put(USERS_URLs.Verify, data);
       toast.success(
         response.data.message || "Your account has been successfully verified!"
       );
@@ -51,7 +51,7 @@ export default function VerifyAccount() {
       className="form-control form-input" 
       placeholder="email"
        aria-label="email" aria-describedby="basic-addon1"
-       {...register("email",EMAILVALIDATION)}
+       {...register("email",EmailValidation)}
        />
     </div>
     </div>
@@ -70,7 +70,7 @@ export default function VerifyAccount() {
       className="form-control form-input"
        placeholder="Enter Verification Code"
        aria-label="code" aria-describedby="basic-addon1"
-       {...register("code",FIELDVALIDATION)}
+       {...register("code",FieldValidation)}
        />
     </div>
     {errors.code && (

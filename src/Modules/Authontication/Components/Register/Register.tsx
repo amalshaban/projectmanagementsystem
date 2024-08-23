@@ -1,25 +1,19 @@
-import { useRef, useState } from 'react'
-// import StyleRegister from "./Register.module.css"
-import { Button } from 'react-bootstrap'
-import { FileUploader } from "react-drag-drop-files";
-import { useForm } from 'react-hook-form';
-// import { PATTERNPASSWORD, PATTERNEMAIL, USERSURL } from "../../../Shared/Components/Constant/ConstUrl.js"
-import axios from 'axios';
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify'
-import imagelogo from "../../../../assets/images/LogoRegister.svg"
 import { USERS_URLs } from '../../../../constans/END_POINTS';
 import regImg from '../../../../assets/images/regImg.png'
-import { EMAILVALIDATION } from '../../../../assets/CONSTANTS/VALIDATION';
-import { FieldValidation, PasswordValidation } from '../../../../constans/VALIDATIONS';
+import { EmailValidation, FieldValidation, PasswordValidation } from '../../../../constans/VALIDATIONS';
+import { useForm } from 'react-hook-form';
+import axios from 'axios';
 
 export default function Register() {
       
 let navigate= useNavigate();
 let{
   register,
-  getValues,
   handleSubmit,
+  getValues,
   formState:{errors},
 } = useForm();
 
@@ -77,7 +71,7 @@ const [isPasswordVisible, setIsPasswordVisible] = useState(false);
       <input type="text" className="form-control form-input"
        placeholder="Enter your email"
        aria-label="email" aria-describedby="basic-addon1"
-       {...register("email",EMAILVALIDATION)}
+       {...register("email",EmailValidation)}
        />
       </div>
      
