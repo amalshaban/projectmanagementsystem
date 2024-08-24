@@ -17,7 +17,6 @@ export default function SideBar() {
     <Prosidebar collapsed={togglecol} className='vh-100 position-relative sidebar p-0'>
       <div className='text-center bg-white'>
       <img src='\src\assets\images\nav-logo.png'  />
-
       </div>
   <Menu>
     <MenuItem icon={<i className="fa-regular fa-user"></i>} component={<Link to="users-list" />}> Users</MenuItem>
