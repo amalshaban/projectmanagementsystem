@@ -6,6 +6,14 @@ export const EmailValidation = {
   },
 };
 
+export const PhoneValidation = {
+  required: "Email is required",
+  pattern: {
+    value: /^(?:(?:\+|\d{2})?[\d-.]+)?\d{3}[\d-.]?\d{3}[\d-.]?\d{2,4}$/,
+    message: "Please enter a valid email",
+  },
+};
+
 const RegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{4,}$/;
 
 export const PasswordValidation = {

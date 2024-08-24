@@ -7,7 +7,7 @@ export default function AuthLayout() {
       
         <div className="d-flex justify-content-center align-items-center">
           <div className="col-md-7">
-            <div className="img-logo text-center my-3">
+            <div className="img-logo my-3">
               <img src={logo} alt="" />
             </div>
             <div className="auth-item  rounded rounded-4  p-5 pt-3">

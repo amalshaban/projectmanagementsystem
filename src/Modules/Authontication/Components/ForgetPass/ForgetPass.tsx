@@ -22,7 +22,7 @@ export default function ForgetPass() {
       let response = await axios.post(USERS_URLs.ForgetPass, data);
       navigate('/reset-pass');
       toast.success(
-        response.data.message || 'check your email inbox !'
+        response?.data?.message || 'check your email inbox !'
       );
     
     console.log(response)

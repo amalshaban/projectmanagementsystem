@@ -30,6 +30,7 @@ export default function LogIn() {
       localStorage.setItem('token', response.data.token);
       saveLoginData();
       console.log(response)
+    
       navigate('/dashboard');
       toast.success(
         response.data.message || 'congratulations, login success !'
@@ -80,7 +81,8 @@ export default function LogIn() {
        placeholder="Enter your password"
        aria-label="password"
        aria-describedby="basic-addon1"
-       {...register("password", PasswordValidation)}/>
+       {...register("password", 
+        {required: "Password is required"})}/>
        <button
               onMouseDown={(e) => e.preventDefault()}
               onMouseUp={(e) => e.preventDefault()}

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify'
 import { USERS_URLs } from '../../../../constans/END_POINTS';
 import regImg from '../../../../assets/images/regImg.png'
-import { EmailValidation, FieldValidation, PasswordValidation } from '../../../../constans/VALIDATIONS';
+import { EmailValidation, FieldValidation, PasswordValidation, PhoneValidation } from '../../../../constans/VALIDATIONS';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 
@@ -36,7 +36,8 @@ const onSubmit = async (data:any) => {
 
     console.log(response);
     navigate("/verify-account")
-    toast.success(response?.data.message)
+    toast.success(response?.data.message);
+   
   }
   catch (error:any) {
     toast.error(
@@ -134,10 +135,10 @@ const onSubmit = async (data:any) => {
 <div className="">
     <label className="main-color my-1">phoneNumber </label>
       <div className="input-group ">
-      <input type="text" className="form-control form-input"
+      <input type="tel" className="form-control form-input"
        placeholder="Enter your phoneNumber "
        aria-label="phoneNumber" aria-describedby="basic-addon1"
-       {...register("phoneNumber",FieldValidation)}
+       {...register("phoneNumber",PhoneValidation)}
        />
       </div>
      
