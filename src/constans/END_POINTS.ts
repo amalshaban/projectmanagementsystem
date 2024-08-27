@@ -19,5 +19,10 @@ export const USERS_URLs = {
   Reset: `${BASE_USERS}/Reset`,
   Verify: `${BASE_USERS}/verify`,
   Register: `${BASE_USERS}/Register`,
+  Usercount: `${BASE_USERS}/count`,
 };
+export const TasksUrl={
+  GetTasksmanager: `${BASE_URL}/Task/manager`,
+  GetTaskEmploee:`${BASE_URL}/Task/count`
+}
 
