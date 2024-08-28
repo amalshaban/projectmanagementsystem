@@ -1,9 +1,12 @@
 
+
 import progressimg from "./img/progress.svg"
 import taskimg from "./img/tasknaumber.svg"
 import projectimg from "./img/projectnumber.svg"
 import "./dashbord.css"
 import axios from "axios"
+import Header from "../Shared/Components/Header/Header";
+import Styles from "./Dashboard.module.css";
 import { AuthorizedToken, TasksUrl, USERS_URLs } from "../../constans/END_POINTS"
 import { useEffect, useState } from "react"
 import CountUp from 'react-countup';
@@ -48,7 +51,7 @@ export default function Dashboard() {
   }, [])
   return (
     <div className='contanerhome'>
-      <div className='sectionheader'><p>lorem5</p></div>
+      <Header headerTitel={"Upskilling"} />
       <div className="section-bar">
         <div className="maindashtasks">
           <div className="headertask">
@@ -110,4 +113,3 @@ export default function Dashboard() {
     </div>
 
   )
-}

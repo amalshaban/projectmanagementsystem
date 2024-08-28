@@ -81,3 +81,34 @@ body{
         background-color: #f39c12;
     }
 }
+/*-------------sidebar---------------*/
+.sidebar{
+    height:100vh;
+}
+.sidebar .css-dip3t8{
+    background-color: #0E382F !important;
+    color: #fff;
+    
+
+.toggle{
+    color: var(--main-bg-color);
+    position: absolute;
+    top: 20px;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    font-size: 30px;
+
+    }
+    .css-1t8x7v1 >.ps-menu-button:hover{
+        background-color: transparent !important;
+        color: var(--main-bg-color);
+    }
+    
+}
+=======
+/* ---------------------- not-found ----------------------*/
+
+.not-found-text{
+    color: #f39c12;
+}
