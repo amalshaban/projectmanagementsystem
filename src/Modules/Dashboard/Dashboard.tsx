@@ -52,12 +52,7 @@ export default function Dashboard() {
 
   return (
     <>
-      <div>
-        Dashboard
-        <button className="btn btn-success p-4" onClick={handleClick}>
-          LOGOUT
-        </button>
-      </div>
+      
 
       <Header headerTitel={"Upskilling"} />
 
