@@ -73,7 +73,6 @@
         background-color: #f39c12;
     }
 }
-
 /*-------------sidebar---------------*/
 .sidebar .css-dip3t8{
     background-color: #0E382F !important;
@@ -95,4 +94,10 @@
         color: var(--main-bg-color);
     }
     
+}
+=======
+/* ---------------------- not-found ----------------------*/
+
+.not-found-text{
+    color: #f39c12;
 }
