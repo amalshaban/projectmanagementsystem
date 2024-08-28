@@ -14,7 +14,7 @@ export default function SideBar() {
 
   return (
     <>
-    <Prosidebar collapsed={togglecol} className='vh-100 position-relative sidebar p-0'>
+    <Prosidebar collapsed={togglecol} className='position-relative sidebar p-0'>
       <div className='text-center bg-white'>
       <img src='\src\assets\images\nav-logo.png'  />
       </div>

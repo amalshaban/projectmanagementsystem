@@ -74,6 +74,9 @@
     }
 }
 /*-------------sidebar---------------*/
+.sidebar{
+    height:100vh;
+}
 .sidebar .css-dip3t8{
     background-color: #0E382F !important;
     color: #fff;
