@@ -16,13 +16,4 @@ export const USERS_URLs = {
   Reset: `${BASE_USERS}/Reset`,
   Verify: `${BASE_USERS}/verify`,
   Register: `${BASE_USERS}/Register`,
-  TotalUsers: `${BASE_USERS}/count`,
-  TotalManager: `${BASE_USERS}/Manager`,
-};
-
-//TASKS urls
-const BASE_TASKS = `${BASE_URL}/Task`;
-
-export const TASKS_URLs = {
-  TotalTasks: `${BASE_TASKS}/count`,
 };

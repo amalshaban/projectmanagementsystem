@@ -15,28 +15,4 @@
         font-size: 0.8125rem;
     }
 
-    .itemCard1 {
-        background-color: rgba(229, 230, 244, 1);
-    }
-
-    .itemCard2 {
-        background-color: rgba(244, 244, 229, 1);
-    }
-
-    .itemCard3 {
-        background-color: rgba(244, 229, 237, 1);
-    }
-
-    .iconBg1 {
-        background-color: rgba(207, 209, 236, 1);
-    }
-
-    .iconBg2 {
-        background-color: rgba(228, 228, 188, 1);
-    }
-
-    .iconBg3 {
-        background-color: rgba(231, 195, 215, 1);
-    }
-
 }
