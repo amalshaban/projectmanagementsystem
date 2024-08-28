@@ -1,4 +1,8 @@
-import { createBrowserRouter, createHashRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  createHashRouter,
+  RouterProvider,
+} from "react-router-dom";
 import "./App.css";
 import ProtectedRoute from "./Modules/Shared/Components/ProtectedRoute/ProtectedRoute";
 import AuthLayout from "./Modules/Shared/Components/AuthLayout/AuthLayout";
@@ -17,8 +21,7 @@ import TasksList from "./Modules/Tasks/Components/TasksList/TasksList";
 import TasksData from "./Modules/Tasks/Components/TasksData/TasksData";
 import UsersList from "./Modules/Users/Components/UsersList/UsersList";
 import { ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
-
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const routes = createHashRouter([
@@ -28,7 +31,10 @@ function App() {
       errorElement: <NotFound />,
       children: [
         { index: true, element: <LogIn /> },
-        { path: "login", element: <LogIn /> },
+        {
+          path: "login",
+          element: <LogIn />,
+        },
         { path: "forget-pass", element: <ForgetPass /> },
         { path: "reset-pass", element: <ResetPass /> },
         { path: "register", element: <Register /> },

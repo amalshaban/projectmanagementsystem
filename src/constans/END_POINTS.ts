@@ -1,13 +1,10 @@
+export const AuthorizedToken = {
+  headers: {
+    Authorization: `Bearer ${localStorage.token}`,
+  },
+};
 
-export const AuthorizedToken = { 
-  headers:{
-     Authorization: `Bearer ${localStorage.token}` 
-    } };
-
-
-    
 const BASE_URL = "https://upskilling-egypt.com:3003/api/v1";
-
 
 //USERS urls
 const BASE_USERS = `${BASE_URL}/Users`;
@@ -19,5 +16,13 @@ export const USERS_URLs = {
   Reset: `${BASE_USERS}/Reset`,
   Verify: `${BASE_USERS}/verify`,
   Register: `${BASE_USERS}/Register`,
+  currentUser: `${BASE_USERS}/currentUser`,
 };
 
+export const getToken = () => {
+  return {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  };
+};

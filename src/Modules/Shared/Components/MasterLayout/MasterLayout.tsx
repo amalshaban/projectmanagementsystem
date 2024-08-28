@@ -1,14 +1,21 @@
-
-import SideBar from '../SideBar/SideBar'
-import { Outlet } from 'react-router-dom'
-import NavBar from '../NavBar/NavBar'
+import SideBar from "../SideBar/SideBar";
+import { Outlet } from "react-router-dom";
+import NavBar from "../NavBar/NavBar";
 
 export default function MasterLayout() {
   return (
     <>
-    <SideBar/>
-    <NavBar/>
-    <Outlet/>
+      <div className="d-flex">
+        <div>
+          <SideBar />
+        </div>
+        <div className="w-100">
+          <div className="w-100">
+            <NavBar />
+          </div>
+          <Outlet />
+        </div>
+      </div>
     </>
-  )
+  );
 }
