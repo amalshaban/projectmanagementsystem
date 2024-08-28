@@ -5,11 +5,10 @@ import { createContext } from "react";
 
 export let AuthContext = createContext(null);
 
-export default function AuthContextProvider(props:   
- PropsWithChildren) {
-  let [loginData, setLoginData] = useState(null);
+export default function AuthContextProvider(props:PropsWithChildren) {
+  const [loginData, setLoginData] = useState(null);
 
-  let saveLoginData = () => {
+  const saveLoginData = () => {
     const encodedToken = localStorage.getItem('token');
     if (encodedToken) {
       const decodedToken = jwtDecode(encodedToken);

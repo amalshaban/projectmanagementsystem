@@ -1,0 +1,517 @@
+:root {
+    --main-color: rgba(239, 155, 40, 1);
+    --main-bg-color: rgba(245, 245, 245, 1);
+    --colo-Progress: rgba(229, 230, 244, 1);
+    --color-TaskNumber: rgba(244, 244, 229, 1);
+    --color-ProjectNumber: rgba(244, 229, 237, 1);
+    --color-progressDash: rgba(248, 249, 251, 1);
+    --color-smolerText: rgba(111, 120, 129, 1);
+
+}
+
+
+.contanerhome {
+    /* background-color: aqua; */
+    width: 100%;
+    height: calc(100% - 50px);
+    display: flex;
+    flex-direction: column;
+
+}
+
+
+/* >>>>>>>>>>>>>>>>>>>-section project task->>>>>>>>>>>>>>>>>>> */
+
+.section-bar {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 50px;
+    overflow: hidden;
+}
+
+/* <<<<<<<<<< maindashtasks as  contaner section >>>>>>>>>>*/
+
+.maindashtasks {
+    width: 50%;
+    height: 281px;
+    background-color: var(--color-progressDash);
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px;
+    margin-top: 1rem;
+    overflow: hidden;
+    /* transform: translateX(-100%); */
+    animation: animate 2s backwards;
+    /* animation-play-state: paused ; */
+
+}
+
+/* <<<<<<<<<<  maindashusertask-right as  contaner section >>>>>>>>*/
+
+.maindashusertask-right {
+    width: 50%;
+    height: 281px;
+    background-color: var(--color-progressDash);
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px;
+    margin-top: 1rem;
+    overflow: hidden;
+    margin-right: 50px;
+    animation: animateright 2s backwards;
+
+}
+
+
+/* <<<<<<<<<< header title  >>>>>>>>>*/
+.headertask {
+    width: 100%;
+    height: 60px;
+    position: relative;
+    padding-left: 1.1rem;
+    animation: mantitle 1.1s backwards;
+    animation-delay: 1.3s;
+
+    .titletask {
+        font-weight: 700;
+    }
+
+    .disctask {
+        color: gray;
+        transform: translateY(-5px);
+    }
+}
+
+.headertask::before {
+    content: "";
+    position: absolute;
+    width: 5px;
+    height: 100%;
+    left: 0;
+    bottom: 0;
+    background-color: var(--main-color);
+}
+
+/* <<<<<<<<<< section progress >>>>>>>>*/
+
+.maincardtask {
+    width: 100%;
+    height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    animation: mancard 1s backwards;
+    animation-delay: 1s;
+
+
+
+
+    .cardtasksProgress {
+        width: 160.46px;
+        height: 143px;
+        background-color: var(--colo-Progress);
+        padding: 1.5rem;
+        border-radius: 20px;
+        transition: .5s all ease-in-out;
+        cursor: pointer;
+
+
+        .TasksCount {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+
+
+
+            span:nth-child(1) {
+                font-size: 16px;
+                font-weight: 500;
+                line-height: 15.5px;
+                color: var(--color-smolerText);
+
+
+            }
+
+            span:nth-child(2) {
+                font-size: 24px;
+                font-weight: 400;
+                line-height: 24.5px;
+                color: unset;
+
+                span {
+                    font-size: 24px;
+                    font-weight: 400;
+                    line-height: 24.5px;
+                    color: unset;
+
+                }
+
+            }
+
+
+        }
+
+    }
+
+    /* <<<<<<<<<< section cardtasksNumber >>>>>>>>*/
+    .cardtasksProgress:hover {
+        transform: scale(1.1);
+    }
+
+    .cardtasksNumber {
+        width: 160.46px;
+        height: 143px;
+        background-color: var(--color-TaskNumber);
+        padding: 1.5rem;
+        border-radius: 20px;
+        transition: .5s all ease-in-out;
+        cursor: pointer;
+
+
+        .TasksCount {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+
+
+
+            span:nth-child(1) {
+                font-size: 16px;
+                font-weight: 500;
+                line-height: 15.5px;
+                color: var(--color-smolerText);
+
+
+            }
+
+            span:nth-child(2) {
+                font-size: 24px;
+                font-weight: 400;
+                line-height: 24.5px;
+                color: unset;
+
+                span {
+                    font-size: 24px;
+                    font-weight: 400;
+                    line-height: 24.5px;
+                    color: unset;
+
+                }
+
+            }
+
+        }
+
+
+
+    }
+
+    .cardtasksNumber:hover {
+        transform: scale(1.1);
+    }
+
+    /* <<<<<<<<<< section cardprojectNumber >>>>>>>>*/
+
+    .cardprojectNumber {
+        width: 160.46px;
+        height: 143px;
+        background-color: var(--color-ProjectNumber);
+        padding: 1.5rem;
+        border-radius: 20px;
+        transition: .5s all ease-in-out;
+        cursor: pointer;
+
+
+        .TasksCount {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+
+
+            span:nth-child(1) {
+                font-size: 15px;
+                font-weight: 500;
+                line-height: 15.5px;
+                color: var(--color-smolerText);
+
+
+            }
+
+            span:nth-child(2) {
+                font-size: 24px;
+                font-weight: 400;
+                line-height: 24.5px;
+                color: unset;
+
+                span {
+                    font-size: 24px;
+                    font-weight: 400;
+                    line-height: 24.5px;
+                    color: unset;
+
+                }
+
+            }
+
+
+        }
+    }
+
+
+}
+
+.cardprojectNumber:hover {
+    transform: scale(1.1);
+}
+
+/* <<<<<<<<<< section headertask-right Title >>>>>>>>*/
+
+.headertask-right {
+
+    width: 100%;
+    height: 60px;
+    position: relative;
+    padding-left: 1.1rem;
+    animation: mantitle 1.1s backwards;
+    animation-delay: 1.3s;
+
+
+    .titletask {
+        font-weight: 700;
+    }
+
+    .disctask {
+        color: gray;
+        transform: translateY(-5px);
+    }
+}
+
+.headertask-right::before {
+    content: "";
+    position: absolute;
+    width: 5px;
+    height: 100%;
+    left: 0;
+    bottom: 0;
+    background-color: var(--main-color);
+}
+
+/* <<<<<<<<<< section maincardtask-right >>>>>>>>*/
+
+.maincardtask-right {
+    width: 100%;
+    height: 250px;
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    animation: mancard 1.1s backwards;
+    animation-delay: 1.1s;
+
+    .cardtasksProgress-right {
+        width: 160.46px;
+        height: 143px;
+        background-color: var(--colo-Progress);
+        padding: 1.5rem;
+        border-radius: 20px;
+        margin-left: 20px;
+        transition: .5s all ease-in-out;
+        cursor: pointer;
+
+
+
+        .TasksCount {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+
+
+
+            span:nth-child(1) {
+                font-size: 16px;
+                font-weight: 500;
+                line-height: 15.5px;
+                color: var(--color-smolerText);
+
+
+            }
+
+            span:nth-child(2) {
+                font-size: 24px;
+                font-weight: 400;
+                line-height: 24.5px;
+                color: unset;
+
+                span {
+                    font-size: 24px;
+                    font-weight: 400;
+                    line-height: 24.5px;
+                    color: unset;
+
+                }
+
+            }
+
+
+        }
+
+    }
+
+    .cardtasksProgress-right:hover {
+        transform: scale(1.1);
+    }
+
+    /* <<<<<<<<<< section cardtasksNumber-right >>>>>>>>*/
+
+    .cardtasksNumber-right {
+        width: 160.46px;
+        height: 143px;
+        background-color: var(--color-TaskNumber);
+        padding: 1.5rem;
+        border-radius: 20px;
+        transition: .5s all ease-in-out;
+        cursor: pointer;
+
+        .TasksCount {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+
+
+
+            span:nth-child(1) {
+                font-size: 16px;
+                font-weight: 500;
+                line-height: 15.5px;
+                color: var(--color-smolerText);
+
+
+            }
+
+            span:nth-child(2) {
+                font-size: 24px;
+                font-weight: 400;
+                line-height: 24.5px;
+                color: unset;
+
+                span {
+                    font-size: 24px;
+                    font-weight: 400;
+                    line-height: 24.5px;
+                    color: unset;
+
+                }
+
+            }
+
+        }
+
+
+
+    }
+
+    .cardtasksNumber-right:hover {
+        transform: scale(1.1);
+    }
+
+    /* <<<<<<<<<< section cardprojectNumber-right >>>>>>>>*/
+    /* 
+    .cardprojectNumber-right {
+        width: 160.46px;
+        height: 143px;
+        background-color: var(--color-ProjectNumber);
+        padding: 1.5rem;
+        border-radius: 20px;
+
+        .TasksCount {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+
+
+            span:nth-child(1) {
+                font-size: 16px;
+                font-weight: 500;
+                line-height: 15.5px;
+                color: var(--color-smolerText);
+
+
+            }
+
+            span:nth-child(2) {
+                font-size: 24px;
+                font-weight: 400;
+                line-height: 24.5px;
+                color: unset;
+
+                span {
+                    font-size: 24px;
+                    font-weight: 400;
+                    line-height: 24.5px;
+                    color: unset;
+
+                }
+
+            }
+
+
+        }
+    } */
+
+
+}
+
+
+
+/* animation dashboard     maindashtasks      maindashusertask-right */
+@keyframes animate {
+    from {
+        transform: translateX(-100%);
+    }
+
+    to {
+        transform: translateX(0);
+
+    }
+}
+
+@keyframes animateright {
+    from {
+        transform: translateX(100%);
+    }
+
+    to {
+        transform: translateX(0);
+
+    }
+}
+
+@keyframes mancard {
+    from {
+        transform: translateY(100%);
+    }
+
+    to {
+        transform: translateY(0);
+
+    }
+}
+
+
+@keyframes mantitle {
+    from {
+        transform: translateX(100%);
+    }
+
+    to {
+        transform: translateX(0);
+
+    }
+}

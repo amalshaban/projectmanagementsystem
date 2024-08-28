@@ -1,7 +1,16 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import logo from "../../../../assets/images/PMS3.png";
+import { useEffect } from "react";
 
 export default function AuthLayout() {
+  // chick token if find Token navigate to dashboard 
+  let navigate = useNavigate()
+  useEffect(()=>{
+    if(localStorage.getItem("token")){
+      navigate("/dashboard")
+
+    }
+  })
   return (
     <div className="auth-container container-fluid">
       

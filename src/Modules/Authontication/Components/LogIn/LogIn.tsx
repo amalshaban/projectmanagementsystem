@@ -8,11 +8,10 @@ import 'react-toastify/dist/ReactToastify.css';
 import { USERS_URLs } from '../../../../constans/END_POINTS';
 import { AuthContext } from '../Context/AuthContext'
 import { EmailValidation, PasswordValidation } from '../../../../constans/VALIDATIONS';
-
 export default function LogIn() {
-  let { saveLoginData } = useContext(AuthContext);
-  let navigate = useNavigate();
-  let{
+  const { loginData,saveLoginData } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const{
     register,
     handleSubmit,
     formState:{errors},
@@ -24,9 +23,9 @@ export default function LogIn() {
     setterFunction((prevState: any) => !prevState);
   };
 
-  let onSubmit = async (data:any)=>{
+  const onSubmit = async (data:any)=>{
     try {
-      let response = await axios.post(USERS_URLs.Login, data);
+      const response = await axios.post(USERS_URLs.Login, data);
       localStorage.setItem('token', response.data.token);
       saveLoginData();
       console.log(response)

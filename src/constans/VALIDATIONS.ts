@@ -21,6 +21,8 @@ export const PasswordValidation = {
 
 export const FieldValidation = {
   required: "this field is required",
+  value: /(\+)?(\(?\d+\)?)(([\s-]+)?(\d+)){0,}/g,
+  message:"The number must be entered correctly, without any letters or separators."
 };
 
 

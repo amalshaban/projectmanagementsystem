@@ -1,53 +1,115 @@
 
-import { useNavigate } from "react-router-dom";
+
+import progressimg from "./img/progress.svg"
+import taskimg from "./img/tasknaumber.svg"
+import projectimg from "./img/projectnumber.svg"
+import "./dashbord.css"
+import axios from "axios"
 import Header from "../Shared/Components/Header/Header";
 import Styles from "./Dashboard.module.css";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import {
-  AuthorizedToken,
-  TASKS_URLs,
-  USERS_URLs,
-} from "../../constans/END_POINTS";
-import { toast } from "react-toastify";
-
+import { AuthorizedToken, TasksUrl, USERS_URLs } from "../../constans/END_POINTS"
+import { useEffect, useState } from "react"
+import CountUp from 'react-countup';
 export default function Dashboard() {
-  const [activatedEmployee, setActivatedEmployee] = useState(null);
-  const [deactivateEmployee, setDeactivateEmployee] = useState(null);
-  const [toDoCounter, setToDoCounter] = useState(null);
-  const [inProgressCounter, setInProgressCounter] = useState(null);
-  const [doneCounter, setDoneCounter] = useState(null);
-  let navigate = useNavigate();
-  let handleClick = () => {
-    localStorage.removeItem("token");
-    navigate("/login");
-  };
+   type Apidata={
+    activatedEmployeeCount:number
+    deactivatedEmployeeCount:number
+  }
+  const [Taskseplyee, setTaskseplyee] = useState(0)
+  const [progressM, setprogressM] = useState(0)
 
-  const getTotalUsers = async () => {
+
+
+  const Gettasks = async ()=> {
     try {
-      const response = await axios.get(USERS_URLs.TotalUsers, AuthorizedToken);
-      setActivatedEmployee(response?.data?.activatedEmployeeCount);
-      setDeactivateEmployee(response?.data?.deactivatedEmployeeCount);
-    } catch (error) {
-      toast.error(error.response.data.message);
+      const response = await axios.get<Apidata>(USERS_URLs.Usercount, {
+        headers: AuthorizedToken.headers
+      })
+      setTaskseplyee(response.data)
+      console.log(response.data)
+
+    } catch (errors) {
+      console.log(errors)
     }
-  };
+  }
+  const Getmanagertask = async  () => {
+    try {
+      const response = await axios.get(TasksUrl.GetTaskEmploee, {
+        headers: AuthorizedToken.headers
+      })
+      setprogressM(response.data)
+      console.log(response.data)
 
-
+    } catch (errors) {
+      console.log(errors)
+    }
+  }
+  useEffect(() => {
+    Gettasks()
+    Getmanagertask()
+    // handlescroll()
+  }, [])
   return (
-    <>
-      
-
+    <div className='contanerhome'>
       <Header headerTitel={"Upskilling"} />
-
-      <div className={`${Styles.dashboardContainer} container-fluid my-4`}>
-        <div className="row justify-content-between align-items-center gy-4">
-          <div className="col-md-6 text-center text-md-start">
-          
+      <div className="section-bar">
+        <div className="maindashtasks">
+          <div className="headertask">
+            <h4 className='titletask'>Tasks</h4>
+            <p className='disctask'>Lorem ipsum dolor sit ametipsum dolor.</p>
           </div>
+          <div className="maincardtask">
+            <div className="cardtasksProgress">
+              <img src={progressimg} alt="logo" />
+              <div className="TasksCount">
+                <span>Progress</span>
+                <span>$ <span><CountUp delay={1.8} end={progressM.toDo} duration={2.8} /></span></span>
+              </div>
 
+            </div>
+            <div className="cardtasksNumber">
+              <img src={taskimg} alt="logo" />
+              <div className="TasksCount">
+                <span>Task Number</span>
+                <span><CountUp delay={1.8} end={progressM.inProgress} duration={2.8} /></span>
+              </div>
+            </div>
+            <div className="cardprojectNumber">
+              <img src={projectimg} alt="logo" />
+              <div className="TasksCount">
+                <span>Projects Number</span>
+                <span><CountUp delay={1.8} end={progressM.done} duration={2.8} /></span>
+              </div>
+            </div>
+          </div>
         </div>
+        <div className="maindashusertask-right">
+          <div className="headertask-right">
+            <h4 className='titletask'>Users</h4>
+            <p className='disctask'>Lorem ipsum dolor sit ametipsum dolor.</p>
+          </div>
+          <div className="maincardtask-right">
+            <div className="cardtasksProgress-right">
+              <img src={progressimg} alt="logo" />
+              <div className="TasksCount">
+                <span>Active</span>
+                <span>$ <span><CountUp delay={1.8} end={Taskseplyee?.activatedEmployeeCount} duration={2.8} /></span></span>
+              </div>
+
+            </div>
+            <div className="cardtasksNumber-right">
+              <img src={taskimg} alt="logo" />
+              <div className="TasksCount">
+                <span>Enactive</span>
+                <span><CountUp delay={1.8} end={Taskseplyee.deactivatedEmployeeCount} duration={2.8} /></span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
       </div>
-    </>
-  );
-}
+
+    </div>
+
+  )

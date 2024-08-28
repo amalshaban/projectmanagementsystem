@@ -27,5 +27,6 @@ export default function SideBar() {
   <i className="fa-solid fa-circle-chevron-left toggle" onClick={toggle}></i>
 </Prosidebar>;
     </>
+
   )
 }
