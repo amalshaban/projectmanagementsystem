@@ -5,7 +5,8 @@ body{
     margin: 0;
     box-sizing: border-box;
     background-color: var(--main-bg-color) !important;
-    height: 200vh;
+    /* height: 200vh; */
+    overflow-x:hidden ;
 }
 .auth-container{
     min-height: 100vh;

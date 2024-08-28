@@ -1,28 +1,36 @@
-
-
 import progressimg from "./img/progress.svg"
 import taskimg from "./img/tasknaumber.svg"
 import projectimg from "./img/projectnumber.svg"
 import "./dashbord.css"
 import axios from "axios"
 import Header from "../Shared/Components/Header/Header";
-import Styles from "./Dashboard.module.css";
 import { AuthorizedToken, TasksUrl, USERS_URLs } from "../../constans/END_POINTS"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import CountUp from 'react-countup';
+import { AuthContext } from "../Authontication/Components/Context/AuthContext"
 export default function Dashboard() {
-   type Apidata={
-    activatedEmployeeCount:number
-    deactivatedEmployeeCount:number
-  }
+  //  interface Apidata{
+  //   activatedEmployeeCount:number
+  //   deactivatedEmployeeCount:number
+  // }
+
+
   const [Taskseplyee, setTaskseplyee] = useState(0)
   const [progressM, setprogressM] = useState(0)
 
 
+  const [userName, setUserName] = useState(null);
+
+  const getCurrentUser = async () => {
+    const response = await axios.get(USERS_URLs.currentUser,AuthorizedToken);
+    console.log(response);
+    setUserName(response.data.userName);
+  };
+
 
   const Gettasks = async ()=> {
     try {
-      const response = await axios.get<Apidata>(USERS_URLs.Usercount, {
+      const response = await axios.get(USERS_URLs.Usercount, {
         headers: AuthorizedToken.headers
       })
       setTaskseplyee(response.data)
@@ -47,11 +55,12 @@ export default function Dashboard() {
   useEffect(() => {
     Gettasks()
     Getmanagertask()
+    getCurrentUser()
     // handlescroll()
   }, [])
   return (
     <div className='contanerhome'>
-      <Header headerTitel={"Upskilling"} />
+      <Header headerTitel={userName} />
       <div className="section-bar">
         <div className="maindashtasks">
           <div className="headertask">
@@ -113,3 +122,4 @@ export default function Dashboard() {
     </div>
 
   )
+}

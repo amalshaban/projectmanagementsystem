@@ -8,11 +8,11 @@ export default function MasterLayout() {
 
   return (
     <>
-    <div className='d-flex'>
+    <div className='d-flex' >
     <div>
     <SideBar/>
     </div>
-      <div>
+      <div className="w-100">
       <NavBar/>
       <Outlet/>
       </div>

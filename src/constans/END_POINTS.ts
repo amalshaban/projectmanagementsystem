@@ -19,6 +19,7 @@ export const USERS_URLs = {
   Usercount: `${BASE_USERS}/count`,
   TotalUsers: `${BASE_USERS}/count`,
   TotalManager: `${BASE_USERS}/Manager`,
+  currentUser: `${BASE_USERS}/currentUser`,
 };
 export const TasksUrl={
   GetTasksmanager: `${BASE_URL}/Task/manager`,
