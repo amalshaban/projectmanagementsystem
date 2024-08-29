@@ -21,6 +21,16 @@ export const USERS_URLs = {
   TotalManager: `${BASE_USERS}/Manager`,
   currentUser: `${BASE_USERS}/currentUser`,
 };
+
+
+const BASE_PROJECTS = `${BASE_URL}/Project` ;
+export const PROJECT_URLS = {
+  getlist: `${BASE_PROJECTS}/manager`,
+}
+
+
+
+
 export const TasksUrl={
   GetTasksmanager: `${BASE_URL}/Task/manager`,
   GetTaskEmploee:`${BASE_URL}/Task/count`

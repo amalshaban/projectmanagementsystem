@@ -18,6 +18,7 @@ import TasksData from "./Modules/Tasks/Components/TasksData/TasksData";
 import UsersList from "./Modules/Users/Components/UsersList/UsersList";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import NoData from "./Modules/Shared/Components/NoData/NoData";
 
 
 function App() {
@@ -48,6 +49,7 @@ function App() {
         { path: "tasks-list", element: <TasksList /> },
         { path: "tasks-data", element: <TasksData /> },
         { path: "users-list", element: <UsersList /> },
+        {path: "nodata", element: <NoData/>}
       ],
     },
   ]);
