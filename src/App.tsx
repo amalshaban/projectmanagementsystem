@@ -42,7 +42,7 @@ function App() {
       element: <ProtectedRoute><MasterLayout /></ProtectedRoute>,
       errorElement: <NotFound />,
       children: [
-        { index: true, element: <Dashboard /> },
+      
         { path: "home", element: <Dashboard /> },
         { path: "project-list", element: <ProjectList /> },
         { path: "project-data", element: <ProjectData /> },
