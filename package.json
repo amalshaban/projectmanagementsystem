@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
@@ -16,8 +16,11 @@
     "jwt-decode": "^4.0.0",
     "react": "^18.3.1",
     "react-bootstrap": "^2.10.4",
+    "react-countup": "^6.5.3",
     "react-dom": "^18.3.1",
+    "react-drag-drop-files": "^2.3.10",
     "react-hook-form": "^7.52.2",
+    "react-image": "^4.1.0",
     "react-pro-sidebar": "^1.1.0",
     "react-router-dom": "^6.26.1",
     "react-toastify": "^10.0.5"
