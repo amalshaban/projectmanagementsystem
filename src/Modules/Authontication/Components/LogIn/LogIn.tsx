@@ -114,7 +114,7 @@ export default function LogIn() {
       Register Now ?
       </Link>
 
-    <Link to={'/forget-pass'} 
+    <Link to={'/forget-password'} 
     className='text-white mt-2 text-decoration-none'
      >
       Forgot Password ?
