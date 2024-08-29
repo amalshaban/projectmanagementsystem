@@ -3,6 +3,7 @@ import { AuthorizedToken, PROJECT_URLS } from '../../../../constans/END_POINTS';
 import axios from 'axios';
 import { format } from 'date-fns';
 import NoData from '../../../Shared/Components/NoData/NoData';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function ProjectList() {
   let [projectsList, setProjectsList] =  useState([]);
@@ -27,7 +28,7 @@ useEffect(() => {
     <>
     <div className="d-flex px-2 py-3 bg-white justify-content-between">
       <h3>Projects</h3>
-      <button className='btn btn-warning rounded-5 p-2'>+ Add New Project</button>
+      <Link to={'/dashboard/project-data'} className='btn btn-warning rounded-5 p-2'>+ Add New Project</Link>
     </div>
  
 <div className= "p-2 d-flex justify-content-between">

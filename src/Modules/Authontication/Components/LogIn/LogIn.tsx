@@ -1,15 +1,14 @@
 import { useForm } from 'react-hook-form';
 
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { USERS_URLs } from '../../../../constans/END_POINTS';
-import { AuthContext } from '../Context/AuthContext'
 import { EmailValidation, PasswordValidation } from '../../../../constans/VALIDATIONS';
 export default function LogIn() {
-  const { loginData,saveLoginData } = useContext(AuthContext);
+  
   const navigate = useNavigate();
   const{
     register,
@@ -27,7 +26,7 @@ export default function LogIn() {
     try {
       const response = await axios.post(USERS_URLs.Login, data);
       localStorage.setItem('token', response.data.token);
-      saveLoginData();
+    
       console.log(response)
       navigate('/dashboard');
       toast.success(
