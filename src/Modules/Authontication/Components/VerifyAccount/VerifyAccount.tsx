@@ -17,7 +17,7 @@ export default function VerifyAccount() {
     try {
       let response = await axios.put(USERS_URLs.Verify, data);
       toast.success(
-        response.data.message || "Your account has been successfully verified!"
+        response?.data?.message || "Your account has been successfully verified!"
       );
       
       navigate('/dashboard');
@@ -26,7 +26,7 @@ export default function VerifyAccount() {
       catch (error:any) {
       
       toast.error(
-        error.message || "verification proccess was unsuccessful. Please try again"
+        error?.message || "verification proccess was unsuccessful. Please try again"
       );
       console.log(error);
       
@@ -58,7 +58,7 @@ export default function VerifyAccount() {
     
     {errors.email && (
             <span className="text-danger">
-              {String(errors.email.message)}
+              {String(errors?.email.message)}
             </span>
     )}
 
@@ -75,7 +75,7 @@ export default function VerifyAccount() {
     </div>
     {errors.code && (
             <span className="text-danger">
-              {String(errors.code.message)}
+              {String(errors?.code.message)}
             </span>
     )}
    

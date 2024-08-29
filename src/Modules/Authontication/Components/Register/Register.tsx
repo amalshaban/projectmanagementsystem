@@ -81,7 +81,7 @@ export default function Register() {
             </div>
             {errors.email && (
               <span className="text-danger">
-                {String(errors.email.message)}
+                {String(errors?.email?.message)}
               </span>
             )}
 
@@ -101,7 +101,7 @@ export default function Register() {
             </div>
             {errors.userName && (
               <span className="text-danger">
-                {String(errors.userName.message)}
+                {String(errors?.userName?.message)}
               </span>
             )}
 
@@ -123,9 +123,9 @@ export default function Register() {
               </div>
 
             </div>
-            {errors.country && (
+            {errors?.country && (
               <span className="text-danger">
-                {String(errors.country.message)}
+                {String(errors?.country?.message)}
               </span>
             )}
 
@@ -147,9 +147,9 @@ export default function Register() {
               </div>
 
             </div>
-            {errors.phoneNumber && (
+            {errors?.phoneNumber && (
               <span className="text-danger">
-                {String(errors.phoneNumber.message)}
+                {String(errors?.phoneNumber?.message)}
               </span>
             )}
 
@@ -194,7 +194,7 @@ export default function Register() {
             </div>
             {errors.password && (
               <span className="text-danger">
-                {String(errors.password.message)}
+                {String(errors?.password?.message)}
               </span>
             )}
 
@@ -235,9 +235,9 @@ export default function Register() {
               </div>
 
             </div>
-            {errors.confirmPassword && (
+            {errors?.confirmPassword && (
               <span className="text-danger">
-                {String(errors.confirmPassword.message)}
+                {String(errors?.confirmPassword?.message)}
               </span>
             )}
 

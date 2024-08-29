@@ -25,12 +25,12 @@ export default function LogIn() {
   const onSubmit = async (data:any)=>{
     try {
       const response = await axios.post(USERS_URLs.Login, data);
-      localStorage.setItem('token', response.data.token);
+      localStorage.setItem('token', response?.data?.token);
     
       console.log(response)
       navigate('/dashboard');
       toast.success(
-        response.data.message || 'congratulations, login success !'
+        response?.data?.message || 'congratulations, login success !'
       );
     
     console.log(response)
@@ -63,9 +63,9 @@ export default function LogIn() {
       </div>
      
     </div>
-    {errors.email && (
+    {errors?.email && (
             <span className="text-danger">
-              {String(errors.email.message)}
+              {String(errors?.email.message)}
             </span>
     )}
     
