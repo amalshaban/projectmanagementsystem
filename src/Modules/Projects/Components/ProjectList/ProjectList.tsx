@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { PROJECT_URLS } from '../../../../constans/END_POINTS';
+import { AuthorizedToken, PROJECT_URLS } from '../../../../constans/END_POINTS';
 import axios from 'axios';
 import { format } from 'date-fns';
 import NoData from '../../../Shared/Components/NoData/NoData';
@@ -8,9 +8,8 @@ export default function ProjectList() {
   let [projectsList, setProjectsList] =  useState([]);
   let getCategoriesList = async ()=>{
     try {
-      let response = await axios.get(PROJECT_URLS.getlist, {
-        headers: { Authorization: `Bearer ${localStorage.token}`}
-      });
+      let response = await axios.get(PROJECT_URLS.getlist, AuthorizedToken
+      );
     
       setProjectsList(response.data.data);
     } catch (error) {
