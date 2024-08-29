@@ -26,7 +26,10 @@ useEffect(() => {
 
   return (
     <>
-    
+    <div className="d-flex px-2 py-3 bg-white justify-content-between">
+      <h3>Projects</h3>
+      <button className='btn btn-warning rounded-5 p-2'>+ Add New Project</button>
+    </div>
  
 <div className= "p-2 d-flex justify-content-between">
 {projectsList.length > 0 ?  
