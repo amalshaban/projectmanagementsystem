@@ -19,6 +19,7 @@ import UsersList from "./Modules/Users/Components/UsersList/UsersList";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import NoData from "./Modules/Shared/Components/NoData/NoData";
+import Header from "./Modules/Shared/Components/Header/Header";
 
 
 function App() {
@@ -43,13 +44,14 @@ function App() {
       errorElement: <NotFound />,
       children: [
       
-        { path: "home", element: <Dashboard /> },
+        { path: "", element: <Dashboard /> },
         { path: "project-list", element: <ProjectList /> },
         { path: "project-data", element: <ProjectData /> },
         { path: "tasks-list", element: <TasksList /> },
         { path: "tasks-data", element: <TasksData /> },
         { path: "users-list", element: <UsersList /> },
-        {path: "nodata", element: <NoData/>}
+        {path: "nodata", element: <NoData/>},
+        
       ],
     },
   ]);

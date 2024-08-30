@@ -1,0 +1,19 @@
+
+.dashboardContainer {
+    .bgCard {
+        background-color: rgba(248, 249, 251, 1);
+    }
+
+    .titelCard {
+        border-left: 4px solid rgba(239, 155, 40, 1) !important;
+    }
+
+    h4 {
+        font-size: 1.43rem;
+    }
+
+    h5, p {
+        font-size: 0.8125rem;
+    }
+
+}

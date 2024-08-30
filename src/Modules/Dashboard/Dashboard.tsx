@@ -5,14 +5,10 @@ import "./dashbord.css"
 import axios from "axios"
 import Header from "../Shared/Components/Header/Header";
 import { AuthorizedToken, TasksUrl, USERS_URLs } from "../../constans/END_POINTS"
-import { useContext, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import CountUp from 'react-countup';
-import { AuthContext } from "../Authontication/Components/Context/AuthContext"
 export default function Dashboard() {
-  //  interface Apidata{
-  //   activatedEmployeeCount:number
-  //   deactivatedEmployeeCount:number
-  // }
+
 
 
   const [Taskseplyee, setTaskseplyee] = useState(0)
@@ -56,7 +52,7 @@ export default function Dashboard() {
     Gettasks()
     Getmanagertask()
     getCurrentUser()
-    // handlescroll()
+    
   }, [])
   return (
     <div className='contanerhome'>
