@@ -26,6 +26,6 @@ export const FieldValidation = {
 };
 
 
-export const RequiredField = (fieldName) => ({
+export const RequiredField = (fieldName: any) => ({
   required: `${fieldName} is required`,
 });

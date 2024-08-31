@@ -113,3 +113,10 @@ body{
 .not-found-text{
     color: #f39c12;
 }
+
+/**********************projectlist***************************/
+
+.form-control{
+    width: 250px !important;
+    margin-top: 20px;
+}

@@ -1,10 +1,10 @@
-import React from 'react'
 import { useForm } from 'react-hook-form';
-import { AuthorizedToken, PROJECT_URLS } from '../../../../constans/END_POINTS';
+import {  PROJECT_URLS } from '../../../../constans/END_POINTS';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { FieldValidation } from '../../../../constans/VALIDATIONS';
+import { AuthorizedToken } from '../../../../constans/END_POINTS';
 
 export default function ProjectData() {
   let navigate = useNavigate();
@@ -15,7 +15,7 @@ export default function ProjectData() {
   } = useForm();
   let onSubmit = async (data:any)=>{
     try {
-      let response = await axios.post(PROJECT_URLS.addproject, data, AuthorizedToken);
+      let response = await axios.post(PROJECT_URLS.addproject, data,AuthorizedToken);
        console.log(response);
       toast.success('Project Added Successfully !');
       navigate('/dashboard/project-list');
