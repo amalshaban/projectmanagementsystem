@@ -24,9 +24,13 @@ export const USERS_URLs = {
 
 
 const BASE_PROJECTS = `${BASE_URL}/Project` ;
+
 export const PROJECT_URLS = {
   getlist: `${BASE_PROJECTS}/manager`,
-  addproject: `${BASE_PROJECTS}`
+  addproject: `${BASE_PROJECTS}`,
+  delete: (id:number) =>`${BASE_PROJECTS}/${id}`,
+  update: (id:number) =>`${BASE_PROJECTS}/${id}`,
+
 }
 
 

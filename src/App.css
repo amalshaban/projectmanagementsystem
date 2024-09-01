@@ -113,3 +113,22 @@ body{
 .not-found-text{
     color: #f39c12;
 }
+
+.sidebar{
+height: 100vmax;
+}
+
+
+
+.options{
+    position: fixed;
+    right: 50px;
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: 0.75rem;
+    width: 150px;
+}
+body:active  .options{
+    display: none !important;
+}
+  

@@ -8,9 +8,6 @@ import { AuthorizedToken, TasksUrl, USERS_URLs } from "../../constans/END_POINTS
 import { useEffect, useState } from "react"
 import CountUp from 'react-countup';
 export default function Dashboard() {
-
-
-
   const [Taskseplyee, setTaskseplyee] = useState(0)
   const [progressM, setprogressM] = useState(0)
 
@@ -24,7 +21,7 @@ export default function Dashboard() {
   };
 
 
-  const Gettasks = async ()=> {
+  const gettasks = async ()=> {
     try {
       const response = await axios.get(USERS_URLs.Usercount, {
         headers: AuthorizedToken.headers
@@ -36,7 +33,7 @@ export default function Dashboard() {
       console.log(errors)
     }
   }
-  const Getmanagertask = async  () => {
+  const getmanagertask = async  () => {
     try {
       const response = await axios.get(TasksUrl.GetTaskEmploee, {
         headers: AuthorizedToken.headers
@@ -49,8 +46,8 @@ export default function Dashboard() {
     }
   }
   useEffect(() => {
-    Gettasks()
-    Getmanagertask()
+    gettasks()
+    getmanagertask()
     getCurrentUser()
     
   }, [])
