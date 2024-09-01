@@ -107,7 +107,7 @@ getProjectsList();
   </div> */}
    
 
-   </td>
+    </td>
   
   </tr>
 ))}
