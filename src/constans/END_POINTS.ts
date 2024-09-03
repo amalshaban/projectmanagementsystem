@@ -4,6 +4,19 @@ export const AuthorizedToken = {
   },
 };
 
+
+export const AuthorizedTokenWithParam = (title: string, pageSize: number, pageNumber: number) => ({
+  headers: {
+    Authorization: `Bearer ${localStorage.getItem("token")}`,
+  },
+  params: {
+    title: title,
+    pageSize: pageSize,
+    pageNumber: pageNumber,
+  },
+});
+
+
 const BASE_URL = "https://upskilling-egypt.com:3003/api/v1";
 
 //USERS urls
@@ -33,9 +46,6 @@ export const PROJECT_URLS = {
 
 }
 
-
-
-
 export const TasksUrl={
   GetTasksmanager: `${BASE_URL}/Task/manager`,
   GetTaskEmploee:`${BASE_URL}/Task/count`
@@ -46,4 +56,5 @@ const BASE_TASKS = `${BASE_URL}/Task`;
 
 export const TASKS_URLs = {
   TotalTasks: `${BASE_TASKS}/count`,
+  getlist:  `${BASE_TASKS}/manager`
 };
