@@ -64,7 +64,11 @@ export default function TasksData() {
 
   const onSubmit = async (data: FormValues) => {
     try {
-      const response = await axios.post(TASKS_URLs.AddTask,data, AuthorizedToken);
+      const response = await axios({
+        method: type==='edit'? 'put' : 'post',
+        url: type==='edit'? TASKS_URLs.update : TASKS_URLs.AddTask,
+        data, AuthorizedToken
+      });
       navigate('/dashboard/tasks-list');
       console.log(response);
       toast.success("successfully added task")

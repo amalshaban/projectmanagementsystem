@@ -58,5 +58,6 @@ const BASE_TASKS = `${BASE_URL}/Task`;
 export const TASKS_URLs = {
   TotalTasks: `${BASE_TASKS}/count`,
   getlist:  `${BASE_TASKS}/manager`,
-    AddTask: `${BASE_URL}/Task`
+    AddTask: `${BASE_URL}/Task`,
+    update: (id)=>`${BASE_URL}/Task/${id}`,
 };
