@@ -48,6 +48,7 @@ function App() {
         { path: "project-data", element: <ProjectData /> },
         { path: "tasks-list", element: <TasksList /> },
         { path: "tasks-data", element: <TasksData /> },
+        { path: "tasks-data/:id", element: <TasksData /> },
         { path: "users-list", element: <UsersList /> },
         {path: "nodata", element: <NoData/>},
         {path: "not-found", element: <NotFound/>},

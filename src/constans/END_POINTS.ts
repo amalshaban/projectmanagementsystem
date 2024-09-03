@@ -48,7 +48,8 @@ export const PROJECT_URLS = {
 
 export const TasksUrl={
   GetTasksmanager: `${BASE_URL}/Task/manager`,
-  GetTaskEmploee:`${BASE_URL}/Task/count`
+  GetTaskEmploee:`${BASE_URL}/Task/count`,
+
 }
 
 //TASKS urls
@@ -56,5 +57,6 @@ const BASE_TASKS = `${BASE_URL}/Task`;
 
 export const TASKS_URLs = {
   TotalTasks: `${BASE_TASKS}/count`,
-  getlist:  `${BASE_TASKS}/manager`
+  getlist:  `${BASE_TASKS}/manager`,
+    AddTask: `${BASE_URL}/Task`
 };
