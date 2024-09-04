@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { AuthorizedToken, TASKS_URLs } from "../../../../constans/END_POINTS";
+import { AuthorizedToken, TASKS_URLs, USERS_URLs } from "../../../../constans/END_POINTS";
 import { Link } from "react-router-dom";
 import NoData from "../../../Shared/Components/NoData/NoData";
 import { format } from "date-fns";
@@ -41,10 +41,20 @@ export default function TasksList() {
       console.log(error);
     }
   };
+  const [userRole, setUserRole] = useState("");
+  const getUserData = async () => {
+    try {
+      const response = await axios.get(USERS_URLs.currentUser, AuthorizedToken);
+      setUserRole(response.data.group.name);
+      console.log(userRole);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
 useEffect(() => {
   getTasksList();
-
+  getUserData();
   return () => {
     
   }
@@ -52,7 +62,9 @@ useEffect(() => {
 
   return (
     <>
-      <div className="d-flex px-2 py-3 bg-white justify-content-between">
+    {userRole === 'Manager' ? 
+    <>
+       <div className="d-flex px-2 py-3 bg-white justify-content-between">
         <h3>Tasks</h3>
         <Link
           to={"/dashboard/tasks-data"}
@@ -99,6 +111,15 @@ useEffect(() => {
       ) : (
         <NoData />
       )}
+    </> :  <>
+    <div className="d-flex px-2 py-3 bg-light justify-content-between">
+    <h3>Tasks Board</h3>
+    <div className="">
+        
+    </div>
+    </div>
+    </>  }
+   
 
 
 <Modal
