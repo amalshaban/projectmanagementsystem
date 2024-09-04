@@ -104,6 +104,41 @@ body {
 
 /* ---------------------- not-found ----------------------*/
 
+<<<<<<< HEAD
+.not-found-text{
+    color: #f39c12;
+}
+
+/**********************projectlist***************************/
+
+.form-control{
+    width: 250px !important;
+    margin-top: 20px;
+}
+
+.menu{
+    position: relative;
+}
+.menu-item{
+    position: absolute;
+    top: 300px;
+    right: 30px;
+    top:auto;
+    width: 200px;
+    height: 100px;
+    background-color: #fff;
+}
+.list-menu{
+    list-style: none;
+}
+
+.list-unstyled li{
+    cursor: pointer;
+}
+.page-item{
+    cursor: pointer;
+}
+=======
 .not-found-text {
   color: #f39c12;
 }
@@ -123,3 +158,4 @@ body {
 body:active .options {
   display: none !important;
 }
+>>>>>>> 55c3647f4f9b870fbcfd3e29988e0bbea2848ab8

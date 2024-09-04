@@ -3,6 +3,16 @@ export const AuthorizedToken = {
     Authorization: `Bearer ${localStorage.token}`,
   },
 };
+export const AuthorizedTokenWithParam = (title: string, pageSize: number, pageNumber: number) => ({
+  headers: {
+    Authorization: `Bearer ${localStorage.getItem("token")}`,
+  },
+  params: {
+    title: title,
+    pageSize: pageSize,
+    pageNumber: pageNumber,
+  },
+});
 
 
 export const AuthorizedTokenWithParam = (title: string, pageSize: number, pageNumber: number) => ({
@@ -41,9 +51,13 @@ const BASE_PROJECTS = `${BASE_URL}/Project` ;
 export const PROJECT_URLS = {
   getlist: `${BASE_PROJECTS}/manager`,
   addproject: `${BASE_PROJECTS}`,
+<<<<<<< HEAD
+  delete: (id: string) => `${BASE_PROJECTS}/${id}`,
+=======
   delete: (id:number) =>`${BASE_PROJECTS}/${id}`,
   update: (id:number) =>`${BASE_PROJECTS}/${id}`,
 
+>>>>>>> 55c3647f4f9b870fbcfd3e29988e0bbea2848ab8
 }
 
 export const TasksUrl={

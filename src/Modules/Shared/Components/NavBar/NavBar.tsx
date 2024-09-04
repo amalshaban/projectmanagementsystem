@@ -48,7 +48,8 @@ export default function NavBar() {
                 <li className="nav-item ms-3 m-auto">
                   <div className="position-relative ">
                     {" "}
-                    <h6 className=" rounded-circle bg-warning  rounded-circle">
+                    <i className=" fa-solid fa-bell fs-3 me-5 text-warning"></i>
+                    <h6 className="position-fixed top-0 ms-3  rounded-circle bg-warning m-1 p-1 rounded-circle">
                       5
                     </h6>
                     <i className=" fa-solid fa-bell fs-3  text-warning"></i>
