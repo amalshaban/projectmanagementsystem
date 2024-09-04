@@ -2,20 +2,39 @@ import { useForm } from 'react-hook-form';
 import {  PROJECT_URLS } from '../../../../constans/END_POINTS';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { FieldValidation } from '../../../../constans/VALIDATIONS';
 import { AuthorizedToken } from '../../../../constans/END_POINTS';
 
 export default function ProjectData() {
-  let navigate = useNavigate();
+  const location = useLocation();
+console.log(location);
 
-  let{register,
+const status = location.state?.type ==='edit';
+const project = location.state?.AddProject;
+
+
+
+const navigate = useNavigate();
+
+  const{register,
     handleSubmit, 
     formState:{errors},
   } = useForm();
-  let onSubmit = async (data:any)=>{
+  const onSubmit = async (data:any)=>{
     try {
+<<<<<<< HEAD
       let response = await axios.post(PROJECT_URLS.addproject, data,AuthorizedToken);
+=======
+      const response = await axios(
+        {
+        method: status ? 'put' : 'post',
+        url: status ? PROJECT_URLS.update(project.id): PROJECT_URLS.addproject,
+        data, 
+        AuthorizedToken
+      }
+    );
+>>>>>>> 55c3647f4f9b870fbcfd3e29988e0bbea2848ab8
        console.log(response);
       toast.success('Project Added Successfully !');
       navigate('/dashboard/project-list');

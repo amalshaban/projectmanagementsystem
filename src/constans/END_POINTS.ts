@@ -14,6 +14,19 @@ export const AuthorizedTokenWithParam = (title: string, pageSize: number, pageNu
   },
 });
 
+
+export const AuthorizedTokenWithParam = (title: string, pageSize: number, pageNumber: number) => ({
+  headers: {
+    Authorization: `Bearer ${localStorage.getItem("token")}`,
+  },
+  params: {
+    title: title,
+    pageSize: pageSize,
+    pageNumber: pageNumber,
+  },
+});
+
+
 const BASE_URL = "https://upskilling-egypt.com:3003/api/v1";
 
 //USERS urls
@@ -34,18 +47,23 @@ export const USERS_URLs = {
 
 
 const BASE_PROJECTS = `${BASE_URL}/Project` ;
+
 export const PROJECT_URLS = {
   getlist: `${BASE_PROJECTS}/manager`,
   addproject: `${BASE_PROJECTS}`,
+<<<<<<< HEAD
   delete: (id: string) => `${BASE_PROJECTS}/${id}`,
+=======
+  delete: (id:number) =>`${BASE_PROJECTS}/${id}`,
+  update: (id:number) =>`${BASE_PROJECTS}/${id}`,
+
+>>>>>>> 55c3647f4f9b870fbcfd3e29988e0bbea2848ab8
 }
-
-
-
 
 export const TasksUrl={
   GetTasksmanager: `${BASE_URL}/Task/manager`,
-  GetTaskEmploee:`${BASE_URL}/Task/count`
+  GetTaskEmploee:`${BASE_URL}/Task/count`,
+
 }
 
 //TASKS urls
@@ -53,4 +71,7 @@ const BASE_TASKS = `${BASE_URL}/Task`;
 
 export const TASKS_URLs = {
   TotalTasks: `${BASE_TASKS}/count`,
+  getlist:  `${BASE_TASKS}/manager`,
+    AddTask: `${BASE_URL}/Task`,
+    update: (id)=>`${BASE_URL}/Task/${id}`,
 };
