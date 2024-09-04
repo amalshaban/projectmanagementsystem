@@ -120,3 +120,26 @@ body{
     width: 250px !important;
     margin-top: 20px;
 }
+
+.menu{
+    position: relative;
+}
+.menu-item{
+    position: absolute;
+    top: 300px;
+    right: 30px;
+    top:auto;
+    width: 200px;
+    height: 100px;
+    background-color: #fff;
+}
+.list-menu{
+    list-style: none;
+}
+
+.list-unstyled li{
+    cursor: pointer;
+}
+.page-item{
+    cursor: pointer;
+}

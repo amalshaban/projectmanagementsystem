@@ -25,7 +25,7 @@ export default function LogIn() {
   const onSubmit = async (data:any)=>{
     try {
       const response = await axios.post(USERS_URLs.Login, data);
-      localStorage.setItem('token', response?.data?.token);
+      localStorage.setItem('token', response.data.token);
     
       console.log(response)
       navigate('/dashboard');
@@ -37,7 +37,7 @@ export default function LogIn() {
       } 
      catch (error:any) {
      toast.error(
-      error?.response?.data?.message || "Login unsuccessful. Please try again"
+      error.response.data.message || "Login unsuccessful. Please try again"
     );
      console.log(error);
     }

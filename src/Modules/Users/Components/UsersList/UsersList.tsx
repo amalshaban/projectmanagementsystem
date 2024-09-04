@@ -1,7 +1,94 @@
-import React from 'react'
+import { useEffect, useState } from "react"
+import { AuthorizedToken, AuthorizedTokenWithParam, USERS_URLs } from "../../../../constans/END_POINTS";
+import axios from "axios";
+import NoData from "../../../Shared/Components/NoData/NoData";
 
 export default function UsersList() {
+  const [userlist,Setuserlist]=useState([])
+  const userslist = async(pageSize: number,pageNumber: number)=>{
+    try {
+      let response = await axios.get(USERS_URLs.TotalManager,AuthorizedTokenWithParam("",pageSize,pageNumber));
+    
+      Setuserlist(response.data.data);
+      console.log(userlist)
+      console.log(response)
+    } 
+    catch(error) {
+      console.log(error);
+    }
+  }
+useEffect(() => {
+  userslist(1,1)
+}, [])
   return (
-    <div>UsersList</div>
+    <>
+    <div className="d-flex px-2 py-3 bg-white justify-content-between">
+      <h3>users</h3>
+    </div>
+    {/* <input className="form-control me-2 " type="search"  placeholder="Search" aria-label="Search" onChange={handelchange}/> */}
+<div className= "p-2 d-flex justify-content-between">
+{userlist.length > 0 ?  
+  <table className="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Title</th>
+      <th scope="col">Discription</th>
+      <th scope="col">Creation Date</th>
+      <th scope="col">Modification Date</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+{/* {userlist.map((user:any)=>(
+  <tr key={user.id}>
+    
+    <td>{user.title}</td>
+    <td>{user.description}</td>
+    <td>
+    
+    <i className="fa-solid fa-ellipsis-vertical menu" onClick={()=>handelmenuetoggle(user.id)}></i>
+    {itemselectid === user.id && (
+                      <div className="dropdown-menu show position-absolute" style={{ right: "50px", top: '40%' }}>
+                        <ul className="list-unstyled m-0">
+                          <li className="dropdown-item"><i className="fa fa-eye"></i> Show</li>
+                          <li className="dropdown-item"><i className="fa fa-edit"></i> Edit</li>
+                          <li className="dropdown-item" onClick={deleteitem}><i className="fa fa-trash"></i> Delete</li>
+                        </ul>
+                      </div>
+                    )}
+   </td>
+  </tr>
+))} */}
+  
+  </tbody>
+</table>:<NoData/>} 
+
+</div>
+
+<nav aria-label="Page navigation example">
+  <ul className="pagination">
+    <li className="page-item">
+      <a className="page-link" href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    
+      {/* {arrayogpage.map((arraypage)=>{
+        return(
+          <li className="page-item" key={arraypage} onClick={()=>getCategoriesList(valuename,4,arraypage)}>
+            <a className="page-link">{arraypage}</a>
+          </li>
+        )
+      })} */}
+    
+    
+    <li className="page-item">
+      <a className="page-link" href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+    </>
   )
 }

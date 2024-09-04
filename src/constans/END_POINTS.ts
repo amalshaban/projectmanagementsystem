@@ -37,7 +37,7 @@ const BASE_PROJECTS = `${BASE_URL}/Project` ;
 export const PROJECT_URLS = {
   getlist: `${BASE_PROJECTS}/manager`,
   addproject: `${BASE_PROJECTS}`,
-  delete:(id: number)=>`${BASE_PROJECTS}/${id}`
+  delete: (id: string) => `${BASE_PROJECTS}/${id}`,
 }
 
 

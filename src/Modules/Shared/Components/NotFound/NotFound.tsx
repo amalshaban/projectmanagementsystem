@@ -15,7 +15,7 @@ export default function NotFound() {
           <h2 className='not-found-text'>Page  not found </h2>
           <p className='fs-3'>This Page doesn’t exist or was removed!
           We suggest you  back to home.</p>
-          <Link to='/dashboard/home' className='btn btn-success p-3'>Back to Home</Link>
+          <Link to='/dashboard' className='btn btn-success p-3'>Back to Home</Link>
           </div>
           </div>
          
