@@ -4,24 +4,51 @@ import { AuthorizedToken, TASKS_URLs } from "../../../../constans/END_POINTS";
 import { Link } from "react-router-dom";
 import NoData from "../../../Shared/Components/NoData/NoData";
 import { format } from "date-fns";
+import { Button, Modal } from "react-bootstrap";
+import DeleteConfirmation from "../../../Shared/Components/DeleteConfirmation/DeleteConfirmation";
+import { toast } from "react-toastify";
 
 export default function TasksList() {
   const [tasksList, setTasksList] = useState([]);
+  const [taskId, setTaskId] = useState(0);
+
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = (id) =>{ 
+    setTaskId(id);
+    setShow(true);
+  };
+  const deleteTask = async (taskId:number) =>{
+    try {
+  const response = await axios.delete(TASKS_URLs.delete(taskId), AuthorizedToken);
+  console.log(response);
+  toast.success("Task deleted successfully");
+  getTasksList();
+  
+    } catch (error) {
+      console.log(error);
+      toast.error("delete failed");
+    }
+  }
 
   const getTasksList = async () => {
     try {
       const response = await axios.get(TASKS_URLs.getlist, AuthorizedToken);
-
+  
       setTasksList(response.data.data);
       console.log(tasksList);
     } catch (error) {
       console.log(error);
     }
   };
-  useEffect(() => {
-    getTasksList();
-    return () => {};
-  }, []);
+
+useEffect(() => {
+  getTasksList();
+
+  return () => {
+    
+  }
+}, []);
 
   return (
     <>
@@ -52,8 +79,8 @@ export default function TasksList() {
               <tr key={task.id}>
                 <td>{task.title}</td>
                 <td>{task.status}</td>
-                <td>{task.employee.userName}</td>
-                <td>{task.project.title}</td>
+                <td>{task?.employee?.userName}</td>
+                <td>{task?.project?.title}</td>
                 <td>{format(task.creationDate, "MMMM d, yyyy")}</td>
                 <td>
                   <i className="fa-solid fa-eye me-1"></i>
@@ -63,7 +90,7 @@ export default function TasksList() {
                   >
                     <i className="fa-solid fa-pen-to-square me-1 text-success"></i>
                   </Link>
-                  <i className="fa-solid fa-trash text-danger"></i>
+                  <i onClick={() => handleShow(task.id)} className="fa-solid fa-trash text-danger"></i>
                 </td>
               </tr>
             ))}
@@ -72,6 +99,24 @@ export default function TasksList() {
       ) : (
         <NoData />
       )}
+
+
+<Modal
+        show={show}
+        onHide={handleClose}
+        backdrop="static"
+        keyboard={false}
+      >
+        <Modal.Header closeButton>
+          
+        </Modal.Header>
+        <Modal.Body>
+          <DeleteConfirmation deleteItem={'Task'}/>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button onClick = {()=>deleteTask(taskId)} variant='btn btn-outline-danger'>Delete this Task</Button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 }

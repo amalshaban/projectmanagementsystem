@@ -11,7 +11,7 @@ export default function ProjectData() {
 console.log(location);
 
 const status = location.state?.type ==='edit';
-const project = location.state?.AddProject;
+// const project = location.state?.AddProject;
 
 
 
@@ -23,9 +23,7 @@ const navigate = useNavigate();
   } = useForm();
   const onSubmit = async (data:any)=>{
     try {
-<<<<<<< HEAD
-      let response = await axios.post(PROJECT_URLS.addproject, data,AuthorizedToken);
-=======
+    
       const response = await axios(
         {
         method: status ? 'put' : 'post',
@@ -34,7 +32,6 @@ const navigate = useNavigate();
         AuthorizedToken
       }
     );
->>>>>>> 55c3647f4f9b870fbcfd3e29988e0bbea2848ab8
        console.log(response);
       toast.success('Project Added Successfully !');
       navigate('/dashboard/project-list');
