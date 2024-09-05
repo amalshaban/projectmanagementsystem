@@ -5,7 +5,6 @@ body{
     margin: 0;
     box-sizing: border-box;
     background-color: var(--main-bg-color) !important;
-    /* height: 200vh; */
     overflow-x:hidden ;
 }
 .auth-container{
@@ -15,6 +14,7 @@ body{
 :root {
     --main-color: rgba(239, 155, 40, 1);
     --main-bg-color: rgba(245, 245, 245, 1);
+    --main-bgS-color: rgba(255, 255, 255, 1);
 
 }
 
@@ -114,9 +114,9 @@ body{
     color: #f39c12;
 }
 
-.sidebar{
+/* .sidebar{
 height: 100vmax;
-}
+} */
 
 
 

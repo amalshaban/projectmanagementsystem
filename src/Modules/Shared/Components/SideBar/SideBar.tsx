@@ -23,7 +23,7 @@ export default function SideBar() {
           <MenuItem icon={<i className="fa-solid fa-arrow-right-from-bracket"></i>} onClick={logout}> Logout</MenuItem>
         </Menu>
         <i className="fa-solid fa-circle-chevron-left toggle" onClick={toggle}></i>
-      </Prosidebar>;
+      </Prosidebar>
     </>
 
   )

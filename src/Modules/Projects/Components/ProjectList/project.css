@@ -1,0 +1,78 @@
+:root {
+   --main-color: rgba(239, 155, 40, 1);
+   --main-bg-color: rgba(245, 245, 245, 1);
+   --main-bgS-color: rgba(255, 255, 255, 1);
+
+}
+
+tr {
+   height: 60px;
+   text-align: center;
+
+   th {
+      color: white !important;
+      cursor: pointer;
+      position: relative;
+      transform: translateY(-20%);
+      border: 1px solid black;
+   }
+}
+
+tbody {
+   cursor: pointer;
+}
+
+thead.bgthed {
+   background-color: rgba(49, 89, 81, 0.9) !important;
+}
+
+.contanertable {
+   /* background-color: aqua; */
+   width: 95%;
+   margin: auto;
+   flex-direction: column;
+   gap: 20px;
+   background-color: var(--main-bgS-color) ;
+   margin-top: 30px;
+}
+table{
+   
+   animation: identifier .2s ease-in forwards;
+}
+@keyframes identifier {
+   from{
+      transform: scale(0);
+
+   }
+   to{
+      transform: scale(1);
+
+   }
+}
+.table {
+   --bs-table-bg: unset !important;
+}
+
+td .dropdown-toggle {
+   background-color: rgba(49, 89, 81, 0.9) !important;
+   border: 1px solid rgba(49, 89, 81, 0.9) !important;
+}
+.searchbar{
+   position: relative;
+   left: 40px;
+   top: 20px;
+}
+.searchbar-input {
+   width: 250px;
+   height: 42px;
+   border-radius: 50px;
+   outline: none;
+   border: 1px solid gray;
+   padding-left: 10px;
+   /* margin-left: 20px; */
+}
+
+
+.page-link{
+   cursor: pointer;
+}
