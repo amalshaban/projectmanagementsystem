@@ -8,14 +8,21 @@ import { AuthorizedToken, TasksUrl, USERS_URLs } from "../../constans/END_POINTS
 import { useEffect, useState } from "react"
 import CountUp from 'react-countup';
 export default function Dashboard() {
-  const [Taskseplyee, setTaskseplyee] = useState(0)
-  const [progressM, setprogressM] = useState(0)
+  const [Taskseplyee, setTaskseplyee] = useState({
+    activatedEmployeeCount: 0,
+    deactivatedEmployeeCount: 0,
+  });  
+  const [progressM, setProgressM] = useState({
+    toDo: 0,
+    inProgress: 0,
+    done: 0,
+  });
 
 
   const [userName, setUserName] = useState(null);
 
   const getCurrentUser = async () => {
-    const response = await axios.get(USERS_URLs.currentUser,AuthorizedToken);
+    const response = await axios.get(USERS_URLs.currentUser,{headers:AuthorizedToken});
     console.log(response);
     setUserName(response.data.userName);
   };
@@ -23,8 +30,7 @@ export default function Dashboard() {
 
   const gettasks = async ()=> {
     try {
-      const response = await axios.get(USERS_URLs.Usercount, {
-        headers: AuthorizedToken.headers
+      const response = await axios.get(USERS_URLs.Usercount, {headers: AuthorizedToken
       })
       setTaskseplyee(response.data)
       console.log(response.data)
@@ -35,10 +41,9 @@ export default function Dashboard() {
   }
   const getmanagertask = async  () => {
     try {
-      const response = await axios.get(TasksUrl.GetTaskEmploee, {
-        headers: AuthorizedToken.headers
+      const response = await axios.get(TasksUrl.GetTaskEmploee, {headers: AuthorizedToken
       })
-      setprogressM(response.data)
+      setProgressM(response.data)
       console.log(response.data)
 
     } catch (errors) {

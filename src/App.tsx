@@ -1,4 +1,4 @@
-import { createBrowserRouter, createHashRouter, RouterProvider } from "react-router-dom";
+import {createHashRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
 import ProtectedRoute from "./Modules/Shared/Components/ProtectedRoute/ProtectedRoute";
 import AuthLayout from "./Modules/Shared/Components/AuthLayout/AuthLayout";
@@ -46,6 +46,7 @@ function App() {
         { path: "", element: <Dashboard /> },
         { path: "project-list", element: <ProjectList /> },
         { path: "project-data", element: <ProjectData /> },
+        { path: "project-data/:id", element: <ProjectData /> },
         { path: "tasks-list", element: <TasksList /> },
         { path: "tasks-data", element: <TasksData /> },
         { path: "tasks-data/:id", element: <TasksData /> },

@@ -104,7 +104,6 @@ body {
 
 /* ---------------------- not-found ----------------------*/
 
-<<<<<<< HEAD
 .not-found-text{
     color: #f39c12;
 }
@@ -138,24 +137,3 @@ body {
 .page-item{
     cursor: pointer;
 }
-=======
-.not-found-text {
-  color: #f39c12;
-}
-
-.sidebar {
-  height: 100vmax;
-}
-
-.options {
-  position: fixed;
-  right: 50px;
-  background-color: #fff;
-  padding: 1rem;
-  border-radius: 0.75rem;
-  width: 150px;
-}
-body:active .options {
-  display: none !important;
-}
->>>>>>> 55c3647f4f9b870fbcfd3e29988e0bbea2848ab8

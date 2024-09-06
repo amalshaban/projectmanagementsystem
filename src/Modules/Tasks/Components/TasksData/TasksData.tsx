@@ -1,5 +1,4 @@
 import { useForm } from "react-hook-form";
-import { FieldValidation } from "../../../../constans/VALIDATIONS";
 import { useEffect, useState } from "react";
 import {
   AuthorizedToken,
@@ -12,38 +11,45 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 export default function TasksData() {
-
+  const location = useLocation();
+  const {taskData , type} =location.state?location.state : "";
   let navigate = useNavigate();
   const [projectList, setProjectList] = useState([]);
   const [userList, setUserList] = useState([]);
+  console.log(projectList)
 
   const getAllProjects = async () => {
     try {
-      const response = await axios.get(PROJECT_URLS.getlist, AuthorizedToken);
+      const response = await axios.get(PROJECT_URLS.getlist,{headers:AuthorizedToken});
 
       setProjectList(response.data.data);
-      console.log(projectList);
     } catch (error) {
       console.log(error);
     }
   };
-  const getAllUsers = async () => {
+  const userslistitem = async(pageSize: number,pageNumber: number)=>{
     try {
-      const response = await axios.get(
-        USERS_URLs.TotalManager,
-        AuthorizedToken
-      );
-
+      let response = await axios.get(`https://upskilling-egypt.com:3003/api/v1/Users`,{headers:AuthorizedToken,
+        params: {
+          pageSize: pageSize,
+          pageNumber: pageNumber ,
+        },
+      });
+    
       setUserList(response.data.data);
-      console.log(userList);
-    } catch (error) {
+      console.log("Fetched User List:", response.data.data); // Log fetched data
+
+      console.log(userList)
+      console.log(response)
+    } 
+    catch(error) {
       console.log(error);
     }
-  };
+  }
 
   useEffect(() => {
     getAllProjects();
-    getAllUsers();
+    userslistitem(10,1);
     return () => {};
   }, []);
 
@@ -61,23 +67,25 @@ export default function TasksData() {
   } = useForm<FormValues>({
     defaultValues: { title: "", description: "", employeeId: 0, projectId: 0 },
   });
-
+ 
+  console.log(taskData)
   const onSubmit = async (data: FormValues) => {
     try {
+      const url = type === 'edit' ? TASKS_URLs.update(taskData.id) : TASKS_URLs.AddTask;
       const response = await axios({
-        method: type==='edit'? 'put' : 'post',
-        url: type==='edit'? TASKS_URLs.update : TASKS_URLs.AddTask,
-        data, AuthorizedToken
+        method:type==='edit'?'PUT':'POST',
+        url,
+        data,
+        headers: AuthorizedToken
       });
       navigate('/dashboard/tasks-list');
       console.log(response);
-      toast.success("successfully added task")
+      toast.success(type === 'edit' ? "Task updated successfully" : "Task added successfully");
     } catch (error) {
       console.log(error);
     }
   };
-const location = useLocation();
-const {taskData , type} =location.state ? location.state : "";
+
   return (
     <>
       <div className="px-2 py-3 bg-white">
@@ -94,8 +102,8 @@ const {taskData , type} =location.state ? location.state : "";
               placeholder="title"
               aria-label="title"
               aria-describedby="basic-addon1"
-              {...register("title", FieldValidation)}
-              value={type === 'edit'? taskData.title : ""}
+              {...register("title")}
+              defaultValue={type === 'edit'? taskData.title : ""}
             />
           </div>
 
@@ -112,8 +120,8 @@ const {taskData , type} =location.state ? location.state : "";
               placeholder="description"
               aria-label="description"
               aria-describedby="basic-addon1"
-              {...register("description", FieldValidation)}
-              value={type === 'edit'? taskData.description : ""}
+              {...register("description")}
+              defaultValue={type === 'edit'? taskData.description : ""}
             />
           </div>
 
@@ -128,7 +136,7 @@ const {taskData , type} =location.state ? location.state : "";
               <label className="main-color my-1">Project</label>
               <div className="input-group ">
                 <select
-              value={type === 'edit'? taskData.project.id : ""}
+              defaultValue={type === 'edit'? taskData.project.id : ""}
                   {...register("projectId", {
                     required: "project is required",
                     
@@ -140,7 +148,8 @@ const {taskData , type} =location.state ? location.state : "";
                 >
                 <option disabled>choose</option>
                   {projectList.map((project : any) => (
-                       <option value={project.id} className="">
+                       <option key={project.id} value={project.id} className="">
+                        
                        {project.title}
                      </option>
                   ))}
@@ -158,7 +167,7 @@ const {taskData , type} =location.state ? location.state : "";
               <label className="main-color my-1">User</label>
               <div className="input-group ">
                 <select
-              value={type === 'edit'? taskData.employee.id : ""}
+              defaultValue={type === 'edit'? taskData.employee?"id" : "":""}
                  {...register("employeeId", {
                   required: "user is required",
                 })}
@@ -166,7 +175,7 @@ const {taskData , type} =location.state ? location.state : "";
                 name="user" id="" className="">
                 <option disabled>choose</option>
                 {userList.map((user : any) => (
-                       <option value={user.id} className="">
+                       <option key={user.id} value={user.id} className="">
                        {user.userName}
                      </option>
                   ))}
@@ -181,7 +190,7 @@ const {taskData , type} =location.state ? location.state : "";
             </div>
           </div>
           <div className="d-flex justify-content-between py-2">
-            <button className="btn btn-outline-warning p-2" type="submit">
+            <button className="btn btn-outline-warning p-2" type="submit" onClick={()=>navigate("/dashboard/tasks-list")}>
               Cancel
             </button>
             <button className="btn btn-warning p-2" type="submit">

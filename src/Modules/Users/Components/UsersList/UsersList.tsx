@@ -1,15 +1,32 @@
 import { useEffect, useState } from "react"
-import { AuthorizedToken, AuthorizedTokenWithParam, USERS_URLs } from "../../../../constans/END_POINTS";
+import { AuthorizedToken, BASE_IMG, BASE_USERS, USERS_URLs } from "../../../../constans/END_POINTS";
 import axios from "axios";
 import NoData from "../../../Shared/Components/NoData/NoData";
+import { id, Locale } from "date-fns/locale";
 
 export default function UsersList() {
-  const [userlist,Setuserlist]=useState([])
-  const userslist = async(pageSize: number,pageNumber: number)=>{
+
+  interface alluserlist {
+    id: number;
+    isActivated: boolean;
+    imagePath: string;
+    email: string;
+    userName: string;
+    country: string;
+  }
+  const [userlist,Setuserlist]=useState<alluserlist[]>([]);
+  const userslistitem = async(pageSize: number,pageNumber: number)=>{
     try {
-      let response = await axios.get(USERS_URLs.TotalManager,AuthorizedTokenWithParam("",pageSize,pageNumber));
+      let response = await axios.get(`https://upskilling-egypt.com:3003/api/v1/Users`,{headers:AuthorizedToken,
+        params: {
+          pageSize: pageSize,
+          pageNumber: pageNumber ,
+        },
+      });
     
       Setuserlist(response.data.data);
+      console.log("Fetched User List:", response.data.data); // Log fetched data
+
       console.log(userlist)
       console.log(response)
     } 
@@ -17,9 +34,23 @@ export default function UsersList() {
       console.log(error);
     }
   }
+
+  const toggleActive=async(id: number)=>{
+    try{
+const response=await axios.put(`https://upskilling-egypt.com:3003/api/v1/Users/${id}`,{},{headers:AuthorizedToken})
+console.log(response)
+userslistitem(10,1) 
+    }
+    catch(error){
+      console.log(error)
+    }
+  }
 useEffect(() => {
-  userslist(1,1)
+  userslistitem(10,1)
+  
 }, [])
+console.log("Current User List:", userlist); // Log updated userlist after render
+
   return (
     <>
     <div className="d-flex px-2 py-3 bg-white justify-content-between">
@@ -31,34 +62,31 @@ useEffect(() => {
   <table className="table table-striped">
   <thead>
     <tr>
-      <th scope="col">Title</th>
-      <th scope="col">Discription</th>
-      <th scope="col">Creation Date</th>
-      <th scope="col">Modification Date</th>
+      <th scope="col">id</th>
+      <th scope="col">isActivated</th>
+      <th scope="col">userName</th>
+      <th scope="col">image</th>
+      <th scope="col">Email</th>
+      <th scope="col">country</th>
       <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
-{/* {userlist.map((user:any)=>(
+{userlist.map((user:any)=>(
   <tr key={user.id}>
     
-    <td>{user.title}</td>
-    <td>{user.description}</td>
+    <td>{user.id}</td>
+    <td>{user.isActivated?<button className="btn btn-success rounded-5">Active</button>:<button className="btn btn-danger rounded-5">Not Active</button>}</td>
+    <td>{user.userName}</td>
+    <td>{user.imagePath?<img className="w-100" src={`${BASE_IMG}/${user.imagePath}`}/>:""}</td>
+    <td>{user.email}</td>
+    <td>{user.country}</td>
     <td>
-    
-    <i className="fa-solid fa-ellipsis-vertical menu" onClick={()=>handelmenuetoggle(user.id)}></i>
-    {itemselectid === user.id && (
-                      <div className="dropdown-menu show position-absolute" style={{ right: "50px", top: '40%' }}>
-                        <ul className="list-unstyled m-0">
-                          <li className="dropdown-item"><i className="fa fa-eye"></i> Show</li>
-                          <li className="dropdown-item"><i className="fa fa-edit"></i> Edit</li>
-                          <li className="dropdown-item" onClick={deleteitem}><i className="fa fa-trash"></i> Delete</li>
-                        </ul>
-                      </div>
-                    )}
+      {user.isActivated?<i className="fa fa-toggle-on text-success" aria-hidden="true" onClick={()=>toggleActive(user.id)}></i>
+:<i className="fa fa-toggle-off text-danger"aria-hidden="true" onClick={()=>toggleActive(user.id)}></i>}
    </td>
   </tr>
-))} */}
+))} 
   
   </tbody>
 </table>:<NoData/>} 

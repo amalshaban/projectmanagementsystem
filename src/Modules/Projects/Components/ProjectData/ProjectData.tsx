@@ -3,15 +3,17 @@ import {  PROJECT_URLS } from '../../../../constans/END_POINTS';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { FieldValidation } from '../../../../constans/VALIDATIONS';
+import {RequiredField } from '../../../../constans/VALIDATIONS';
 import { AuthorizedToken } from '../../../../constans/END_POINTS';
 
 export default function ProjectData() {
   const location = useLocation();
 console.log(location);
+const {projectitemdata,type}=location.state?location.state:""
+console.log(projectitemdata,type)
 
-const status = location.state?.type ==='edit';
-const project = location.state?.AddProject;
+
+
 
 
 
@@ -23,20 +25,15 @@ const navigate = useNavigate();
   } = useForm();
   const onSubmit = async (data:any)=>{
     try {
-<<<<<<< HEAD
-      let response = await axios.post(PROJECT_URLS.addproject, data,AuthorizedToken);
-=======
-      const response = await axios(
-        {
-        method: status ? 'put' : 'post',
-        url: status ? PROJECT_URLS.update(project.id): PROJECT_URLS.addproject,
-        data, 
-        AuthorizedToken
-      }
-    );
->>>>>>> 55c3647f4f9b870fbcfd3e29988e0bbea2848ab8
+      const url = type === "edit" ? PROJECT_URLS.update(projectitemdata.id) : PROJECT_URLS.addproject;
+      let response = await axios({
+        method: type==="edit"?"PUT":"POST",
+        url,
+        data,
+        headers:AuthorizedToken
+      })
        console.log(response);
-      toast.success('Project Added Successfully !');
+      toast.success(type==="edit"?"project is updated successfully":"project is added successfully");
       navigate('/dashboard/project-list');
       } 
       catch (error:any) {
@@ -49,7 +46,8 @@ const navigate = useNavigate();
     <>
       <div className="px-2 py-3 bg-white">
          <p>View All Projects</p>
-         <h4>Add a New Project</h4>
+         {type==="edit"? <h4>update a Project</h4>: <h4>Add a New Project</h4>}
+        
       </div>
 
 
@@ -61,7 +59,8 @@ const navigate = useNavigate();
       <input type="text" className="form-control form-input"
        placeholder="title"
        aria-label="title" aria-describedby="basic-addon1"
-       {...register("title",FieldValidation)}
+       {...register("title",RequiredField("title"))}
+       defaultValue={type==="edit"?projectitemdata.title:""}
        />
       </div>
      
@@ -79,7 +78,8 @@ const navigate = useNavigate();
       <input type="text" className="form-control form-input"
        placeholder="description"
        aria-label="description" aria-describedby="basic-addon1"
-       {...register("description",FieldValidation)}
+       {...register("description",RequiredField("description"))}
+       defaultValue={type==="edit"?projectitemdata.description:""}
        />
       </div>
      
@@ -90,7 +90,7 @@ const navigate = useNavigate();
             </span>
     )}
           <div className="d-flex justify-content-between py-2">
-          <button className='btn btn-outline-warning p-2' type='submit'>Cancel</button> 
+          <button className='btn btn-outline-warning p-2' type='submit' onClick={()=>navigate('/dashboard/project-list')}>Cancel</button> 
           <button className='btn btn-warning p-2' type='submit'>Save</button>  
           </div>
   </form>

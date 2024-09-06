@@ -10,17 +10,16 @@ export default function TasksList() {
 
   const getTasksList = async () => {
     try {
-      const response = await axios.get(TASKS_URLs.getlist, AuthorizedToken);
+      const response = await axios.get(TASKS_URLs.getlist,{headers:AuthorizedToken});
 
       setTasksList(response.data.data);
-      console.log(tasksList);
+      console.log(tasksList); 
     } catch (error) {
       console.log(error);
     }
   };
   useEffect(() => {
     getTasksList();
-    return () => {};
   }, []);
 
   return (
@@ -31,7 +30,7 @@ export default function TasksList() {
           to={"/dashboard/tasks-data"}
           className="btn btn-warning rounded-5 p-2"
         >
-          + Add New Task
+          Add New Task
         </Link>
       </div>
 
@@ -52,14 +51,14 @@ export default function TasksList() {
               <tr key={task.id}>
                 <td>{task.title}</td>
                 <td>{task.status}</td>
-                <td>{task.employee.userName}</td>
+                <td>{task.employee?"userName":""}</td>
                 <td>{task.project.title}</td>
                 <td>{format(task.creationDate, "MMMM d, yyyy")}</td>
                 <td>
                   <i className="fa-solid fa-eye me-1"></i>
                   <Link
                     to={`/dashboard/tasks-data/${task.id}`}
-                    state={{ taskData: task, type: "edit" }}
+                    state={{ taskData:task,type: "edit" }}
                   >
                     <i className="fa-solid fa-pen-to-square me-1 text-success"></i>
                   </Link>
