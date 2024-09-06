@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { AuthorizedToken, PROJECT_URLS } from '../../../../constans/END_POINTS';
+import { AuthorizedToken, PROJECT_URLS, USERS_URLs } from '../../../../constans/END_POINTS';
 import axios from 'axios';
 import { format } from 'date-fns';
 import NoData from '../../../Shared/Components/NoData/NoData';
@@ -55,7 +55,7 @@ export default function ProjectList() {
 
   const getProjectsList = async (pageSize: number, pageNumber: number, title: string) => {
     try {
-      const response = await axios.get<responsprojects>(PROJECT_URLS.getlist,
+      const response = await axios.get<responsprojects>(BASE_PROJECTS,
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
           params: {
@@ -108,12 +108,35 @@ export default function ProjectList() {
   useEffect(() => {
     getProjectsList(5, 1, Title);
   }, []);
+
+  const [userRole, setUserRole] = useState("");
+  const getUserData = async () => {
+    try {
+      const response = await axios.get(USERS_URLs.currentUser, AuthorizedToken);
+      setUserRole(response.data.group.name);
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+useEffect(() => {
+  getUserData();
+  return () => {
+    
+  }
+}, []);
+
+
   return (
     <>
 
       <div className="d-flex px-2 py-3 bg-white justify-content-between">
         <h3>Projects</h3>
-        <Link to={'/dashboard/project-data'} className='btn btn-warning rounded-5 p-2'>+ Add New Project</Link>
+        {userRole == 'Manager' ? 
+         <Link to={'/dashboard/project-data'} className='btn btn-warning rounded-5 p-2'>+ Add New Project</Link>
+      : ""}
+       
       </div>
 
       {projectsList.length > 0 ? <div className="searchbar">
