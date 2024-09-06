@@ -60,5 +60,7 @@ export const TASKS_URLs = {
   getlist:  `${BASE_TASKS}/manager`,
     AddTask: `${BASE_URL}/Task`,
     update: (id)=>`${BASE_URL}/Task/${id}`,
-    delete: (id)=>`${BASE_URL}/Task/${id}`
+    delete: (id)=>`${BASE_URL}/Task/${id}`,
+    getAllTasks: `${BASE_URL}/Task`,
+    changeStatus:(id)=>`${BASE_URL}/Task/${id}`
 };

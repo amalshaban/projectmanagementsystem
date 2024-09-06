@@ -7,8 +7,66 @@ import { format } from "date-fns";
 import { Button, Modal } from "react-bootstrap";
 import DeleteConfirmation from "../../../Shared/Components/DeleteConfirmation/DeleteConfirmation";
 import { toast } from "react-toastify";
+import './taskslist.css';
+
+
+
+
+
+const Column = ({ title, tasks  }:{tasks:UsrerTasksType, title:string}) =>{
+  return(
+    <div className="column">
+      <h3>{title}</h3>
+      <div className="cards">
+        {tasks.map((task)=>(
+          <div className="card">{task.title}</div>
+        ))}
+      </div>
+    </div>
+  );
+}; 
+
+
+type  UsrerTaskType = {
+  id: "";
+  title: "";
+  description: "";
+  status: "ToDo"|"InProgress" |"Done";
+}
+type UsrerTasksType = UsrerTaskType[];
 
 export default function TasksList() {
+
+  type UserTasksResponse ={
+    data: UsrerTasksType;
+  }
+  const [tasks, setTasks] = useState<UsrerTasksType>([]);
+  const getUsersTasks = async () =>{
+    try{
+      const response = await axios.get<UserTasksResponse>(
+        TASKS_URLs.getAllTasks,
+        {
+          headers:{
+            Authorization:`Bearer ${localStorage.getItem("token")}`
+          },
+          params:{
+            pageSize: 100,
+            pageNumber: 1,
+          },
+        }
+      );
+      setTasks(response.data.data);
+      console.log(tasks);
+      
+    } catch(error){}
+  }
+  useEffect(() => {
+    getUsersTasks();
+    return () => {
+    }
+  }, []);
+  
+
   const [tasksList, setTasksList] = useState([]);
   const [taskId, setTaskId] = useState(0);
 
@@ -34,9 +92,9 @@ export default function TasksList() {
   const getTasksList = async () => {
     try {
       const response = await axios.get(TASKS_URLs.getlist, AuthorizedToken);
-  
+      
       setTasksList(response.data.data);
-      console.log(tasksList);
+    
     } catch (error) {
       console.log(error);
     }
@@ -46,7 +104,7 @@ export default function TasksList() {
     try {
       const response = await axios.get(USERS_URLs.currentUser, AuthorizedToken);
       setUserRole(response.data.group.name);
-      console.log(userRole);
+      console.log(response.data);
     } catch (error) {
       console.log(error);
     }
@@ -59,6 +117,7 @@ useEffect(() => {
     
   }
 }, []);
+
 
   return (
     <>
@@ -112,13 +171,27 @@ useEffect(() => {
         <NoData />
       )}
     </> :  <>
-    <div className="d-flex px-2 py-3 bg-light justify-content-between">
-    <h3>Tasks Board</h3>
-    <div className="">
-        
-    </div>
-    </div>
-    </>  }
+    <div className="wrapper">
+      <div>
+      <h2>Tasks Board</h2>  
+      </div>
+    <div className="tasks-board">
+        <Column
+        title="To Do"
+        tasks={tasks.filter((task) => task.status == 'ToDo')}
+        />
+          <Column
+        title="In Progress"
+        tasks={tasks.filter((task) => task.status =='InProgress')}
+        />
+          <Column
+        title="Done"
+        tasks={tasks.filter((task) => task.status =='Done')}
+        />
+      </div>
+      </div>
+    </>
+    }
    
 
 
@@ -140,4 +213,5 @@ useEffect(() => {
       </Modal>
     </>
   );
+
 }
