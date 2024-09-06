@@ -6,6 +6,8 @@ import NoData from '../../../Shared/Components/NoData/NoData';
 import { Link } from 'react-router-dom';
 import { AuthorizedTokenWithParam } from '../../../../constans/END_POINTS';
 import { toast } from 'react-toastify';
+import { Button, Modal } from 'react-bootstrap';
+import DeleteConfirmation from '../../../Shared/Components/DeleteConfirmation/DeleteConfirmation';
 
 
 // interface ApiResponse {
@@ -29,7 +31,7 @@ export default function ProjectList() {
   let [projectsList, setProjectsList] = useState<Project[]>([]);
   const [arrayogpage,Setpageofarray]=useState<number[]>([]);
   const [itemselectid, setitemselectid] = useState<number | null | undefined>(undefined);
-  const [show ,Setshow]=useState<boolean>(false)
+  // const [show ,Setshow]=useState<boolean>(false)
   const [valuename,Setvaluename]=useState("")
   console.log(valuename)
   console.log(itemselectid)
@@ -53,18 +55,14 @@ useEffect(() => {
 }, [])
 
 
-const handelchange=(e: { target: { value: any; }; })=>{
-  Setvaluename(e.target.value)
-  getprojectsList(e.target.value,1,1)
-}
   const handelmenuetoggle=(id: any)=> {
-    Setshow(true)
+    setShow(true)
     setitemselectid(id);
     
     
   }
   const closemenue=()=>{
-    Setshow(false)
+    setShow(false)
     setitemselectid(null);
   }
 const deleteitem=async(id: any)=>{
@@ -79,6 +77,32 @@ const deleteitem=async(id: any)=>{
   catch (error){
     console.log(error)
   }
+  useEffect(()=>{
+    getprojectsList("",4,1);
+
+  },[])
+  
+
+// const [showDiv, setShowDiv] = useState(false);
+// const [selectedId, setSelectedId] = useState(false);
+
+// const handleIconClick = (id:any) => {
+//   setShowDiv(!showDiv);
+//   setSelectedId(id);
+//   alert(id);
+// };
+// const [projectId, setProjectId ] =useState();
+const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  // const handleShow = (id: any) =>{ 
+  //   // setProjectId(id);
+  //   setShow(true);
+  // };
+
+
+const handelchange=(e: { target: { value: any; }; })=>{
+  Setvaluename(e.target.value)
+  getprojectsList(e.target.value,1,1)
 }
   return (
     <>
@@ -132,6 +156,13 @@ const deleteitem=async(id: any)=>{
 
 </div>
 
+
+
+
+
+
+
+
 <nav aria-label="Page navigation example">
   <ul className="pagination">
     <li className="page-item">
@@ -139,16 +170,18 @@ const deleteitem=async(id: any)=>{
         <span aria-hidden="true">&laquo;</span>
       </a>
     </li>
-    
+
       {arrayogpage.map((arraypage)=>{
         return(
-          <li className="page-item" key={arraypage} onClick={()=>getprojectsList(valuename,4,arraypage)}>
+          <li className="page-item" key={arraypage} onClick={()=>getprojectsList("",4,arraypage)}>
             <a className="page-link">{arraypage}</a>
           </li>
         )
       })}
     
     
+
+
     <li className="page-item">
       <a className="page-link" href="#" aria-label="Next">
         <span aria-hidden="true">&raquo;</span>
@@ -156,6 +189,31 @@ const deleteitem=async(id: any)=>{
     </li>
   </ul>
 </nav>
+
+<Modal
+        show={show}
+        onHide={handleClose}
+        backdrop="static"
+        keyboard={false}
+      >
+        <Modal.Header closeButton>
+          
+        </Modal.Header>
+        <Modal.Body>
+          <DeleteConfirmation deleteItem={'Project'}/>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button onClick = {()=>deleteitem(itemselectid)} variant='btn btn-outline-danger'>Delete this Project</Button>
+        </Modal.Footer>
+      </Modal>
     </>
   )
 }
+}
+
+
+
+function setShow(_arg0: boolean) {
+  throw new Error('Function not implemented.');
+}
+

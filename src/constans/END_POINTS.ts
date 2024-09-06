@@ -42,13 +42,13 @@ export const PROJECT_URLS = {
   getlist: `${BASE_PROJECTS}/manager`,
   addproject: `${BASE_PROJECTS}`,
   delete: (id: string) => `${BASE_PROJECTS}/${id}`,
-  update: (id: string) => `${BASE_PROJECTS}/${id}`,
+  update: (id:number) =>`${BASE_PROJECTS}/${id}`,
+
 }
 
 export const TasksUrl={
   GetTasksmanager: `${BASE_URL}/Task/manager`,
   GetTaskEmploee:`${BASE_URL}/Task/count`,
-
 }
 
 //TASKS urls
@@ -59,6 +59,7 @@ export const TASKS_URLs = {
   getlist:  `${BASE_TASKS}/manager`,
     AddTask: `${BASE_URL}/Task`,
     update: (id: number)=>`${BASE_URL}/Task/${id}`,
+    delete: (id: number)=>`${BASE_URL}/Task/${id}`
 };
 
 export const BASE_IMG="https://upskilling-egypt.com:3003/";

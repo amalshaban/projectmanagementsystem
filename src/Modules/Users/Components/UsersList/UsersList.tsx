@@ -1,34 +1,18 @@
 import { useEffect, useState } from "react"
-import { AuthorizedToken, BASE_IMG, BASE_USERS, USERS_URLs } from "../../../../constans/END_POINTS";
+import { AuthorizedToken, AuthorizedTokenWithParam, BASE_IMG, BASE_USERS, USERS_URLs } from "../../../../constans/END_POINTS";
 import axios from "axios";
 import NoData from "../../../Shared/Components/NoData/NoData";
 import { id, Locale } from "date-fns/locale";
 
 export default function UsersList() {
-
-  interface alluserlist {
-    id: number;
-    isActivated: boolean;
-    imagePath: string;
-    email: string;
-    userName: string;
-    country: string;
-  }
-  const [userlist,Setuserlist]=useState<alluserlist[]>([]);
-  const userslistitem = async(pageSize: number,pageNumber: number)=>{
+  const [userlist,Setuserlist]=useState([])
+  const getuserslist = async(pageSize: number,pageNumber: number)=>{
     try {
-      let response = await axios.get(`https://upskilling-egypt.com:3003/api/v1/Users`,{headers:AuthorizedToken,
-        params: {
-          pageSize: pageSize,
-          pageNumber: pageNumber ,
-        },
-      });
-    
+      const response = await axios.get("https://upskilling-egypt.com:3003/api/v1/Users/Manager",
+        AuthorizedTokenWithParam("",pageSize,pageNumber));
+    console.log(response);
       Setuserlist(response.data.data);
-      console.log("Fetched User List:", response.data.data); // Log fetched data
-
-      console.log(userlist)
-      console.log(response)
+      console.log(userlist);
     } 
     catch(error) {
       console.log(error);
@@ -39,15 +23,14 @@ export default function UsersList() {
     try{
 const response=await axios.put(`https://upskilling-egypt.com:3003/api/v1/Users/${id}`,{},{headers:AuthorizedToken})
 console.log(response)
-userslistitem(10,1) 
+getuserslist(10,1) 
     }
     catch(error){
       console.log(error)
     }
   }
 useEffect(() => {
-  userslistitem(10,1)
-  
+  getuserslist(10,1);
 }, [])
 console.log("Current User List:", userlist); // Log updated userlist after render
 
@@ -62,12 +45,10 @@ console.log("Current User List:", userlist); // Log updated userlist after rende
   <table className="table table-striped">
   <thead>
     <tr>
-      <th scope="col">id</th>
-      <th scope="col">isActivated</th>
-      <th scope="col">userName</th>
-      <th scope="col">image</th>
+      <th scope="col">User</th>
       <th scope="col">Email</th>
-      <th scope="col">country</th>
+      <th scope="col">Country</th>
+    
       <th scope="col"></th>
     </tr>
   </thead>
