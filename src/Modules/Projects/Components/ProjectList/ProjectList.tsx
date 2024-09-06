@@ -19,7 +19,6 @@ export default function ProjectList() {
 
   const handleClose = () => {
     setShow(false)
-
   }
 
   const handleShow = (id: number) => {
@@ -55,7 +54,7 @@ export default function ProjectList() {
 
   const getProjectsList = async (pageSize: number, pageNumber: number, title: string) => {
     try {
-      const response = await axios.get<responsprojects>(BASE_PROJECTS,
+      const response = await axios.get<responsprojects>("https://upskilling-egypt.com:3003/api/v1/Project",
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
           params: {
@@ -75,15 +74,9 @@ export default function ProjectList() {
     }
   }
 
-
-  // console.log(ArrayofpagePage)
-
-
-
-
-  const deleteProject = async (recipeId: number) => {
+  const deleteProject = async (projectId: number) => {
     try {
-      const response = await axios.delete(PROJECT_URLS.delete(recipeId), AuthorizedToken);
+      const response = await axios.delete(PROJECT_URLS.delete(projectId), AuthorizedToken);
       console.log(response);
       toast.success("Project deleted successfully");
       getProjectsList(5, 1, Title);
@@ -173,7 +166,8 @@ useEffect(() => {
                         {/* <i class="fa-solid fa-ellipsis-vertical"></i> */}
 
                         <Dropdown.Item href="#/action-1">  View</Dropdown.Item>
-                        <Link to={`/dashboard/project-data/${project.id}`} state={{ getproject: project, type: "Edit" }}>
+                        <Link to={`/dashboard/project-data/${project.id}`} 
+                        state={{ getproject: project, type: "Edit" }}>
                           <Dropdown.Item href="#/action-2"  >Edit</Dropdown.Item>
                         </Link>
                         <Dropdown.Item onClick={() => handleShow(project.id)}>Delete</Dropdown.Item>
