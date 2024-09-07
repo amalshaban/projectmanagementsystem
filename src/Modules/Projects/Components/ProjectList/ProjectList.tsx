@@ -1,18 +1,11 @@
 import { useEffect, useState } from 'react'
-import { AuthorizedToken, PROJECT_URLS, USERS_URLs } from '../../../../constans/END_POINTS';
+import { AuthorizedToken, PROJECT_URLS } from '../../../../constans/END_POINTS';
 import axios from 'axios';
 import { format } from 'date-fns';
 import NoData from '../../../Shared/Components/NoData/NoData';
-import imgdelete from "../../../../assets/images/delete-model.svg"
 import { Link } from 'react-router-dom';
 import { AuthorizedTokenWithParam } from '../../../../constans/END_POINTS';
 import { toast } from 'react-toastify';
-import { Button, Dropdown, DropdownButton, Modal } from 'react-bootstrap';
-import Sorting from '../../../Shared/Components/sorting/Sorting';
-import "./project.css"
-import paginate from '../../../Shared/Components/pagination/Pagination';
-
-
 import { Button, Modal } from 'react-bootstrap';
 import DeleteConfirmation from '../../../Shared/Components/DeleteConfirmation/DeleteConfirmation';
 
@@ -35,35 +28,58 @@ export default function ProjectList() {
     totalNumberOfRecords: number;
   }
   
-  const [projectsList, setProjectsList] =  useState([]);
+  let [projectsList, setProjectsList] = useState<Project[]>([]);
   const [arrayogpage,Setpageofarray]=useState<number[]>([]);
+  const [itemselectid, setitemselectid] = useState<number | null | undefined>(undefined);
+  const [showMenue ,SetshowMenue]=useState<boolean>(false)
   const [valuename,Setvaluename]=useState("")
-  const getProjectsList = async (title: string,pageSize: number,pageNumber: number )=>{
+  console.log(valuename)
+  console.log(itemselectid)
+  
+  let getprojectsList = async (title: string,pageSize: number,pageNumber: number )=>{
     try {
-      const response = await axios.get<responsprojects>(BASE_PROJECTS,
-        {
-          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-          params: {
-            pageSize: pageSize,
-            pageNumber: pageNumber,
-            title: title
-          }
-        }
-      )
-      setArrayofPage(response?.data?.totalNumberOfPages)
-      // setArrayofPage(Array(response.data.totalNumberOfPages).fill().map((_, i) => i + 1))
-      setProjectsList(response?.data?.data);
-      console.log(response);
-      setPage(response.data.pageNumber)
-    } catch (error) {
+      let response = await axios.get<ApiResponse>(PROJECT_URLS.getlist,AuthorizedTokenWithParam(title,pageSize,pageNumber));
+    
+      setProjectsList(response.data.data);
+      console.log(projectsList)
+      console.log(response)
+      Setpageofarray(Array(response.data.totalNumberOfRecords).fill(0).map((_, i) => i + 1));
+      
+    } 
+    catch(error) {
       console.log(error);
     }
   }
 useEffect(() => {
-  getProjectsList("",4,1);
-  return () => {
+  getprojectsList("",4,1);
+}, [])
+
+
+  const handelmenuetoggle=(id: number)=> {
+    SetshowMenue(true)
+    setitemselectid(id);
+    
+    
   }
-}, []);
+  const closemenue=()=>{
+    SetshowMenue(false)
+    setitemselectid(null);
+  }
+const deleteitem=async()=>{
+  try{
+    const response=await axios.delete(PROJECT_URLS.delete(itemselectid),{headers:AuthorizedToken})
+    console.log(response)
+    toast.success("project is deleted successfully")
+    getprojectsList("",4,1)
+   
+    closemenue()
+    handleClose()
+  }
+  catch (error){
+    console.log(error)
+  }
+}
+  
 
 // const [showDiv, setShowDiv] = useState(false);
 // const [selectedId, setSelectedId] = useState(false);
@@ -75,28 +91,19 @@ useEffect(() => {
 // };
 // const [projectId, setProjectId ] =useState();
 const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = (id) =>{ 
-    // setProjectId(id);
-    setShow(true);
+  const handleClose = () => {
+    setShow(false)
+    closemenue()
+
   };
 
 
-const deleteProject = async (projectId:number) =>{
-  try {
-const response = await axios.delete(PROJECT_URLS.delete(projectId), AuthorizedToken);
-console.log(response);
-toast.success("Project deleted successfully");
-getProjectsList("",1,4);
-
-  } catch (error) {
-    console.log(error);
-    toast.error("delete failed");
-  }
-}
 const handelchange=(e: { target: { value: any; }; })=>{
   Setvaluename(e.target.value)
-  getProjectsList(e.target.value,1,1)
+  getprojectsList(e.target.value,1,1)
+}
+const showmodel=()=>{
+  setShow(true)
 }
   return (
     <>
@@ -105,10 +112,7 @@ const handelchange=(e: { target: { value: any; }; })=>{
       <h3>Projects</h3>
       <Link to={'/dashboard/project-data'} className='btn btn-warning rounded-5 p-2'>Add New Project</Link>
     </div>
- 
-
-
-    <input className="form-control me-2 " type="search" placeholder="Search" aria-label="Search" onChange={handelchange}/>
+    <input className="form-control me-2 " type="search"  placeholder="Search" aria-label="Search" onChange={handelchange}/>
 <div className= "p-2 d-flex justify-content-between">
 {projectsList.length > 0 ?  
   <table className="table table-striped">
@@ -128,28 +132,23 @@ const handelchange=(e: { target: { value: any; }; })=>{
     <td>{project.title}</td>
     <td>{project.description}</td>
     <td>{format(new Date(project.creationDate), 'MMMM d, yyyy')}</td>
-                  <td>{format(new Date(project.modificationDate), 'MMMM d, yyyy')}</td>
+    <td>{format(new Date(project.modificationDate), 'MMMM d, yyyy')}</td>
     
     <td>
-    {/* <i className="fa-regular fa-eye me-1"></i> */}
-    <i onClick={()=>handleShow(project.id)} className="fa-solid fa-trash text-danger"></i>
-    {/* <Link to={`/dashboard/project-data/:${project.id}`}
-    state={{AddProject: project, type: 'edit'}}
-    >
-    <i className="fa-solid fa-pen-to-square text-success  ms-2"></i>
-    </Link> */}
-<i className="fa-regular fa-pen-to-square me-1"></i>
-{/* <i onClick={()=>deleteProject(project.id)} className="fa-solid fa-trash-can"></i> */}
-    {/* <i onClick={()=>handleIconClick(project.id)} className="fa-solid fa-ellipsis-vertical p-1"></i> */}
-  {/* <div style={{ display: selectedId === project.id ? 'block' : 'none' }} className='options'>
-    <Link to={'/dashboard/project-list'}><i className="fa-regular fa-eye"></i> View</Link><br />
-    <Link to={'/dashboard/project-data'}><i className="fa-regular fa-pen-to-square"></i> Edit</Link><br />
-    <button onClick ={()=>getId(project.id)} ><i className="fa-solid fa-trash-can"></i> Delete</button>
-  </div> */}
-   
-
-    </td>
-  
+    
+    <i className="fa-solid fa-ellipsis-vertical menu" onClick={()=>handelmenuetoggle(project.id)}></i>
+    {itemselectid === project.id && (
+                      <div className="dropdown-menu show position-absolute" style={{ right: "50px", top: '40%' }}>
+                        <ul className="list-unstyled m-0">
+                          <li className="dropdown-item"><i className="fa fa-eye"></i> Show</li>
+                          <Link to={`/dashboard/project-data/${project.id}`}state={{projectitemdata:project,type:"edit"}}>
+                          <li className="dropdown-item"><i className="fa fa-edit"></i> Edit</li>
+                          </Link>
+                          <li className="dropdown-item" onClick={showmodel}><i className="fa fa-trash"></i> Delete</li>
+                        </ul>
+                      </div>
+                    )}
+   </td>
   </tr>
 ))}
   
@@ -157,13 +156,6 @@ const handelchange=(e: { target: { value: any; }; })=>{
 </table>:<NoData/>} 
 
 </div>
-
-
-
-
-
-
-
 
 <nav aria-label="Page navigation example">
   <ul className="pagination">
@@ -175,11 +167,13 @@ const handelchange=(e: { target: { value: any; }; })=>{
 
       {arrayogpage.map((arraypage)=>{
         return(
-          <li className="page-item" key={arraypage} onClick={()=>getProjectsList("",4,arraypage)}>
+          <li className="page-item" key={arraypage} onClick={()=>getprojectsList("",4,arraypage)}>
             <a className="page-link">{arraypage}</a>
           </li>
         )
       })}
+    
+    
 
 
     <li className="page-item">
@@ -202,16 +196,10 @@ const handelchange=(e: { target: { value: any; }; })=>{
         <Modal.Body>
           <DeleteConfirmation deleteItem={'Project'}/>
         </Modal.Body>
-
         <Modal.Footer>
-          <Button onClick = {deleteProject} variant='btn btn-outline-danger'>Delete this Project</Button>
+          <Button onClick = {deleteitem} variant='btn btn-outline-danger'>Delete this Project</Button>
         </Modal.Footer>
       </Modal>
-
-
-
-
-
     </>
   )
 }
