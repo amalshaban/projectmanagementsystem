@@ -24,10 +24,8 @@ export default function SideBar() {
       console.log(error);
     }
   };
-
   useEffect(() => {
     getUserData();
-
     return () => {};
   }, []);
 

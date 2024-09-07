@@ -1,10 +1,9 @@
 import { useForm } from 'react-hook-form';
-import {  PROJECT_URLS } from '../../../../constans/END_POINTS';
+import { AuthorizedToken, PROJECT_URLS } from '../../../../constans/END_POINTS';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useLocation, useNavigate } from 'react-router-dom';
 import {RequiredField } from '../../../../constans/VALIDATIONS';
-import { AuthorizedToken } from '../../../../constans/END_POINTS';
 
 export default function ProjectData() {
   const location = useLocation();
@@ -17,13 +16,13 @@ console.log(projectitemdata,type)
 
 
 
-const navigate = useNavigate();
+  const navigate = useNavigate();
 
-  const{register,
-    handleSubmit, 
-    formState:{errors},
+  const { register,
+    handleSubmit,
+    formState: { errors },
   } = useForm();
-  const onSubmit = async (data:any)=>{
+  const onSubmit = async (data: any) => {
     try {
       const url = type === "edit" ? PROJECT_URLS.update(projectitemdata.id) : PROJECT_URLS.addproject;
       let response = await axios({
@@ -35,11 +34,11 @@ const navigate = useNavigate();
        console.log(response);
       toast.success(type==="edit"?"project is updated successfully":"project is added successfully");
       navigate('/dashboard/project-list');
-      } 
-      catch (error:any) {
+    }
+    catch (error: any) {
       toast.error(error.response.data.message);
       console.log(error);
-      
+
     }
   }
   return (
@@ -69,7 +68,7 @@ const navigate = useNavigate();
             <span className="text-danger">
               {String(errors.title.message)}
             </span>
-    )}
+          )}
 
 
         <br/>
@@ -88,13 +87,13 @@ const navigate = useNavigate();
             <span className="text-danger">
               {String(errors.description.message)}
             </span>
-    )}
+          )}
           <div className="d-flex justify-content-between py-2">
           <button className='btn btn-outline-warning p-2' type='submit' onClick={()=>navigate('/dashboard/project-list')}>Cancel</button> 
           <button className='btn btn-warning p-2' type='submit'>Save</button>  
           </div>
-  </form>
-      
+        </form>
+
       </div>
     </>
   )

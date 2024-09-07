@@ -58,8 +58,10 @@ export const TASKS_URLs = {
   TotalTasks: `${BASE_TASKS}/count`,
   getlist:  `${BASE_TASKS}/manager`,
     AddTask: `${BASE_URL}/Task`,
-    update: (id: number)=>`${BASE_URL}/Task/${id}`,
-    delete: (id: number)=>`${BASE_URL}/Task/${id}`
+    update: (id)=>`${BASE_URL}/Task/${id}`,
+    delete: (id)=>`${BASE_URL}/Task/${id}`,
+    getAllTasks: `${BASE_URL}/Task`,
+    changeStatus:(id)=>`${BASE_URL}/Task/${id}`
 };
 
 export const BASE_IMG="https://upskilling-egypt.com:3003/";

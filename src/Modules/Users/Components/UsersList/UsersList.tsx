@@ -1,21 +1,32 @@
 import { useEffect, useState } from "react"
-import { AuthorizedToken, AuthorizedTokenWithParam, BASE_IMG } from "../../../../constans/END_POINTS";
+import { AuthorizedToken,BASE_IMG } from "../../../../constans/END_POINTS";
 import axios from "axios";
 import NoData from "../../../Shared/Components/NoData/NoData";
 
+
 export default function UsersList() {
-  const [userlist,Setuserlist]=useState([])
-  const [arrayogpage,Setpageofarray]=useState([])
-  const getuserslist = async(pageSize: number,pageNumber: number)=>{
+  const [userlist, Setuserlist] = useState([]);
+  const [arrayogpage, Setpageofarray] = useState<number[]>([]);
+  const getuserslist = async (
+    userName: string,
+    pageSize: number,
+    pageNumber: number
+  ) => {
     try {
-      const response = await axios.get("https://upskilling-egypt.com:3003/api/v1/Users",
-        AuthorizedTokenWithParam("",pageSize,pageNumber));
-        Setpageofarray(Array(response.data.totalNumberOfPages).fill(0).map((_,i)=>i+1))
-    console.log(response);
+      const response = await axios.get(
+        "https://upskilling-egypt.com:3003/api/v1/Users/Manager",{
+          headers: { Authorization: `Bearer ${localStorage.token}` } ,
+          params: {userName:userName , pageSize: pageSize, pageNumber: pageNumber}
+        });
+
       Setuserlist(response.data.data);
-      console.log(userlist);
-    } 
-    catch(error) {
+      Setpageofarray(
+        Array.from(
+          { length: response.data.totalNumberOfRecords },
+          (_, i) => i + 1
+        )
+      );
+    } catch (error) {
       console.log(error);
     }
   }
@@ -24,14 +35,14 @@ export default function UsersList() {
     try{
 const response=await axios.put(`https://upskilling-egypt.com:3003/api/v1/Users/${id}`,{},{headers:AuthorizedToken})
 console.log(response)
-getuserslist(10,1) 
+getuserslist("",10,1) 
     }
     catch(error){
       console.log(error)
     }
   }
 useEffect(() => {
-  getuserslist(6,1);
+  getuserslist("",6,1);
 }, [])
 console.log("Current User List:", userlist); // Log updated userlist after render
 
@@ -78,7 +89,9 @@ console.log("Current User List:", userlist); // Log updated userlist after rende
   </tbody>
 </table>:<NoData/>} 
 
-</div>
+        
+      </div>
+     
 
 <nav aria-label="Page navigation example">
   <ul className="pagination">
@@ -90,7 +103,7 @@ console.log("Current User List:", userlist); // Log updated userlist after rende
     
       {arrayogpage.map((arraypage)=>{
         return(
-          <li className="page-item" key={arraypage} onClick={()=>getuserslist(6,arraypage)}>
+          <li className="page-item" key={arraypage} onClick={()=>getuserslist("",6,arraypage)}>
             <a className="page-link">{arraypage}</a>
           </li>
         )
@@ -105,5 +118,5 @@ console.log("Current User List:", userlist); // Log updated userlist after rende
   </ul>
 </nav>
     </>
-  )
+  );
 }
