@@ -51,7 +51,7 @@ export default function ProjectList() {
   const [page, setPage] = useState(0)
 
   const [projectsList, setProjectsList] = useState([]);
-
+// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<Gtiprojects List by Manager >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
   const getProjectsList = async (pageSize: number, pageNumber: number, title: string) => {
     try {
       const response = await axios.get<responsprojects>("https://upskilling-egypt.com:3003/api/v1/Project",
@@ -87,19 +87,47 @@ export default function ProjectList() {
       toast.error("delete failed");
     }
   }
-  // / const ValueName = (input) => {
-  //   SetNamevalue(input.target.value)
-  //   isDataUsers(20, 1, input.target.value, Emailvalue, Cantryvalue, groupvalue)
 
-  // }
   const handlevalue = (e: any) => {
     setTitle(e)
     getProjectsList(5, 1, e)
   }
 
-  // console.log(paginate({currentPage:page,requiredNumberOfPages:6,totalNumberOfPages:ArrayofpagePage[0]}))
+
+
+  // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<Get Projects List By Employees>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+  const getProjectsListEmployees = async (pageSize: number, pageNumber: number, title: string) => {
+    try {
+      const response = await axios.get<responsprojects>(PROJECT_URLS.getlistEmplyee,
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+          params: {
+            pageSize: pageSize,
+            pageNumber: pageNumber,
+            title: title
+          }
+        }
+      )
+      setArrayofPage(response?.data?.totalNumberOfPages)
+      // setArrayofPage(Array(response.data.totalNumberOfPages).fill().map((_, i) => i + 1))
+      setProjectsList(response?.data?.data);
+      console.log(response);
+      setPage(response.data.pageNumber)
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+
+
+
+
+
+
   useEffect(() => {
     getProjectsList(5, 1, Title);
+    getProjectsListEmployees(5, 1, Title)
   }, []);
 
   const [userRole, setUserRole] = useState("");

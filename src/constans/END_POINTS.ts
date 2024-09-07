@@ -1,6 +1,6 @@
 export const AuthorizedToken = {
   headers: {
-    Authorization: `Bearer ${localStorage.token}`,
+    Authorization: `Bearer ${localStorage.getItem("token")}`,
   },
 };
 export const AuthorizedTokenWithParam = (title: string, pageSize: number, pageNumber: number) => ({
@@ -41,6 +41,9 @@ const BASE_PROJECTS = `${BASE_URL}/Project` ;
 
 export const PROJECT_URLS = {
   getlist: `${BASE_PROJECTS}/manager`,
+  getlistEmplyee: `${BASE_PROJECTS}/employee`,
+ 
+
   addproject: `${BASE_PROJECTS}`,
   delete: (id: string) => `${BASE_PROJECTS}/${id}`,
   update: (id:number) =>`${BASE_PROJECTS}/${id}`,
@@ -59,8 +62,8 @@ export const TASKS_URLs = {
   TotalTasks: `${BASE_TASKS}/count`,
   getlist:  `${BASE_TASKS}/manager`,
     AddTask: `${BASE_URL}/Task`,
-    update: (id)=>`${BASE_URL}/Task/${id}`,
-    delete: (id)=>`${BASE_URL}/Task/${id}`,
+    update: (id:string)=>`${BASE_URL}/Task/${id}`,
+    delete: (id:string)=>`${BASE_URL}/Task/${id}`,
     getAllTasks: `${BASE_URL}/Task`,
-    changeStatus:(id)=>`${BASE_URL}/Task/${id}`
+    changeStatus:(id:string)=>`${BASE_URL}/Task/${id}/change-status`
 };
