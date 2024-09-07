@@ -1,5 +1,5 @@
 export const AuthorizedToken = {
-    Authorization: `Bearer ${localStorage.token}`
+    Authorization: `Bearer ${localStorage.getItem("token")}`
 };
 export const AuthorizedTokenWithParam = (title: string, pageSize: number, pageNumber: number) => ({
   headers: {

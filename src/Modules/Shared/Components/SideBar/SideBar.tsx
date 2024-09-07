@@ -17,7 +17,7 @@ export default function SideBar() {
   const [userRole, setUserRole] = useState("");
   const getUserData = async () => {
     try {
-      const response = await axios.get(USERS_URLs.currentUser, AuthorizedToken);
+      const response = await axios.get(USERS_URLs.currentUser,{headers:AuthorizedToken});
       setUserRole(response.data.group.name);
       console.log(userRole);
     } catch (error) {

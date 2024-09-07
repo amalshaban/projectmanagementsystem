@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { AuthorizedToken, USERS_URLs } from '../../../../constans/END_POINTS';
+import {USERS_URLs } from '../../../../constans/END_POINTS';
 import { EmailValidation, FieldValidation } from '../../../../constans/VALIDATIONS';
 
 export default function VerifyAccount() {

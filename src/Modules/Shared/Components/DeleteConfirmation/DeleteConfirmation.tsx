@@ -1,6 +1,9 @@
 import nodata from '../../../../assets/images/Envelope-br.png'
+interface DeleteConfirmationProps {
+  deleteItem: any; // Specify the type, e.g., 'string', 'number', or a more complex type if needed
+}
 
-export default function DeleteConfirmation({ deleteItem }) {
+export default function DeleteConfirmation({ deleteItem }:DeleteConfirmationProps) {
     return (
       <div className="modalbody text-center">
       <img src={nodata}/>

@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react"
-import { AuthorizedToken, AuthorizedTokenWithParam, BASE_IMG, BASE_USERS, USERS_URLs } from "../../../../constans/END_POINTS";
+import { AuthorizedToken, AuthorizedTokenWithParam, BASE_IMG } from "../../../../constans/END_POINTS";
 import axios from "axios";
 import NoData from "../../../Shared/Components/NoData/NoData";
-import { id, Locale } from "date-fns/locale";
 
 export default function UsersList() {
   const [userlist,Setuserlist]=useState([])
+  const [arrayogpage,Setpageofarray]=useState([])
   const getuserslist = async(pageSize: number,pageNumber: number)=>{
     try {
-      const response = await axios.get("https://upskilling-egypt.com:3003/api/v1/Users/Manager",
+      const response = await axios.get("https://upskilling-egypt.com:3003/api/v1/Users",
         AuthorizedTokenWithParam("",pageSize,pageNumber));
+        Setpageofarray(Array(response.data.totalNumberOfPages).fill(0).map((_,i)=>i+1))
     console.log(response);
       Setuserlist(response.data.data);
       console.log(userlist);
@@ -30,7 +31,7 @@ getuserslist(10,1)
     }
   }
 useEffect(() => {
-  getuserslist(10,1);
+  getuserslist(6,1);
 }, [])
 console.log("Current User List:", userlist); // Log updated userlist after render
 
@@ -45,9 +46,12 @@ console.log("Current User List:", userlist); // Log updated userlist after rende
   <table className="table table-striped">
   <thead>
     <tr>
-      <th scope="col">User</th>
-      <th scope="col">Email</th>
-      <th scope="col">Country</th>
+      <th scope="col">id</th>
+      <th scope="col">isActivated</th>
+      <th scope="col">userName</th>
+      <th scope="col">image</th>
+      <th scope="col">email</th>
+      <th scope="col">country</th>
     
       <th scope="col"></th>
     </tr>
@@ -59,7 +63,9 @@ console.log("Current User List:", userlist); // Log updated userlist after rende
     <td>{user.id}</td>
     <td>{user.isActivated?<button className="btn btn-success rounded-5">Active</button>:<button className="btn btn-danger rounded-5">Not Active</button>}</td>
     <td>{user.userName}</td>
-    <td>{user.imagePath?<img className="w-100" src={`${BASE_IMG}/${user.imagePath}`}/>:""}</td>
+    <td>{user.imagePath?<img style={{
+      width: 50,
+    }} src={`${BASE_IMG}/${user.imagePath}`}/>:""}</td>
     <td>{user.email}</td>
     <td>{user.country}</td>
     <td>
@@ -82,13 +88,13 @@ console.log("Current User List:", userlist); // Log updated userlist after rende
       </a>
     </li>
     
-      {/* {arrayogpage.map((arraypage)=>{
+      {arrayogpage.map((arraypage)=>{
         return(
-          <li className="page-item" key={arraypage} onClick={()=>getCategoriesList(valuename,4,arraypage)}>
+          <li className="page-item" key={arraypage} onClick={()=>getuserslist(6,arraypage)}>
             <a className="page-link">{arraypage}</a>
           </li>
         )
-      })} */}
+      })}
     
     
     <li className="page-item">

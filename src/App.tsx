@@ -19,6 +19,7 @@ import UsersList from "./Modules/Users/Components/UsersList/UsersList";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import NoData from "./Modules/Shared/Components/NoData/NoData";
+import Home from "./Home";
 
 
 function App() {
@@ -44,6 +45,7 @@ function App() {
       children: [
       
         { path: "", element: <Dashboard /> },
+        { path: "home", element: <Home /> },
         { path: "project-list", element: <ProjectList /> },
         { path: "project-data", element: <ProjectData /> },
         { path: "project-data/:id", element: <ProjectData /> },

@@ -31,7 +31,7 @@ export default function ProjectList() {
   let [projectsList, setProjectsList] = useState<Project[]>([]);
   const [arrayogpage,Setpageofarray]=useState<number[]>([]);
   const [itemselectid, setitemselectid] = useState<number | null | undefined>(undefined);
-  // const [show ,Setshow]=useState<boolean>(false)
+  const [showMenue ,SetshowMenue]=useState<boolean>(false)
   const [valuename,Setvaluename]=useState("")
   console.log(valuename)
   console.log(itemselectid)
@@ -55,32 +55,30 @@ useEffect(() => {
 }, [])
 
 
-  const handelmenuetoggle=(id: any)=> {
-    setShow(true)
+  const handelmenuetoggle=(id: number)=> {
+    SetshowMenue(true)
     setitemselectid(id);
     
     
   }
   const closemenue=()=>{
-    setShow(false)
+    SetshowMenue(false)
     setitemselectid(null);
   }
-const deleteitem=async(id: any)=>{
+const deleteitem=async()=>{
   try{
-    const response=await axios.delete(PROJECT_URLS.delete(id),{headers:AuthorizedToken})
+    const response=await axios.delete(PROJECT_URLS.delete(itemselectid),{headers:AuthorizedToken})
     console.log(response)
     toast.success("project is deleted successfully")
     getprojectsList("",4,1)
    
     closemenue()
+    handleClose()
   }
   catch (error){
     console.log(error)
   }
-  useEffect(()=>{
-    getprojectsList("",4,1);
-
-  },[])
+}
   
 
 // const [showDiv, setShowDiv] = useState(false);
@@ -93,16 +91,19 @@ const deleteitem=async(id: any)=>{
 // };
 // const [projectId, setProjectId ] =useState();
 const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  // const handleShow = (id: any) =>{ 
-  //   // setProjectId(id);
-  //   setShow(true);
-  // };
+  const handleClose = () => {
+    setShow(false)
+    closemenue()
+
+  };
 
 
 const handelchange=(e: { target: { value: any; }; })=>{
   Setvaluename(e.target.value)
   getprojectsList(e.target.value,1,1)
+}
+const showmodel=()=>{
+  setShow(true)
 }
   return (
     <>
@@ -131,7 +132,7 @@ const handelchange=(e: { target: { value: any; }; })=>{
     <td>{project.title}</td>
     <td>{project.description}</td>
     <td>{format(new Date(project.creationDate), 'MMMM d, yyyy')}</td>
-                  <td>{format(new Date(project.modificationDate), 'MMMM d, yyyy')}</td>
+    <td>{format(new Date(project.modificationDate), 'MMMM d, yyyy')}</td>
     
     <td>
     
@@ -143,7 +144,7 @@ const handelchange=(e: { target: { value: any; }; })=>{
                           <Link to={`/dashboard/project-data/${project.id}`}state={{projectitemdata:project,type:"edit"}}>
                           <li className="dropdown-item"><i className="fa fa-edit"></i> Edit</li>
                           </Link>
-                          <li className="dropdown-item" onClick={()=>deleteitem(project.id)}><i className="fa fa-trash"></i> Delete</li>
+                          <li className="dropdown-item" onClick={showmodel}><i className="fa fa-trash"></i> Delete</li>
                         </ul>
                       </div>
                     )}
@@ -155,13 +156,6 @@ const handelchange=(e: { target: { value: any; }; })=>{
 </table>:<NoData/>} 
 
 </div>
-
-
-
-
-
-
-
 
 <nav aria-label="Page navigation example">
   <ul className="pagination">
@@ -203,17 +197,9 @@ const handelchange=(e: { target: { value: any; }; })=>{
           <DeleteConfirmation deleteItem={'Project'}/>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick = {()=>deleteitem(itemselectid)} variant='btn btn-outline-danger'>Delete this Project</Button>
+          <Button onClick = {deleteitem} variant='btn btn-outline-danger'>Delete this Project</Button>
         </Modal.Footer>
       </Modal>
     </>
   )
 }
-}
-
-
-
-function setShow(_arg0: boolean) {
-  throw new Error('Function not implemented.');
-}
-

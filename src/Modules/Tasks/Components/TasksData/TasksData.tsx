@@ -140,13 +140,8 @@ export default function TasksData() {
                   {...register("projectId", {
                     required: "project is required",
                     
-                  })}
-                  
-                  name="project"
-                  id=""
-                  className=""
-                >
-                <option disabled>choose</option>
+                  })}>
+                <option  selected>choose</option>
                   {projectList.map((project : any) => (
                        <option key={project.id} value={project.id} className="">
                         
