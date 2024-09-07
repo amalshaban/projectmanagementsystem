@@ -12,8 +12,10 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 export default function TasksData() {
+const location = useLocation();
+const { taskData , type}=location.state;
 
-  let navigate = useNavigate();
+  const navigate = useNavigate();
   const [projectList, setProjectList] = useState([]);
   const [userList, setUserList] = useState([]);
 
@@ -76,8 +78,8 @@ export default function TasksData() {
       console.log(error);
     }
   };
-const location = useLocation();
-const {taskData , type} =location.state ? location.state : "";
+
+
   return (
     <>
       <div className="px-2 py-3 bg-white">

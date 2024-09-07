@@ -13,7 +13,25 @@ import paginate from '../../../Shared/Components/pagination/Pagination';
 
 
 export default function ProjectList() {
-  const [Title, setTitle] = useState("")
+  
+  const [userRole, setUserRole] = useState("");
+  const getUserData = async () => {
+    try {
+      const response = await axios.get(USERS_URLs.currentUser, AuthorizedToken);
+      setUserRole(response.data.group.name);
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+useEffect(() => {
+  getUserData();
+  return () => {
+    
+  }
+}, []);
+  const [title, setTitle] = useState("")
   const [projectId, SetprojectId] = useState(0);
   const [show, setShow] = useState(false);
 
@@ -48,22 +66,25 @@ export default function ProjectList() {
   }
 
   const [ArrayofpagePage, setArrayofPage] = useState(0);
-  const [page, setPage] = useState(0)
-
+  const [page, setPage] = useState(0);
   const [projectsList, setProjectsList] = useState([]);
 
   const getProjectsList = async (pageSize: number, pageNumber: number, title: string) => {
     try {
-      const response = await axios.get<responsprojects>("https://upskilling-egypt.com:3003/api/v1/Project",
+      const response = await axios(
         {
+          method: 'get',
+          url: userRole === "Manager" ? "https://upskilling-egypt.com:3003/api/v1/Project/manager"
+          : "https://upskilling-egypt.com:3003/api/v1/Project/employee",
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
           params: {
             pageSize: pageSize,
             pageNumber: pageNumber,
             title: title
           }
-        }
-      )
+        })
+        
+    
       setArrayofPage(response?.data?.totalNumberOfPages)
       // setArrayofPage(Array(response.data.totalNumberOfPages).fill().map((_, i) => i + 1))
       setProjectsList(response?.data?.data);
@@ -79,7 +100,7 @@ export default function ProjectList() {
       const response = await axios.delete(PROJECT_URLS.delete(projectId), AuthorizedToken);
       console.log(response);
       toast.success("Project deleted successfully");
-      getProjectsList(5, 1, Title);
+      getProjectsList(5, 1, title);
       setShow(false);
 
     } catch (error) {
@@ -99,26 +120,10 @@ export default function ProjectList() {
 
   // console.log(paginate({currentPage:page,requiredNumberOfPages:6,totalNumberOfPages:ArrayofpagePage[0]}))
   useEffect(() => {
-    getProjectsList(5, 1, Title);
+    getProjectsList(5, 1, title);
+  
   }, []);
 
-  const [userRole, setUserRole] = useState("");
-  const getUserData = async () => {
-    try {
-      const response = await axios.get(USERS_URLs.currentUser, AuthorizedToken);
-      setUserRole(response.data.group.name);
-      console.log(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-useEffect(() => {
-  getUserData();
-  return () => {
-    
-  }
-}, []);
 
 
   return (
@@ -131,8 +136,7 @@ useEffect(() => {
       : ""}
        
       </div>
-
-      {projectsList.length > 0 ? <div className="searchbar">
+  {projectsList.length > 0 ? <div className="searchbar">
         <input type="search" onChange={(e) => handlevalue(e.target.value)} placeholder="Search By Title" className="searchbar-input" />
       </div> : ""}
 
@@ -146,8 +150,10 @@ useEffect(() => {
                 <th>Num Users <Sorting /></th>
                 <th>Num Tasks <Sorting /></th>
                 <th>Creation Date <Sorting /></th>
+                {userRole == "Manager" ? 
                 <th></th>
-              </tr>
+             : ""}
+                </tr>
             </thead>
             <tbody>
               {projectsList.map((project: any) => (
@@ -159,6 +165,7 @@ useEffect(() => {
                   <td>{project.description}</td>
                   <td>{format(project.creationDate, 'MMMM d, yyyy')}</td>
 
+                  {userRole == "Manager" ? 
                   <td>
 
                     <DropdownButton title className='contanetDrop'>
@@ -177,7 +184,7 @@ useEffect(() => {
                     </DropdownButton>
 
                   </td>
-
+                  : "" }
                 </tr>
               ))}
 
@@ -207,8 +214,7 @@ useEffect(() => {
           </nav>
         }
       </div>
-
-
+    
       <Modal show={show} onHide={handleClose} animation={false}>
         <Modal.Header closeButton></Modal.Header>
         <Modal.Body className='text-center'>
