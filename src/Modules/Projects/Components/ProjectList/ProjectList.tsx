@@ -28,10 +28,10 @@ export default function ProjectList() {
 useEffect(() => {
   getUserData();
   return () => {
-    
   }
 }, []);
-  const [title, setTitle] = useState("")
+
+  const [title, setTitle] = useState("");
   const [projectId, SetprojectId] = useState(0);
   const [show, setShow] = useState(false);
 
@@ -60,8 +60,8 @@ useEffect(() => {
   //   pageNumber: number,
   //   totalNumberOfPages: number
   // }
-  type respons=responsparam[]
-  type responsprojects = {
+  type respons = responsparam[]
+  type responsProjects = {
     data: respons
   }
 
@@ -71,7 +71,7 @@ useEffect(() => {
 
   const getProjectsList = async (pageSize: number, pageNumber: number, title: string) => {
     try {
-      const response = await axios(
+      const response = await axios<responsProjects>(
         {
           method: 'get',
           url: userRole === "Manager" ? "https://upskilling-egypt.com:3003/api/v1/Project/manager"
@@ -95,7 +95,7 @@ useEffect(() => {
     }
   }
 
-  const deleteProject = async (projectId: number) => {
+  const deleteProject = async (projectId: string) => {
     try {
       const response = await axios.delete(PROJECT_URLS.delete(projectId), AuthorizedToken);
       console.log(response);
@@ -115,12 +115,12 @@ useEffect(() => {
   // }
   const handlevalue = (e: any) => {
     setTitle(e)
-    getProjectsList(5, 1, e)
+    getProjectsList(5, 1, title)
   }
 
   // console.log(paginate({currentPage:page,requiredNumberOfPages:6,totalNumberOfPages:ArrayofpagePage[0]}))
   useEffect(() => {
-    getProjectsList(5, 1, title);
+    getProjectsList(5, 1, "");
   
   }, []);
 
