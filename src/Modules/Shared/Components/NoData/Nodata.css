@@ -1,0 +1,9 @@
+.no-data{
+    width: 400px;
+    height: 50vh;
+    background-color: aqua !important;
+    img{
+        width: 300px;
+        height: 500px;
+    }
+}

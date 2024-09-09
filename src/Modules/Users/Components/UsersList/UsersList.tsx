@@ -13,10 +13,10 @@ export default function UsersList() {
   ) => {
     try {
       const response = await axios.get(
-        "https://upskilling-egypt.com:3003/api/v1/Users/Manager",{
-          headers: { Authorization: `Bearer ${localStorage.token}` } ,
-          params: {userName:userName , pageSize: pageSize, pageNumber: pageNumber}
-        });
+        "https://upskilling-egypt.com:3003/api/v1/Users/Manager", {
+        headers: { Authorization: `Bearer ${localStorage.token}` },
+        params: { userName: userName, pageSize: pageSize, pageNumber: pageNumber }
+      });
 
       Setuserlist(response.data.data);
       Setpageofarray(
@@ -33,10 +33,10 @@ export default function UsersList() {
     getuserslist("", 10, 1);
   }, []);
 
- 
+
 
   const [valuename, Setvaluename] = useState("");
-  const handelchange =  (input:any) => {
+  const handelchange = (input: any) => {
     Setvaluename(input.target.value);
     getuserslist(valuename, 10, 1);
     console.log(getuserslist(valuename, 10, 1));
@@ -48,61 +48,47 @@ export default function UsersList() {
       </div>
       <div className=" px-2 py-3">
         <div className="row">
-        <input
-        className="form-control me-2 "
-        type="search"
-        placeholder="Search"
-        aria-label="Search"
-        onChange={handelchange}
-      />
+          <input
+            className="form-control me-2 "
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+            onChange={handelchange}
+          />
         </div>
-     
-      <div className="p-2 d-flex justify-content-between">
-     
-        <div className="p-2 d-flex justify-content-between">
-          {userlist.length > 0 ? (
-            <table className="table table-striped">
-              <thead>
-                <tr>
-                  <th scope="col">User</th>
-                  <th scope="col">Email</th>
-                  <th scope="col">Country</th>
 
-                  <th scope="col"></th>
-                </tr>
-              </thead>
-              <tbody>
-                {userlist.map((user: any) => (
-                  <tr key={user.id}>
-                    <td>{user.userName}</td>
-                    <td>{user.email}</td>
-                    <td>{user.country}</td>
+        {/* <div className="p-2 d-flex justify-content-between "> */}
+          <div className="p-2 d-flex justify-content-between">
+            {userlist.length > 0 ? (
+              <table className="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">User</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Country</th>
 
-                    {/* <td>
-    
-    <i className="fa-solid fa-ellipsis-vertical menu" onClick={()=>handelmenuetoggle(user.id)}></i>
-    {itemselectid === user.id && (
-                      <div className="dropdown-menu show position-absolute" style={{ right: "50px", top: '40%' }}>
-                        <ul className="list-unstyled m-0">
-                          <li className="dropdown-item"><i className="fa fa-eye"></i> Show</li>
-                          <li className="dropdown-item"><i className="fa fa-edit"></i> Edit</li>
-                          <li className="dropdown-item" ><i className="fa fa-trash"></i> Delete</li>
-                        </ul>
-                      </div>
-                    )}
-   </td> */}
+                    <th scope="col"></th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          ) : (
-            <NoData />
-          )}
-        </div>
+                </thead>
+                <tbody>
+                  {userlist.map((user: any) => (
+                    <tr key={user.id}>
+                      <td>{user.userName}</td>
+                      <td>{user.email}</td>
+                      <td>{user.country}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            ) : (
+              <div className='nodataproject'>< NoData /></div>
 
-        
-      </div>
-      <nav aria-label="Page navigation example">
+            )}
+          </div>
+
+
+        {/* </div> */}
+        <nav aria-label="Page navigation example">
           <ul className="pagination">
             <li className="page-item">
               <a className="page-link" href="#" aria-label="Previous">
@@ -129,7 +115,7 @@ export default function UsersList() {
             </li>
           </ul>
         </nav>
-        </div>
+      </div>
     </>
   );
 }

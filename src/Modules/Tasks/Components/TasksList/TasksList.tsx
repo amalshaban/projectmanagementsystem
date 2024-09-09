@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 import './taskslist.css';
 import { AuthContext } from "../../../Authontication/Components/Context/AuthContext";
 import Sorting from "../../../Shared/Components/sorting/Sorting";
-
+import svg from "../../../../assets/images/icontaskdrag.svg"
 
 
 
@@ -45,8 +45,10 @@ export default function TasksList() {
             params: {
               pageSize: 100,
               pageNumber: 1,
+            
             },
           }
+          
         );
         setTasks(response.data.data);
         // console.log(tasks);
@@ -146,7 +148,7 @@ export default function TasksList() {
 
                       <DropdownButton title className='contanetDrop'>
                         <div className="contanerdropdown">
-                          <i className="fa-solid fa-eye me-1" onClick={()=>handleViue(task.id)}></i>
+                          <i className="fa-solid fa-eye me-1" ></i>
                           <Link to={`/dashboard/tasks-data/${task.id}`}
                             state={{ taskData: task, type: "edit" }}>
                             <i className="fa-solid fa-pen-to-square me-1 text-success"></i>
@@ -163,7 +165,7 @@ export default function TasksList() {
               </tbody>
             </table>
           ) : (
-            <NoData />
+            <div className='nodataproject'>< NoData /></div>
           )}
         </> : <>
           <div className="wrapper">
@@ -248,7 +250,6 @@ const Column = ({ title, tasks, refetchtask }: { tasks: UsrerTasksType, title: s
       <div className="cards"
         onDrop={(e) => {
           e.preventDefault()
-          // console.log({ dropped: title, taskId: e.dataTransfer.getData("taskID") })
           const taskId = e.dataTransfer.getData("taskID")
           changetasks({ taskId, newStatus: title })
         }}
@@ -265,7 +266,7 @@ const Column = ({ title, tasks, refetchtask }: { tasks: UsrerTasksType, title: s
             onDragEnd={() => {
               console.log({ dragged: title })
             }}
-          >{title}</div>
+          ><h4>{title}</h4> </div>
         ))}
       </div>
     </div>

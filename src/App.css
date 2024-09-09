@@ -13,6 +13,9 @@ body {
 :root {
   --main-color: rgba(239, 155, 40, 1);
   --main-bg-color: rgba(245, 245, 245, 1);
+  --main-text-color: rgba(79, 79, 79, 1);
+  --main-bg-color: rgba(245, 245, 245, 1);
+  --main-bg-color: rgba(245, 245, 245, 1);
 }
 
 .main-color {
@@ -141,9 +144,9 @@ body {
   color: #f39c12;
 }
 
-.sidebar {
+/* .sidebar {
   height: 100vmax;
-}
+} */
 
 .options {
   position: fixed;

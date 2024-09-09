@@ -17,14 +17,15 @@
     display: flex;
     flex-grow: 1;
     gap: 0.5rem;
-
+    animation:identifier .8s ease-in backwards ;
     .column {
         flex: 1;
 
         h3 {
-            font-size: 1rem;
+            font-size: 2rem;
             padding-top: 4rem;
             margin-bottom: 2rem;
+            color: var(--main-text-color);
         }
 
         .cards {
@@ -44,7 +45,13 @@
                 background-color: #ef9B26;
                 padding: 1rem;
                 border-radius: 0.5rem;
+                display: flex !important;
+                cursor: grab;
 
+                img {
+                    width: 20px;
+                    height: 20px;
+                }
             }
         }
     }
@@ -80,7 +87,7 @@
     border-radius: 30px;
     transition: .1s all ease-in-out;
 
-    animation: showdeteals 3s backwards ;
+    animation: showdeteals 3s backwards;
 
     h1 {
         color: #ef9B26;
@@ -107,6 +114,18 @@
 
         }
     }
+}
+
+@keyframes identifier {
+    0% {
+        transform: translateY(50%);
+        opacity: 0;
+
+    }100%{
+        transform: translateY(0);
+        opacity: 1;
+    }
+
 }
 
 @keyframes showdeteals {

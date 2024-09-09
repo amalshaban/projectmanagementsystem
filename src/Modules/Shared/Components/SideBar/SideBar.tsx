@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { Sidebar as Prosidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Link, useNavigate } from "react-router-dom";
-import { AuthorizedToken, USERS_URLs } from "../../../../constans/END_POINTS";
-import axios from "axios";
+import { AuthContext } from "../../../Authontication/Components/Context/AuthContext";
 export default function SideBar() {
   const [togglecol, Settogglecol] = useState(false);
   const toggle = () => {
@@ -14,20 +13,9 @@ export default function SideBar() {
   };
   const navigate = useNavigate();
 
-  const [userRole, setUserRole] = useState("");
-  const getUserData = async () => {
-    try {
-      const response = await axios.get(USERS_URLs.currentUser, AuthorizedToken);
-      setUserRole(response.data.group.name);
-      console.log(userRole);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  useEffect(() => {
-    getUserData();
-    return () => {};
-  }, []);
+  // const [userRole,setUserRole]=useState()
+  const {loginData}=useContext(AuthContext)
+  console.log(loginData)
 
   return (
     <>
@@ -35,26 +23,28 @@ export default function SideBar() {
         collapsed={togglecol}
         className=" position-relative sidebar p-0 "
       >
-        <Menu className="my-5">
+        <Menu className="my-5" >
           <MenuItem
             icon={<i className="fa-regular fa-user"></i>}
-            component={<Link to="home" />}
+            component={<Link to="" />}
           >
             {" "}
             Home
           </MenuItem>
-          {userRole === 'Manager'?
-           <MenuItem
-           icon={<i className="fa-regular fa-user"></i>}
-           component={<Link to="users-list" />}
-         >
-           {" "}
-           Users
-         </MenuItem>
-         : ""
-         }
-         
+          {loginData?.userGroup === 'Manager' ?
+            <MenuItem
+            // className="item"
+              icon={<i className="fa-regular fa-user"></i>}
+              component={<Link to="users-list" />}
+            >
+              {" "}
+              Users
+            </MenuItem>
+            : ""
+          }
+
           <MenuItem
+          // className="item"
             icon={<i className="fa-solid fa-bars-progress"></i>}
             component={<Link to="project-list" />}
           >
@@ -62,6 +52,7 @@ export default function SideBar() {
             Projects
           </MenuItem>
           <MenuItem
+          // className="item"
             icon={<i className="fa-solid fa-list-check"></i>}
             component={<Link to="tasks-list" />}
           >
@@ -69,6 +60,7 @@ export default function SideBar() {
             Tasks
           </MenuItem>
           <MenuItem
+          // className="item"
             icon={<i className="fa-solid fa-arrow-right-from-bracket"></i>}
             onClick={logout}
           >

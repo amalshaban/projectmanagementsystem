@@ -91,6 +91,7 @@ export default function ProjectList() {
   const handlevalue = (e: any) => {
     setTitle(e)
     getProjectsList(5, 1, e)
+    getProjectsListEmployees(5, 1, e)
   }
 
 
@@ -160,9 +161,11 @@ useEffect(() => {
        
       </div>
 
-      {projectsList.length > 0 ? <div className="searchbar">
+      {/* {projectsList.length > 0 ?  */}
+      <div className="searchbar">
         <input type="search" onChange={(e) => handlevalue(e.target.value)} placeholder="Search By Title" className="searchbar-input" />
-      </div> : ""}
+      </div> 
+      {/*  : ""} */}
 
       <div className=" p-2 d-flex justify-content-between  contanertable">
         {projectsList.length > 0 ?
@@ -190,16 +193,13 @@ useEffect(() => {
                   <td>
 
                     <DropdownButton title className='contanetDrop'>
-                      <div className="contanerdropdown">
-                        {/* <i class="fa-solid fa-ellipsis-vertical"></i> */}
-
-                        <Dropdown.Item href="#/action-1">  View</Dropdown.Item>
-                        <Link to={`/dashboard/project-data/${project.id}`} 
-                        state={{ getproject: project, type: "Edit" }}>
-                          <Dropdown.Item href="#/action-2"  >Edit</Dropdown.Item>
-                        </Link>
-                        <Dropdown.Item onClick={() => handleShow(project.id)}>Delete</Dropdown.Item>
-
+                      <div className="contanerdropdownproject">
+                        <span className='item item1'><i className="fa-solid fa-eye me-1" ></i> Viue</span>
+                        <Link  className='item item2' to={`/dashboard/tasks-data/${project.id}`}
+                            state={{ getproject: project, type: "Edit" }}>
+                            <span ><i className="fa-solid fa-pen-to-square me-1 text-success"></i> Update</span>
+                          </Link>
+                        <span className='item item3' onClick={() => handleShow(project.id)}><i className="fa-solid fa-trash text-danger"></i> Delete</span>
                       </div>
 
                     </DropdownButton>
@@ -210,24 +210,22 @@ useEffect(() => {
               ))}
 
             </tbody>
-          </table> : <NoData />}
+          </table> :<div className='nodataproject'>< NoData /></div>}
         {projectsList?.length <= 0 ? "" :
           <nav aria-label="Page navigation example" className='my-50'>
             <ul className="pagination">
               <li className="page-item">
-                <a className="page-link" aria-label="Previous">
+                <a className="page-link" aria-label="Previous" onClick={() => getProjectsList(5, page-1, "")}>
                   <span aria-hidden="true">&laquo;</span>
                 </a>
               </li>
-              {/* ({ currentPage: page, totalNumberOfPages: currentPage }) */}
-
               {paginate({ currentPage: page, totalNumberOfPages: ArrayofpagePage, requiredNumberOfPages: 5 }).map((pagenum) => (
 
                 <li key={pagenum} onClick={() => getProjectsList(5, pagenum, "")}><a className="page-link" >{pagenum}</a></li>
               ))
               }
               <li className="page-item">
-                <a className="page-link" aria-label="Next">
+                <a className="page-link" aria-label="Next" onClick={() => getProjectsList(5, page+1, "")}>
                   <span aria-hidden="true">&raquo;</span>
                 </a>
               </li>
