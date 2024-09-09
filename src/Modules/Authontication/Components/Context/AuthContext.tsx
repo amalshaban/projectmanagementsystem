@@ -17,7 +17,9 @@ export default function AuthContextProvider(props:PropsWithChildren) {
   };
 
   useEffect(() => {
-    saveLoginData();
+    if(localStorage.getItem("token")){
+      saveLoginData();
+    }
   }, []); 
 
   return (

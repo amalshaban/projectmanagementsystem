@@ -37,3 +37,41 @@
         border-radius: 0.5rem;
     
 }}}}
+tbody {
+    cursor: pointer;
+ }
+ tbody {
+    cursor: pointer;
+ }
+ .table-content{
+   flex-grow: 1;
+   width: 100%;
+
+   
+
+   .head-column {
+      background-color: #315951 !important;
+      padding-block: 20px;
+      padding: 20px !important;
+      width: 100% !important;
+    }
+ }
+ .table-content table {
+   width: 100%; 
+   border-collapse: collapse;
+   table-layout: fixed;
+ }
+ .table-content th, 
+.table-content td {
+  text-align: left; 
+  padding: 10px 15px;
+}
+.table-content thead th  {
+   background-color: #315951;
+   color: white;
+   cursor: pointer;
+ }
+ .table-content th {
+  
+   width: 20%; 
+ }

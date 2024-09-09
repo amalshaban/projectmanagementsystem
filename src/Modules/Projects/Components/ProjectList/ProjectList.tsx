@@ -8,7 +8,8 @@ import { AuthorizedTokenWithParam } from '../../../../constans/END_POINTS';
 import { toast } from 'react-toastify';
 import { Button, Modal } from 'react-bootstrap';
 import DeleteConfirmation from '../../../Shared/Components/DeleteConfirmation/DeleteConfirmation';
-
+import "./project.css"
+import paginate from '../../../Shared/Components/pagination/Pagination';
 
 // interface ApiResponse {
 //   data: any[];
@@ -25,14 +26,17 @@ export default function ProjectList() {
 
   interface ApiResponse {
     data: any[];
-    totalNumberOfRecords: number;
+    totalNumberOfPages: number;
+    pageNumber:number;
+    pageSize:number
   }
   
   let [projectsList, setProjectsList] = useState<Project[]>([]);
-  const [arrayogpage,Setpageofarray]=useState<number[]>([]);
+  const [arrayofpage,Setpageofarray]=useState<number[]>([]);
   const [itemselectid, setitemselectid] = useState<number | null | undefined>(undefined);
   const [showMenue ,SetshowMenue]=useState<boolean>(false)
   const [valuename,Setvaluename]=useState("")
+  const[pagenum,SetPagenum]=useState<number>(0)
   console.log(valuename)
   console.log(itemselectid)
   
@@ -41,9 +45,10 @@ export default function ProjectList() {
       let response = await axios.get<ApiResponse>(PROJECT_URLS.getlist,AuthorizedTokenWithParam(title,pageSize,pageNumber));
     
       setProjectsList(response.data.data);
+      SetPagenum(response.data.pageNumber)
       console.log(projectsList)
       console.log(response)
-      Setpageofarray(Array(response.data.totalNumberOfRecords).fill(0).map((_, i) => i + 1));
+      Setpageofarray(response.data.totalNumberOfPages);
       
     } 
     catch(error) {
@@ -112,16 +117,27 @@ const showmodel=()=>{
       <h3>Projects</h3>
       <Link to={'/dashboard/project-data'} className='btn btn-warning rounded-5 p-2'>Add New Project</Link>
     </div>
-    <input className="form-control me-2 " type="search"  placeholder="Search" aria-label="Search" onChange={handelchange}/>
-<div className= "p-2 d-flex justify-content-between">
+    
+    <div className="search-container position-relative">
+        <input
+          className="form-control me-2 ps-5 rounded-5 " 
+          type="search"
+          placeholder="Search"
+          aria-label="Search"
+          onChange={handelchange}
+        />
+        <i className="fa fa-search search-icon position-absolute"></i>
+      </div>
+<div className="p-2 ">
 {projectsList.length > 0 ?  
-  <table className="table table-striped">
-  <thead>
-    <tr>
-      <th scope="col">Title</th>
-      <th scope="col">Discription</th>
-      <th scope="col">Creation Date</th>
-      <th scope="col">Modification Date</th>
+  <table className="table-content">
+  <thead className='head-column'>
+    <tr >
+      <th scope="col">Title<i className="fa-solid fa-angle-down ms-2"></i>
+      </th>
+      <th scope="col">Discription<i className="fa-solid fa-angle-down ms-2" ></i></th>
+      <th scope="col">Creation Date<i className="fa-solid fa-angle-down ms-2"></i></th>
+      <th scope="col">Modification Date<i className="fa-solid fa-angle-down ms-2"></i></th>
       <th scope="col"></th>
     </tr>
   </thead>
@@ -136,7 +152,7 @@ const showmodel=()=>{
     
     <td>
     
-    <i className="fa-solid fa-ellipsis-vertical menu" onClick={()=>handelmenuetoggle(project.id)}></i>
+    <i className="fa-solid fa-ellipsis-vertical menu right" onClick={()=>handelmenuetoggle(project.id)}></i>
     {itemselectid === project.id && (
                       <div className="dropdown-menu show position-absolute" style={{ right: "50px", top: '40%' }}>
                         <ul className="list-unstyled m-0">
@@ -165,7 +181,7 @@ const showmodel=()=>{
       </a>
     </li>
 
-      {arrayogpage.map((arraypage)=>{
+      {paginate({currentPage:pagenum,requiredNumberOfPages:5,totalNumberOfPages:arrayofpage}).map((arraypage)=>{
         return(
           <li className="page-item" key={arraypage} onClick={()=>getprojectsList("",4,arraypage)}>
             <a className="page-link">{arraypage}</a>

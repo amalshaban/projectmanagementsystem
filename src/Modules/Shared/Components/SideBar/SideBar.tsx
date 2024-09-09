@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Sidebar as Prosidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthorizedToken, USERS_URLs } from "../../../../constans/END_POINTS";
 import axios from "axios";
+import { AuthContext } from "../../../Authontication/Components/Context/AuthContext";
 export default function SideBar() {
   const [togglecol, Settogglecol] = useState(false);
   const toggle = () => {
@@ -13,21 +14,9 @@ export default function SideBar() {
     navigate("/Login");
   };
   const navigate = useNavigate();
+const {loginData}=useContext(AuthContext);
 
-  const [userRole, setUserRole] = useState("");
-  const getUserData = async () => {
-    try {
-      const response = await axios.get(USERS_URLs.currentUser,{headers:AuthorizedToken});
-      setUserRole(response.data.group.name);
-      console.log(userRole);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  useEffect(() => {
-    getUserData();
-    return () => {};
-  }, []);
+
 
   return (
     <>
@@ -40,15 +29,15 @@ export default function SideBar() {
             icon={<i className="fa-regular fa-user"></i>}
             component={<Link to="home" />}
           >
-            {" "}
+           
             Home
           </MenuItem>
-          {userRole === 'Manager'?
+          {loginData?.userGroup === 'Manager'?
            <MenuItem
            icon={<i className="fa-regular fa-user"></i>}
            component={<Link to="users-list" />}
          >
-           {" "}
+          
            Users
          </MenuItem>
          : ""
@@ -58,21 +47,21 @@ export default function SideBar() {
             icon={<i className="fa-solid fa-bars-progress"></i>}
             component={<Link to="project-list" />}
           >
-            {" "}
+            
             Projects
           </MenuItem>
           <MenuItem
             icon={<i className="fa-solid fa-list-check"></i>}
             component={<Link to="tasks-list" />}
           >
-            {" "}
+           
             Tasks
           </MenuItem>
           <MenuItem
             icon={<i className="fa-solid fa-arrow-right-from-bracket"></i>}
             onClick={logout}
           >
-            {" "}
+            
             Logout
           </MenuItem>
         </Menu>

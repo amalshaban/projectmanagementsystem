@@ -2,30 +2,29 @@ import { useEffect, useState } from "react"
 import { AuthorizedToken,BASE_IMG } from "../../../../constans/END_POINTS";
 import axios from "axios";
 import NoData from "../../../Shared/Components/NoData/NoData";
+import paginate from "../../../Shared/Components/pagination/Pagination";
 
 
 export default function UsersList() {
   const [userlist, Setuserlist] = useState([]);
-  const [arrayogpage, Setpageofarray] = useState<number[]>([]);
+  const [arrayofpage, Setpageofarray] = useState<number[]>([]);
+  const [pagenum,SetPagenum]=useState()
   const getuserslist = async (
     userName: string,
     pageSize: number,
-    pageNumber: number
+    pageNumber: number,
+    
   ) => {
     try {
       const response = await axios.get(
         "https://upskilling-egypt.com:3003/api/v1/Users/Manager",{
-          headers: { Authorization: `Bearer ${localStorage.token}` } ,
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } ,
           params: {userName:userName , pageSize: pageSize, pageNumber: pageNumber}
         });
 
       Setuserlist(response.data.data);
-      Setpageofarray(
-        Array.from(
-          { length: response.data.totalNumberOfRecords },
-          (_, i) => i + 1
-        )
-      );
+      Setpageofarray(response.data.totalNumberOfPages);
+      SetPagenum(response.data.pageNumber)
     } catch (error) {
       console.log(error);
     }
@@ -35,14 +34,14 @@ export default function UsersList() {
     try{
 const response=await axios.put(`https://upskilling-egypt.com:3003/api/v1/Users/${id}`,{},{headers:AuthorizedToken})
 console.log(response)
-getuserslist("",10,1) 
+getuserslist("",3,1) 
     }
     catch(error){
       console.log(error)
     }
   }
 useEffect(() => {
-  getuserslist("",6,1);
+  getuserslist("",3,1);
 }, [])
 console.log("Current User List:", userlist); // Log updated userlist after render
 
@@ -101,13 +100,16 @@ console.log("Current User List:", userlist); // Log updated userlist after rende
       </a>
     </li>
     
-      {arrayogpage.map((arraypage)=>{
+    {/* {paginate({currentPage:pagenum,requiredNumberOfPages:5,totalNumberOfPages:arrayofpage}).map((arraypage)=>{
         return(
-          <li className="page-item" key={arraypage} onClick={()=>getuserslist("",6,arraypage)}>
+          <li className="page-item" key={arraypage} onClick={()=>getprojectsList("",4,arraypage)}>
             <a className="page-link">{arraypage}</a>
           </li>
         )
-      })}
+      })} */}
+      {paginate({currentPage:pagenum,totalNumberOfPages:arrayofpage,requiredNumberOfPages:5}).map((pagin)=>(
+        <li className="page-item" key={pagin} onClick={()=>getuserslist("",3,pagin)}><a className="page-link">{pagin}</a></li>
+      ))}
     
     
     <li className="page-item">

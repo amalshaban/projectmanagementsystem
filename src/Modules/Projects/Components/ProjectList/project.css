@@ -1,43 +1,52 @@
-:root {
-    --main-color: rgba(239, 155, 40, 1);
-    --main-bg-color: rgba(245, 245, 245, 1);
-    --main-bgS-color: rgba(255, 255, 255, 1);
+
  
- }
- 
- tr {
+ /* tr {
     height: 60px;
     text-align: center;
- 
-    th {
+  */
+    /* th {
        color: white !important;
        cursor: pointer;
        position: relative;
        transform: translateY(-20%);
        border: 1px solid black;
-    }
- }
+    } */
+ 
  
  tbody {
     cursor: pointer;
  }
- 
- thead.bgthed {
-    background-color: rgba(49, 89, 81, 0.9) !important;
+ .table-content{
+   flex-grow: 1;
+   width: 100%;
+
+   
+
+   .head-column {
+      background-color: #315951 !important;
+      padding-block: 20px;
+      padding: 20px !important;
+      width: 100% !important;
+    }
  }
- 
- .contanertable {
-    /* background-color: aqua; */
-    width: 95%;
-    margin: auto;
-    flex-direction: column;
-    gap: 20px;
-    background-color: var(--main-bgS-color) ;
-    margin-top: 30px;
+ .table-content table {
+   width: 100%; 
+   border-collapse: collapse;
+   table-layout: fixed;
  }
- table{
-    
-    animation: identifier .2s ease-in forwards;
+ .table-content th, 
+.table-content td {
+  text-align: left; 
+  padding: 10px 15px;
+}
+.table-content thead th {
+   background-color: #315951;
+   color: white;
+   cursor: pointer;
+ }
+ .table-content th {
+  
+   width: 20%; 
  }
  @keyframes identifier {
     from{
@@ -49,30 +58,34 @@
  
     }
  }
- .table {
-    --bs-table-bg: unset !important;
- }
  
- td .dropdown-toggle {
-    background-color: rgba(49, 89, 81, 0.9) !important;
-    border: 1px solid rgba(49, 89, 81, 0.9) !important;
- }
- .searchbar{
-    position: relative;
-    left: 40px;
-    top: 20px;
- }
- .searchbar-input {
-    width: 250px;
-    height: 42px;
-    border-radius: 50px;
-    outline: none;
-    border: 1px solid gray;
-    padding-left: 10px;
-    /* margin-left: 20px; */
- }
+ 
+ 
  
  
  .page-link{
     cursor: pointer;
  }
+ .search-container .search-icon {
+  position: absolute;
+  top: 12px;
+  left: 5px;
+  opacity: 0.5;
+
+}
+
+.menu {
+   cursor: pointer;
+   float: right; 
+   margin-left: 10px;
+ }
+
+ .dropdown-menu {
+   position: absolute;
+   right: 0; 
+   top: 100%;
+   background-color: white; 
+   border: 1px solid #ddd; 
+   display: none; 
+ }
+ 
