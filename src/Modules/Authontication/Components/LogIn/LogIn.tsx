@@ -1,15 +1,14 @@
 import { useForm } from 'react-hook-form';
 
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { USERS_URLs } from '../../../../constans/END_POINTS';
-import { AuthContext } from '../Context/AuthContext'
 import { EmailValidation, PasswordValidation } from '../../../../constans/VALIDATIONS';
 export default function LogIn() {
-  const { loginData,saveLoginData } = useContext(AuthContext);
+  
   const navigate = useNavigate();
   const{
     register,
@@ -27,18 +26,18 @@ export default function LogIn() {
     try {
       const response = await axios.post(USERS_URLs.Login, data);
       localStorage.setItem('token', response.data.token);
-      saveLoginData();
+    
       console.log(response)
       navigate('/dashboard');
       toast.success(
-        response.data.message || 'congratulations, login success !'
+        response?.data?.message || 'congratulations, login success !'
       );
     
     console.log(response)
       } 
      catch (error:any) {
      toast.error(
-      error?.response?.data?.message || "Login unsuccessful. Please try again"
+      error.response.data.message || "Login unsuccessful. Please try again"
     );
      console.log(error);
     }
@@ -64,9 +63,9 @@ export default function LogIn() {
       </div>
      
     </div>
-    {errors.email && (
+    {errors?.email && (
             <span className="text-danger">
-              {String(errors.email.message)}
+              {String(errors?.email.message)}
             </span>
     )}
     
@@ -115,7 +114,7 @@ export default function LogIn() {
       Register Now ?
       </Link>
 
-    <Link to={'/forget-pass'} 
+    <Link to={'/forget-password'} 
     className='text-white mt-2 text-decoration-none'
      >
       Forgot Password ?

@@ -1,4 +1,4 @@
-import { createBrowserRouter, createHashRouter, RouterProvider } from "react-router-dom";
+import {createHashRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
 import ProtectedRoute from "./Modules/Shared/Components/ProtectedRoute/ProtectedRoute";
 import AuthLayout from "./Modules/Shared/Components/AuthLayout/AuthLayout";
@@ -18,6 +18,8 @@ import TasksData from "./Modules/Tasks/Components/TasksData/TasksData";
 import UsersList from "./Modules/Users/Components/UsersList/UsersList";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import NoData from "./Modules/Shared/Components/NoData/NoData";
+import Home from "./Home";
 
 
 function App() {
@@ -29,10 +31,10 @@ function App() {
       children: [
         { index: true, element: <LogIn /> },
         { path: "login", element: <LogIn /> },
-        { path: "forget-pass", element: <ForgetPass /> },
-        { path: "reset-pass", element: <ResetPass /> },
+        { path: "forget-password", element: <ForgetPass /> },
+        { path: "reset-password", element: <ResetPass /> },
         { path: "register", element: <Register /> },
-        { path: "change-pass", element: <ChangePass /> },
+        { path: "change-password", element: <ChangePass /> },
         { path: "verify-account", element: <VerifyAccount /> },
       ],
     },
@@ -41,13 +43,18 @@ function App() {
       element: <ProtectedRoute><MasterLayout /></ProtectedRoute>,
       errorElement: <NotFound />,
       children: [
-        { index: true, element: <Dashboard /> },
-        { path: "home", element: <Dashboard /> },
+      
+        { path: "", element: <Dashboard /> },
+        { path: "home", element: <Home /> },
         { path: "project-list", element: <ProjectList /> },
         { path: "project-data", element: <ProjectData /> },
+        { path: "project-data/:id", element: <ProjectData /> },
         { path: "tasks-list", element: <TasksList /> },
         { path: "tasks-data", element: <TasksData /> },
+        { path: "tasks-data/:id", element: <TasksData /> },
         { path: "users-list", element: <UsersList /> },
+        {path: "nodata", element: <NoData/>},
+        {path: "not-found", element: <NotFound/>},
       ],
     },
   ]);

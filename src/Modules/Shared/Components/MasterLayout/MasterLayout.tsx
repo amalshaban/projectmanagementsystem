@@ -1,6 +1,6 @@
-import { useEffect } from "react";
+
 import SideBar from '../SideBar/SideBar'
-import { Outlet, useNavigate } from 'react-router-dom'
+import { Outlet } from 'react-router-dom'
 import NavBar from '../NavBar/NavBar'
 import "./master.css"
 

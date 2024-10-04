@@ -3,8 +3,8 @@ import logo from "../../../../assets/images/PMS3.png";
 import { useEffect } from "react";
 
 export default function AuthLayout() {
-  // chick token if find Token navigate to dashboard 
-  let navigate = useNavigate()
+  // check token if find Token navigate to dashboard 
+  const navigate = useNavigate()
   useEffect(()=>{
     if(localStorage.getItem("token")){
       navigate("/dashboard")
@@ -16,7 +16,7 @@ export default function AuthLayout() {
       
         <div className="d-flex justify-content-center align-items-center">
           <div className="col-md-7">
-            <div className="img-logo text-center my-3">
+            <div className="img-logo text-left my-3">
               <img src={logo} alt="" />
             </div>
             <div className="auth-item  rounded rounded-4  p-5 pt-3">

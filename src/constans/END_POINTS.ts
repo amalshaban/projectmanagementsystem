@@ -1,13 +1,25 @@
 export const AuthorizedToken = {
-  headers: {
-    Authorization: `Bearer ${localStorage.token}`,
-  },
+    Authorization: `Bearer ${localStorage.getItem("token")}`
 };
+export const AuthorizedTokenWithParam = (title: string, pageSize: number, pageNumber: number) => ({
+  headers: {
+    Authorization: `Bearer ${localStorage.getItem("token")}`,
+  },
+  params: {
+    title: title,
+    pageSize: pageSize,
+    pageNumber: pageNumber,
+  },
+});
+
+
+
+
 
 const BASE_URL = "https://upskilling-egypt.com:3003/api/v1";
 
 //USERS urls
-const BASE_USERS = `${BASE_URL}/Users`;
+export const BASE_USERS = `${BASE_URL}/Users`;
 
 export const USERS_URLs = {
   Login: `${BASE_USERS}/Login`,
@@ -20,10 +32,23 @@ export const USERS_URLs = {
   TotalUsers: `${BASE_USERS}/count`,
   TotalManager: `${BASE_USERS}/Manager`,
   currentUser: `${BASE_USERS}/currentUser`,
+  toggleStatue:(id: number)=>`${BASE_URL}/${id}`
 };
+
+
+const BASE_PROJECTS = `${BASE_URL}/Project` ;
+
+export const PROJECT_URLS = {
+  getlist: `${BASE_PROJECTS}/manager`,
+  addproject: `${BASE_PROJECTS}`,
+  delete: (id: string) => `${BASE_PROJECTS}/${id}`,
+  update: (id:number) =>`${BASE_PROJECTS}/${id}`,
+
+}
+
 export const TasksUrl={
   GetTasksmanager: `${BASE_URL}/Task/manager`,
-  GetTaskEmploee:`${BASE_URL}/Task/count`
+  GetTaskEmploee:`${BASE_URL}/Task/count`,
 }
 
 //TASKS urls
@@ -31,4 +56,12 @@ const BASE_TASKS = `${BASE_URL}/Task`;
 
 export const TASKS_URLs = {
   TotalTasks: `${BASE_TASKS}/count`,
+  getlist:  `${BASE_TASKS}/manager`,
+    AddTask: `${BASE_URL}/Task`,
+    update: (id: any)=>`${BASE_URL}/Task/${id}`,
+    delete: (id: any)=>`${BASE_URL}/Task/${id}`,
+    getAllTasks: `${BASE_URL}/Task`,
+    changeStatus:(id: any)=>`${BASE_URL}/Task/${id}`
 };
+
+export const BASE_IMG="https://upskilling-egypt.com:3003/";

@@ -21,11 +21,14 @@ export const PasswordValidation = {
 
 export const FieldValidation = {
   required: "this field is required",
-  value: /(\+)?(\(?\d+\)?)(([\s-]+)?(\d+)){0,}/g,
+  pattern:{
+value: /(\+)?(\(?\d+\)?)(([\s-]+)?(\d+)){0,}/g,
   message:"The number must be entered correctly, without any letters or separators."
+  }
+  
 };
 
 
-export const RequiredField = (fieldName) => ({
+export const RequiredField = (fieldName: any) => ({
   required: `${fieldName} is required`,
 });

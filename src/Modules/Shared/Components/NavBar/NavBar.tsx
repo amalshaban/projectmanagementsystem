@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import{ useEffect, useState } from "react";
 import pp from "../../../../assets/images/pp.png";
 import logo from "../../../../assets/images/nav-logo.png";
 import axios from "axios";
@@ -9,7 +9,7 @@ export default function NavBar() {
   const [userEmail, setUserEmail] = useState(null);
 
   const getCurrentUser = async () => {
-    const response = await axios.get(USERS_URLs.currentUser,AuthorizedToken);
+    const response = await axios.get(USERS_URLs.currentUser,{headers:AuthorizedToken});
     console.log(response);
     setUserName(response.data.userName);
     setUserEmail(response.data.email);
@@ -49,7 +49,7 @@ export default function NavBar() {
                   <div className="position-relative ">
                     {" "}
                     <i className=" fa-solid fa-bell fs-3 me-5 text-warning"></i>
-                    <h6 className="position-fixed top-0 ms-3  rounded-circle bg-warning m-1 p-1 rounded-circle">
+                    <h6 className="position-absolute top-0 ms-3  rounded-circle bg-warning m-1 p-1 rounded-circle">
                       5
                     </h6>
                   </div>

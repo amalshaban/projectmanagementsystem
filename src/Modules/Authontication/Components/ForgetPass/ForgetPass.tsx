@@ -20,7 +20,7 @@ export default function ForgetPass() {
   let onSubmit = async (data:any)=>{
     try {
       let response = await axios.post(USERS_URLs.ForgetPass, data);
-      navigate('/reset-pass');
+      navigate('/reset-password');
       toast.success(
         response.data.message || 'check your email inbox !'
       );
